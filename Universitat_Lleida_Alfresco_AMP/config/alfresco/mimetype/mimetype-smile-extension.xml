@@ -1,0 +1,53 @@
+<alfresco-config area="mimetype-map">   
+   <config evaluator="string-compare" condition="Mimetype Map">
+      <mimetypes>
+		 <!-- DETACHED SIGNATURE-->
+         <mimetype mimetype="application/dpdf" display="Detached Signature pdf">
+            <extension>dpdf</extension>
+         </mimetype>
+         <mimetype mimetype="application/ddoc" display="Detached Signature doc">
+            <extension>ddoc</extension>
+         </mimetype>
+         <mimetype mimetype="application/ddocx" display="Detached Signature docx">
+            <extension>ddocx</extension>
+         </mimetype>
+         <mimetype mimetype="application/dodt" display="Detached Signature odt">
+            <extension>dodt</extension>
+         </mimetype>
+
+		 <!-- XADES SIGNATURE-->
+         <mimetype mimetype="application/xades" display="XAdES">
+            <extension>xades</extension>
+         </mimetype>
+         <mimetype mimetype="application/xpdf" display="XAdES pdf">
+            <extension>xpdf</extension>
+         </mimetype>
+         <mimetype mimetype="application/xdoc" display="XAdES doc">
+            <extension>xdoc</extension>
+         </mimetype>
+         <mimetype mimetype="application/xdocx" display="XAdES docx">
+            <extension>xdocx</extension>
+         </mimetype>
+         <mimetype mimetype="application/xodt" display="XAdES odt">
+            <extension>xodt</extension>
+         </mimetype>
+
+		 <!-- CADES SIGNATURE-->
+         <mimetype mimetype="application/cades" display="CAdES">
+            <extension>cades</extension>
+         </mimetype>
+         <mimetype mimetype="application/cpdf" display="CAdES pdf">
+            <extension>cpdf</extension>
+         </mimetype>
+         <mimetype mimetype="application/cdoc" display="CAdES doc">
+            <extension>cdoc</extension>
+         </mimetype>
+         <mimetype mimetype="application/cdocx" display="CAdES docx">
+            <extension>cdocx</extension>
+         </mimetype>
+         <mimetype mimetype="application/codt" display="CAdES odt">
+            <extension>codt</extension>
+         </mimetype>
+      </mimetypes>
+   </config>   
+</alfresco-config>

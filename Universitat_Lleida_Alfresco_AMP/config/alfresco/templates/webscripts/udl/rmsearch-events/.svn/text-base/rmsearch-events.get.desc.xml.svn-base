@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. RM Search</shortname>
+  <description>Universitat de Lleida. RM Search</description>
+  <url>/udl/rmsearch-events</url>
+  <format default="json">argument</format>
+  <authentication>user</authentication>
+</webscript>

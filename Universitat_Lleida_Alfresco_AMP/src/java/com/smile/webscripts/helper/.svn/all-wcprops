@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts/helper
+END
+UdlProperties.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts/helper/UdlProperties.java
+END
+Metadada.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts/helper/Metadada.java
+END
+ConstantsUdL.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts/helper/ConstantsUdL.java
+END
+Cript.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts/helper/Cript.java
+END
+DateHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts/helper/DateHelper.java
+END
+KeyTools.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts/helper/KeyTools.java
+END
+Impersonate.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts/helper/Impersonate.java
+END
+CertTools.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts/helper/CertTools.java
+END
+Arguments.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts/helper/Arguments.java
+END
+Signatura.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts/helper/Signatura.java
+END

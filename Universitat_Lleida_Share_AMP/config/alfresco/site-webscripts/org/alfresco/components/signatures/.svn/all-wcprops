@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/components/signatures
+END
+signatures-list-call.get.js
+K 25
+svn:wc:ra_dav:version-url
+V 173
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/components/signatures/signatures-list-call.get.js
+END
+signatures-list-call.get.desc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 179
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/components/signatures/signatures-list-call.get.desc.xml
+END
+signatures-list-call.get.html.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 179
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/components/signatures/signatures-list-call.get.html.ftl
+END
+signatures-list.get.properties
+K 25
+svn:wc:ra_dav:version-url
+V 176
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/components/signatures/signatures-list.get.properties
+END
+signatures-list.get_ca_ES.properties
+K 25
+svn:wc:ra_dav:version-url
+V 182
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/components/signatures/signatures-list.get_ca_ES.properties
+END
+signatures-list.get_es_ES.properties
+K 25
+svn:wc:ra_dav:version-url
+V 182
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/components/signatures/signatures-list.get_es_ES.properties
+END
+signatures-list.get_ca.properties
+K 25
+svn:wc:ra_dav:version-url
+V 179
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/components/signatures/signatures-list.get_ca.properties
+END
+signatures-list.get_es.properties
+K 25
+svn:wc:ra_dav:version-url
+V 179
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/components/signatures/signatures-list.get_es.properties
+END

@@ -1,0 +1,8 @@
+#Target of this file must be declarated in build.properties of this project
+env=dev
+
+#Activate or no webscript window debug ('on' or 'off')
+debugWebscript=on
+
+#Path and name of your alfresco.log
+log4jfile.alfresco=alfresco.log

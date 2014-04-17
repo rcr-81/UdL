@@ -1,0 +1,6 @@
+<webscript>
+  <shortname>Admin Console Reports</shortname>
+  <description>Administration Console - Reporting</description>
+  <url>/components/console/sml-rm-audit-cutoff</url>
+<!-- <family>rm-console</family> -->
+</webscript>

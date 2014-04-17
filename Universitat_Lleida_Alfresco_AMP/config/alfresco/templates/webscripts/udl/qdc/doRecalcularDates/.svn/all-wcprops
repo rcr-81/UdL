@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/qdc/doRecalcularDates
+END
+doRecalcularDates.get.js
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/qdc/doRecalcularDates/doRecalcularDates.get.js
+END
+doRecalcularDates.get.desc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 175
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/qdc/doRecalcularDates/doRecalcularDates.get.desc.xml
+END
+doRecalcularDates.get.html.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 175
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/qdc/doRecalcularDates/doRecalcularDates.get.html.ftl
+END

@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Consultar carpeta</shortname>
+  <description>Universitat de Lleida. Consultar carpeta</description>
+  <url>/udl/carpeta/consultarCarpeta</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+</webscript>

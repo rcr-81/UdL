@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/expedient/tancarExpedient
+END
+tancarExpedient.post.js
+K 25
+svn:wc:ra_dav:version-url
+V 172
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/expedient/tancarExpedient/tancarExpedient.post.js
+END
+tancarExpedient.post.desc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 178
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/expedient/tancarExpedient/tancarExpedient.post.desc.xml
+END
+tancarExpedient.post.xml.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 177
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/expedient/tancarExpedient/tancarExpedient.post.xml.ftl
+END

@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Do recalcular dates.</shortname>
+  <description>Universitat de Lleida. Executar recalcular dates.</description>
+  <url>/udl/qdc/doRecalcularDates</url>
+  <format default="html">argument</format>  
+  <authentication>admin</authentication>
+</webscript>

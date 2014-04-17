@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets
+END
+audit-application-applist.get.desc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 179
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets/audit-application-applist.get.desc.xml
+END
+audit-application-config.get.html.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 178
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets/audit-application-config.get.html.ftl
+END
+audit-application-config.get_en.properties
+K 25
+svn:wc:ra_dav:version-url
+V 183
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets/audit-application-config.get_en.properties
+END
+audit-application-config.get.properties
+K 25
+svn:wc:ra_dav:version-url
+V 180
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets/audit-application-config.get.properties
+END
+audit-application-config.get_ca.properties
+K 25
+svn:wc:ra_dav:version-url
+V 183
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets/audit-application-config.get_ca.properties
+END
+audit-application-config.get_es.properties
+K 25
+svn:wc:ra_dav:version-url
+V 183
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets/audit-application-config.get_es.properties
+END
+audit-application-applist.get.json.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 179
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets/audit-application-applist.get.json.ftl
+END
+audit-application-config.get.js
+K 25
+svn:wc:ra_dav:version-url
+V 172
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets/audit-application-config.get.js
+END
+audit-application-applist.get.js
+K 25
+svn:wc:ra_dav:version-url
+V 173
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets/audit-application-applist.get.js
+END
+audit-application-config.get.desc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 178
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets/audit-application-config.get.desc.xml
+END
+audit-application-config.get_fr.properties
+K 25
+svn:wc:ra_dav:version-url
+V 183
+/svn/universitat-lleida/!svn/ver/563/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/modules/dashlets/audit-application-config.get_fr.properties
+END

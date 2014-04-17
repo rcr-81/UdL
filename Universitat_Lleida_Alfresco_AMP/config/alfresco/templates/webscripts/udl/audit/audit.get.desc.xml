@@ -1,0 +1,16 @@
+<webscript>
+  <shortname>Webscript Audit</shortname>
+  <description>Webscript d'Auditoria que s'utilitza per obtenir el nom de l'usuari loguejat.
+               Està a Alfresco, ja que desde els webscripts del Share no hi ha accés a l'objecte person que s'utilitza per obtenir el nom d'usuari.
+  </description>
+  <url>/udl/audit/audit?action={action}</url>
+  
+    <args>
+    <arg>
+        <shortname>action</shortname>
+        <description>query statement to execute</description>
+    </arg>
+  </args>
+  <authentication>user</authentication>
+  <family>UDL</family>
+</webscript>

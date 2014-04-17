@@ -1,0 +1,178 @@
+10
+
+dir
+563
+https://sources.bcn.intranet/svn/universitat-lleida/trunk/Universitat_Lleida_Share_AMP_3.4.13/config/alfresco/site-webscripts/org/alfresco/components
+https://sources.bcn.intranet/svn/universitat-lleida
+
+
+
+2013-11-22T08:39:15.794903Z
+563
+racor
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+3679b0db-e671-466a-b2d8-643237e4b702
+
+admin
+dir
+
+blog
+dir
+
+calendar
+dir
+
+comments
+dir
+
+console
+dir
+
+create-content
+dir
+
+custom-rmaudit
+dir
+
+custom-rmsearch
+dir
+
+dashboard
+dir
+
+dashlets
+dir
+
+data-lists
+dir
+
+discussions
+dir
+
+document-details
+dir
+
+documentlibrary
+dir
+
+edit-metadata
+dir
+
+fileplan
+dir
+
+folder-details
+dir
+
+footer
+dir
+
+form
+dir
+
+header
+dir
+
+inline-edit
+dir
+
+invite
+dir
+
+links
+dir
+
+manage-permissions
+dir
+
+my-documentlibraries
+dir
+
+navigation
+dir
+
+new-rmreference
+dir
+
+people-finder
+dir
+
+portlet
+dir
+
+preview
+dir
+
+profile
+dir
+
+rmaudit
+dir
+
+rmpermissions
+dir
+
+rmreferences
+dir
+
+rmresults-common
+dir
+
+rmsearch
+dir
+
+rules
+dir
+
+search
+dir
+
+signatures
+dir
+
+sincronizar-QdC
+dir
+
+site
+dir
+
+site-finder
+dir
+
+site-members
+dir
+
+tag-filter
+dir
+
+tags
+dir
+
+title
+dir
+
+upload
+dir
+
+wiki
+dir
+
+workflow
+dir
+
+zcallRecalcularDates
+dir
+

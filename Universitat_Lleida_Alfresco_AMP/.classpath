@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="**" kind="src" path="config"/>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="src" path="src/classes"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DOD_5015_Alfresco_PROJECT_AMP_NATIVE.3.4.8"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DOD_5015_Share_PROJECT_AMP_NATIVE.3.4.8"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Universitat_Lleida"/>
+	<classpathentry kind="lib" path="lib/MITyCLibAPI-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/MITyCLibCert-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/MITyCLibOCSP-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/MITyCLibPolicy-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/MITyCLibTrust-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/MITyCLibTSA-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/MITyCLibXADES-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/itextpdf-5.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/axis-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/AlfrescoE4Xutils.jar"/>
+	<classpathentry kind="lib" path="lib/bcmail-jdk16-146.jar"/>
+	<classpathentry kind="lib" path="lib/bcprov-jdk16-146.jar"/>
+	<classpathentry kind="lib" path="lib/bctsp-jdk16-146.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SDK AlfrescoEmbedded"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SDK AlfrescoRemote"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

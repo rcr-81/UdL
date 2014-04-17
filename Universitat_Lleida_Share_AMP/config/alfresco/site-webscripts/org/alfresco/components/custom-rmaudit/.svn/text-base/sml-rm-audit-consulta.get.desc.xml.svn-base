@@ -1,0 +1,6 @@
+<webscript>
+  <shortname>Admin Console Reports</shortname>
+  <description>Administration Console - Reporting</description>
+  <url>/components/console/sml-rm-audit-consulta</url>
+<!-- <family>rm-console</family> --> 
+</webscript>

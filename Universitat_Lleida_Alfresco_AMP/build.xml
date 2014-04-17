@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+
+<project name="[4]-Universitat_Lleida_Alfresco_AMP" default="clean" basedir=".">
+	
+	<taskdef resource="net/sf/antcontrib/antlib.xml" />
+	
+	<property file="build.properties" />
+    <property name="buildAmp.dir" value="${projectAmp.dir}/build"/>
+    <property name="config.dir" value="${projectAmp.dir}/config"/>
+    <property name="jar.file" value="${buildAmp.dir}/lib/universitat_lleida_alfresco.jar"/>
+    <property name="amp.file" value="${buildAmp.dir}/dist/universitat_lleida_alfresco.amp"/>
+	<property name="alfresco.lib.src" value="${projectAmp.dir}/lib" />
+	<property name="filters.dir" value="${projectAmp.dir}/filters" />
+	<property name="alfresco.classes.src" value="${projectAmp.dir}/src/classes" />
+	<property name="alfresco.classes.dest" value="${alfresco.target}/WEB-INF/classes" />
+	
+	<target name="Afegir-a-WAR" depends="update-war" />
+	<target name="clean" depends="set-filter,rmdirs,mkdirs,compile,copy" />
+    <target name="mkdirs">
+        <mkdir dir="${buildAmp.dir}/classes" />
+        <mkdir dir="${buildAmp.dir}/dist" />
+        <mkdir dir="${buildAmp.dir}/lib" />
+    </target>
+    <target name="rmdirs">
+        <delete dir="${buildAmp.dir}" />
+    </target>
+    
+    <path id="class.path">
+        <dirset dir="${buildAmp.dir}" />
+        <fileset dir="../SDK AlfrescoEmbedded" includes="**/*.jar"/>
+    	
+    	<fileset dir="${alfresco.lib.src}">
+    		<include name="**/*.jar" />
+    	</fileset>
+    </path>
+
+    <target name="compile">
+        <mkdir dir="${buildAmp.dir}/classes" />
+        <javac debug="true" classpathref="class.path" srcdir="${projectAmp.dir}/src/java" destdir="${buildAmp.dir}/classes" />
+    </target>
+	
+	<target name="copy" depends="set-filter,compile,copy-conf-alfresco">
+        <copy overwrite="true" todir="${alfresco.target}/WEB-INF/classes">
+            <fileset dir="${buildAmp.dir}/classes" />
+        	<fileset dir="${projectAmp.dir}/config" />
+        </copy>
+		<copy overwrite="true" todir="${alfresco.target}/">
+		    <fileset dir="${projectAmp.dir}/source/web/" />
+		</copy>				
+		
+		<copy overwrite="true" todir="${alfresco.target}/WEB-INF/lib">
+			<fileset dir="${alfresco.lib.src}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+		<copy overwrite="true" todir="${auditExtractors.dir}">
+			<fileset dir="${auditExtractorsSrc.dir}"/>			
+		</copy>
+	</target>
+    
+    <target name="package-jar" depends="clean, compile">
+    	<delete file="${jar.file}" failonerror="false"/>
+        <jar destfile="${jar.file}" >
+            <fileset dir="${buildAmp.dir}/classes" excludes="**/custom*,**/*Test*,**/org/alfresco/repo/**" includes="**/*.class" />
+        </jar>
+    </target>
+	
+    <target name="package-amp" depends="package-jar" description="Package the Module" >
+        <delete file="${amp.file}" failonerror="false"/>
+    	<copy overwrite="true" todir="${projectAmp.dir}/build/lib">
+    	     <fileset dir="${projectAmp.dir}/lib" />
+    	</copy>	
+        <zip destfile="${amp.file}">
+            <fileset dir="${projectAmp.dir}/build" includes="lib/*.jar" />
+            <zipfileset dir="${buildAmp.dir}/classes" includes="**/org/alfresco/repo/**" prefix="config"/>
+            <fileset dir="${projectAmp.dir}" includes="config/**/*.*" excludes="**/module.properties" />
+            <fileset dir="${projectAmp.dir}/config/alfresco/module/universitat_lleida" includes="module.properties" />
+        </zip>
+    </target>
+
+    <target name="update-war" depends="package-amp" description="Update the WAR file.  Set -Dwar.file=..." >
+    	<echo>Installing -Universitat_Lleida_Alfresco_AMP into WAR</echo>
+    	<delete dir="${tomcat.dir}/webapps/alfresco" />
+        <java dir="." fork="true" classname="org.alfresco.repo.module.tool.ModuleManagementTool">
+            <classpath refid="class.path" />
+            <arg line="install ${amp.file} ${war.file} -force -verbose"/>
+        </java>
+    	<!--<unwar src="${war.file}" dest="${alfresco.target}" />-->
+    </target>	
+	
+	<target name="copy-conf-alfresco">
+		<copy overwrite="true" todir="${alfresco.classes.dest}">
+			<fileset dir="${alfresco.classes.src}" />
+			<filterset>
+				<filtersfile file="${filter.file}" />
+			</filterset>
+		</copy>
+	</target>
+	    
+	   
+	
+	<target name="set-filter" unless="set-filter.false">
+		<switch value="${target.env}">
+			<case value="dev">
+				<echo message="dev" />
+				<property name="filter.file" value="${filters.dir}/developpement.properties" />
+			</case>
+			<case value="inte">
+				<echo message="inte" />
+				<property name="filter.file" value="${filters.dir}/inte.properties" />
+			</case>
+			<case value="preprod">
+				<echo message="preprod" />
+				<property name="filter.file" value="${filters.dir}/preprod.properties" />
+			</case>
+			<case value="prod">
+				<echo message="prod" />
+				<property name="filter.file" value="${filters.dir}/prod.properties" />
+			</case>
+		</switch>
+	</target>
+</project>

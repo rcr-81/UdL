@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>Webscript Audit java backed</shortname>
+  <description>Auditoria amb java backed</description>
+  <url>/udl/audit/auditUdlJavaBacked?action={action}</url>
+  <authentication>none</authentication>
+  <format default="">argument</format>
+  <family>UDL</family>  
+</webscript>

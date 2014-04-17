@@ -1,0 +1,2638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model name="udlrm:model" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+	<description>UdL RM custom Model</description>
+   	<author>Smile</author>
+   	<version>1.0</version>
+	
+	<imports>
+    	<!-- Import Alfresco Dictionary Definitions -->
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+    </imports>
+	
+	<namespaces>
+      	<!-- Define a Namespace for my new definitions -->
+      	<namespace uri="http://www.smile.com/model/udlrm/1.0" prefix="udlrm"/>      	
+   	</namespaces>
+   	
+   	<constraints>    
+     	<constraint name="udlrm:classificacioAccesUD" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value>Públic</value>
+                	<value>Restringit</value>
+                	<value>Confidencial</value>
+            	</list>
+        	</parameter>
+        </constraint>
+        <constraint name="udlrm:classificacioAccesSerie" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value>Públic</value>
+                	<value>Restringit</value>
+                	<value>Confidencial</value>
+            	</list>
+        	</parameter>
+        </constraint>
+     	<constraint name="udlrm:classificacioAccesDoc" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value>Públic</value>
+                	<value>Restringit</value>
+                	<value>Confidencial</value>                	
+            	</list>
+        	</parameter>
+        </constraint>
+       	<constraint name="udlrm:suport_origen_constraint" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value></value>
+                	<value>Físic</value>
+                	<value>Híbrid</value>
+                	<value>Electrònic</value>
+            	</list>
+        	</parameter>
+        </constraint>
+        <constraint name="udlrm:suport_origen_constraint_doc" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value></value>
+                	<value>Físic</value>
+                	<value>Híbrid</value>
+                	<value>Electrònic</value>
+            	</list>
+        	</parameter>
+        </constraint>          
+        <constraint name="udlrm:categoria_advertencia_seguretat_constraint" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value></value>
+                	<value>Solament accès autoritzat</value>                	
+            	</list>
+        	</parameter>
+        </constraint>
+        <constraint name="udlrm:sensibilitat_dades_caracter_personal_constraint" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value></value>
+                	<value>Basic</value>                	
+                	<value>Mig</value>
+                	<value>Alt</value>
+            	</list>
+        	</parameter>
+        </constraint>
+        <constraint name="udlrm:idioma_constraint" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+            		<value></value>
+                	<value>de. Alemany</value>
+                	<value>ar. Àrab</value>                	
+                	<value>en. Anglès</value>
+                	<value>eu. Basc</value>
+                	<value>bg. Búlgar</value>
+                	<value>ca. Català</value>
+                	<value>da. Danès</value>
+                	<value>sk. Eslovac</value>
+                	<value>sl. Eslovè</value>
+                	<value>es. Espanyol;Castellà</value>
+                	<value>et. Estonià</value>
+                	<value>fi. Finès</value>
+                	<value>fr. Francès</value>
+                	<value>gl. Gallec</value>
+                	<value>el. Grec, Modern (1453-)</value>
+                	<value>hu. Hongarès</value>
+                	<value>ga. Irlandès</value>
+                	<value>it. Italià</value>
+                	<value>lv. Letó</value>
+                	<value>lt. Lituà</value>
+                	<value>mt. Maltès</value>
+                	<value>nl. Neerlandès; Flamenc</value>
+                	<value>pl. Polac</value>
+                	<value>pt. Portuguès</value>
+                	<value>ro. Romanès; Moldau;</value>
+                	<value>ru. Rus</value>
+                	<value>sv. Suec</value>
+                	<value>cs. Txec</value>
+                	<value>uk. Ucraïnès</value>
+                	<value>zh. Xinès</value>
+            	</list>
+        	</parameter>
+        </constraint> 
+        <constraint name="udlrm:unitats_constraint" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value></value>
+                	<value>B</value>                	
+                	<value>Volum</value>
+                	<value>Cm</value>
+            	</list>
+        	</parameter>
+        </constraint>
+        <constraint name="udlrm:tipus_dictamen_constraint" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value></value>
+                	<value>Conservació permanent</value> 
+                	<value>Eliminació</value>
+                	<value>Eliminació parcial</value>                	
+                	<value>Transferència</value>
+                	<value>Mostreig</value>
+                	<value>Duplicació por essencial</value>
+                	<value>Sense avaluació</value>                	
+                	<value>Revisió posterior</value>
+            	</list>
+        	</parameter>
+        </constraint>
+        <constraint name="udlrm:suport_constraint" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value></value>
+                	<value>Paper DIN A4</value>
+                	<value>Paper DIN-A5</value>                	
+                	<value>Paper DIN-A3-Gran format</value>
+                	<value>Paper DIN-Publicacions</value>
+                	<value>Paper-Fotogràfic: positius</value>
+                	<value>Paper-Fotogràfic: negatius</value>                	
+                	<value>Plàstic-Fotogràfic: diapositives</value>
+                	<value>Paper/Plàstic-Plànols i mapes</value>
+                	<value>Paper/Plàstic-Cartells</value>
+                	<value>Microformes-Microfitxa</value>
+                	<value>Microformes-Bobina</value>
+                	<value>Plàstic-Negatius (rodet/reportatge)</value>
+                	<value>Magnètic 3 1/2”</value>
+                	<value>Magnètic 5 1/4”</value>
+                	<value>Magnètic Vídeos</value>
+                	<value>Òptic-CD</value>
+                	<value>Òptic-DVD</value>
+                	<value>Magnètic-Casset</value>
+                	<value>Magnètic</value>
+                	<value>Electrònic</value>
+            	</list>
+        	</parameter>
+        </constraint>
+        <constraint name="udlrm:valoracio_constraint" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value>Sense cobertura d'avaluació</value>
+                	<value></value>                	                	
+            	</list>
+        	</parameter>
+        </constraint>
+        <constraint name="udlrm:denominacion_estado_constraint" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value>Original</value>
+                	<value>Còpia</value>                	
+            	</list>
+        	</parameter>
+        </constraint>
+        <constraint name="udlrm:tipus_copia_constraint" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value></value>
+                	<value>Còpia simple</value>
+                	<value>Còpia autèntica en paper de document paper</value>
+                	<value>Còpia electrònica autèntica de document paper</value>                	
+                	<value>Còpia autèntica en paper de document electrònic</value>	      	        
+            	</list>
+        	</parameter>
+        </constraint>        
+        <constraint name="udlrm:tipus_documental_constraint" type="LIST">
+     		<parameter name="allowedValues">
+            	<list>
+                	<value>U00 DOCUMENT ADMINISTRATIU</value>
+					<value>U01 INFORME</value>
+					<value>U02 ESTADÍSTICA</value>
+					<value>U03 ENQUESTA</value>
+					<value>U04 SUBVENCIÓ</value>
+					<value>U05 RESOLUCIÓ</value>
+					<value>U06 ACORD</value>
+					<value>U07 ASSEGURANÇA</value>
+					<value>U08 CENS</value>
+					<value>U09 AJUT</value>
+					<value>U10 ACTA</value>
+					<value>U11 ACUSAMENT DE REBUDA</value>
+					<value>U12 ALBARÀ</value>
+					<value>U13 AL·LEGACIÓ</value>
+					<value>U14 ANUNCI/AVÍS</value>
+					<value>U15 BUROFAX</value>
+					<value>U16 CARTA</value>
+					<value>U17 CARTELL</value>
+					<value>U18 CATÀLEG</value>
+					<value>U19 CERTIFICAT</value>
+					<value>U20 CIRCULAR</value>
+					<value>U21 CITACIÓ</value>
+					<value>U22 COMUNICACIÓ</value>
+					<value>U23 COMUNICAT</value>
+					<value>U24 CONTRACTE</value>
+					<value>U25 CONVENI</value>
+					<value>U26 CONVOCATÒRIA/ORDRE DEL DIA</value>
+					<value>U27 CORREU ELECTRÒNIC</value>
+					<value>U28 DECLARACIÓ</value>
+					<value>U29 DEMANDA</value>
+					<value>U30 DICTAMEN</value>
+					<value>U31 DILIGÈNCIA</value>
+					<value>U32 ESTATUT</value>
+					<value>U33 ESTUDI</value>
+					<value>U34 EXAMEN</value>
+					<value>U35 EXTRACTE</value>
+					<value>U36 FACTURA</value>
+					<value>U37 FAX</value>
+					<value>U38 FORMULARI</value>
+					<value>U39 FOTOGRAFIA</value>
+					<value>U40 FULLETÓ</value>
+					<value>U41 GUIA</value>
+					<value>U42 IMATGE DIGITAL</value>
+					<value>U43 INSTRUCCIÓ</value>
+					<value>U44 INVENTARI</value>
+					<value>U45 INVITACIÓ</value>
+					<value>U46 JUSTIFICANT</value>
+					<value>U47 LLIBRE</value>
+					<value>U48 LLICÈNCIA</value>
+					<value>U49 LLISTAT</value>
+					<value>U50 MANAMENT D'INGRÉS</value>
+					<value>U51 MANAMENT DE PAGAMENT</value>
+					<value>U52 MEMÒRIA</value>
+					<value>U53 MOCIÓ</value>
+					<value>U54 NOMENAMENT</value>
+					<value>U55 NORMA</value>
+					<value>U56 NOTA DE PREMSA</value>
+					<value>U57 NOTA SIMPLE</value>
+					<value>U58 NOTIFICACIÓ</value>
+					<value>U59 AUDIOVISUAL</value>
+					<value>U60 OFICI</value>
+					<value>U61 ORDRE DE PAGAMANENT</value>
+					<value>U62 ORGANIGRAMA</value>
+					<value>U63 PERMÍS</value>
+					<value>U64 PLA</value>
+					<value>U65 PLÀNOL</value>
+					<value>U66 PLEC DE CLÀUSULES</value>
+					<value>U67 PLICA</value>
+					<value>U68 PRESSUPOST</value>
+					<value>U69 PROCEDIMENT</value>
+					<value>U70 PROGRAMA</value>
+					<value>U71 PROJECTE</value>
+					<value>U72 PROPOSTA DE RESOLUCIÓ</value>
+					<value>U73 PUBLICACIÓ</value>
+					<value>U74 QUEIXA</value>
+					<value>U75 QÜESTIONARI</value>
+					<value>U76 REBUT</value>
+					<value>U77 RECLAMACIÓ</value>
+					<value>U78 RECURS</value>
+					<value>U79 REGISTRE</value>
+					<value>U80 REGLAMENT</value>
+					<value>U81 RECULL DE PREMSA</value>
+					<value>U82 REVISTA</value>
+					<value>U83 SALUDA</value>
+					<value>U84 SENTÈNCIA</value>
+					<value>U85 SOL·LICITUD</value>
+					<value>U86 TELEGRAMA</value>
+					<value>U87 TRÍPTIC</value>
+					<value>U88 DÍPTIC</value>
+            	</list>
+        	</parameter>
+        </constraint>                     		
+	</constraints>
+	
+   	<aspects>     	
+      	<aspect name="udlrm:documentSimple">
+         	<title>Document simple</title>
+         	<properties>
+				<property name="udlrm:tipus_entitat_documentSimple">
+               		<title>0 - Tipus entitat</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>
+               		<default>Document</default>               		
+            	</property>
+				<property name="udlrm:categoria_documentSimple">
+               		<title>1 - Categoria</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>
+					<default>Document simple</default>               		
+            	</property>
+				<property name="udlrm:secuencial_identificador_documentSimple">
+               		<title>2.1 - Seqüencial identificador</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:esquema_identificador_documentSimple">
+               		<title>2.2 - Esquema identificador</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+<!-- 			<property name="udlrm:nom_natural_documentSimple">
+               		<title>3.1 - Nom natural</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property> -->
+				<property name="udlrm:data_inici_documentSimple">
+               		<title>4.1 - Data inici</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+            	<property name="udlrm:data_registre_entrada_documentSimple">
+               		<title>4.1 - Data registre entrada</title>
+               		<type>d:date</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:data_registre_sortida_documentSimple">
+               		<title>4.1 - Data registre sortida</title>
+               		<type>d:date</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:data_fi_documentSimple">
+               		<title>4.2 - Data fi</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:descripcio_documentSimple">
+               		<title>5 - Descripció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:classificacio_acces_documentSimple">
+               		<title>8.1.1 - Classificació accés</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default>Públic</default>
+               		<constraints>
+                		<constraint ref="udlrm:classificacioAccesDoc"/>                 		
+             		</constraints>         		
+            	</property>
+				<property name="udlrm:codi_politica_control_acces_documentSimple">
+               		<title>8.1.2 - Codi política control accés</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:sensibilitat_dades_caracter_personal_documentSimple">
+               		<title>8.4 - Sensibilitat dades caràcter personal</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:sensibilitat_dades_caracter_personal_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:classificacio_ENS_documentSimple">
+               		<title>8.5 - Classificació ENS</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:condicions_acces_1_documentSimple">
+               		<title>Condicions accés ús reutilització 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:condicions_acces_2_documentSimple">
+               		<title>Condicions accés ús reutilització 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:tipus_acces_1_documentSimple">
+               		<title>Tipus accés 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:tipus_acces_2_documentSimple">
+               		<title>Tipus accés 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:idioma_1_documentSimple">
+               		<title>11 - Idioma 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default>ca. Català</default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:idioma_2_documentSimple">
+               		<title>11 - Idioma 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:idioma_3_documentSimple">
+               		<title>11 - Idioma 3</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:idioma_4_documentSimple">
+               		<title>11 - Idioma 4</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+				<property name="udlrm:valoracio_documentSimple">
+               		<title>13.1 - Valoració</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default>Sense cobertura d'avaluació</default>
+               		<constraints>
+                		<constraint ref="udlrm:valoracio_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:tipus_dictamen_1_documentSimple">
+               		<title>13.2.1 - Tipus dictamen 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:tipus_dictamen_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:tipus_dictamen_2_documentSimple">
+               		<title>13.2.1 - Tipus dictamen 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:tipus_dictamen_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:accio_dictaminada_1_documentSimple">
+               		<title>13.2.2 - Acció dictaminada 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:accio_dictaminada_2_documentSimple">
+               		<title>13.2.2 - Acció dictaminada 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:suport_origen_documentSimple">
+               		<title>14.1 - Suport origen</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:suport_origen_constraint_doc"/>                 		
+             		</constraints>		
+            	</property>
+				<property name="udlrm:versio_format_documentSimple">
+               		<title>14.3 - Versió format</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:nom_aplicacio_creacio_documentSimple">
+               		<title>14.4 - Nom aplicació creació</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:versio_aplicacio_creacio_documentSimple">
+               		<title>14.5 - Versió aplicació creació</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:registre_formats_documentSimple">
+               		<title>14.6 - Registre formats</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:resolucio_documentSimple">
+               		<title>14.7 - Resolució</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:dimensions_fisiques_documentSimple">
+               		<title>14.8.1 - Dimensions físiques</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:tamany_logic_documentSimple">
+               		<title>14.8.2 - Tamany lògic (Kb)</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:unitats_documentSimple">
+               		<title>14.8.4 - Unitats</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:unitats_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:suport_1_documentSimple">
+               		<title>15.1 - Suport 1</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:localitzacio_1_documentSimple">
+               		<title>15.2 - Localització 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:localitzacio_2_documentSimple">
+               		<title>15.2 - Localització 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:valor_documentSimple">
+               		<title>16.2 - Valor</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:rol_signatura_documentSimple">
+               		<title>Rol signatura</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:tipus_documental_documentSimple">
+               		<title>18 - Tipus documental</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+               		<default>U00 DOCUMENT ADMINISTRATIU</default>
+               		<constraints>
+                		<constraint ref="udlrm:tipus_documental_constraint"/>                 		
+             		</constraints>
+            	</property>
+				<property name="udlrm:denominacio_estat_documentSimple">
+               		<title>20.1 - Denominació estat</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>
+               		<default>Original</default>
+               		<constraints>
+                		<constraint ref="udlrm:denominacion_estado_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:tipus_copia_documentSimple">
+               		<title>20.2.1 - Tipus còpia</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:tipus_copia_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:motiu_documentSimple">
+               		<title>20.2.2 - Motiu característiques còpia</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:motiu_reglat_documentSimple">
+               		<title>21.2 - Motiu reglat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:codi_classificacio_1_documentSimple">
+               		<title>22.1 - Codi classificació 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:codi_classificacio_2_documentSimple">
+               		<title>22.1 - Codi classificació 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:denominacio_classe_1_documentSimple">
+               		<title>22.2 - Denominació classe 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:denominacio_classe_2_documentSimple">
+               		<title>22.2 - Denominació classe 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:grup_creador_documentSimple">
+               		<title>Grup creador</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:advertencia_seguretat_documentSimple">
+               		<title>8.2.1 - Text advertència seguretat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:categoria_advertencia_seguretat_documentSimple">
+               		<title>8.2.2 - Categoria advertència seguretat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>       
+               		<constraints>
+                		<constraint ref="udlrm:categoria_advertencia_seguretat_constraint"/>                 		
+             		</constraints>
+            	</property>
+            	<property name="udlrm:verificacio_integritat_algorisme_documentSimple">
+               		<title>16.1 - Algorisme</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default>SHA-512</default>       		
+            	</property>
+            	<property name="udlrm:verificacio_integritat_valor_documentSimple">
+               		<title>16.2 - Valor</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>            	
+            </properties>       	
+      	</aspect>
+
+      	<aspect name="udlrm:expedient">
+         	<title>Expedient</title>
+         	<properties>
+				<property name="udlrm:tipus_entitat_expedient">
+               		<title>0 - Tipus entitat</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>
+               		<default>Document</default>               		
+            	</property>
+				<property name="udlrm:categoria_expedient">
+               		<title>1 - Categoria</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>
+               		<default>Expedient</default>               		
+            	</property>
+				<property name="udlrm:secuencial_identificador_expedient">
+               		<title>2.1 - Seqüencial identificador</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:esquema_identificador_expedient">
+               		<title>2.2 - Esquema identificador</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default><![CDATA[CAT_<AUdL>_<AAAA>_núm. reg._<999999999999>_núm. exp_<999999999999>_tipus<$>]]></default>               		
+            	</property>
+				<property name="udlrm:nom_natural_expedient">
+               		<title>3.1 - Nom natural</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:data_inici_expedient">
+               		<title>4.1 - Data inici</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+            	<property name="udlrm:data_creacio_expedient">
+               		<title>4.1 - Data creació</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:data_fi_expedient">
+               		<title>4.2 - Data fi</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:descripcio_expedient">
+               		<title>5 - Descripció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:classificacio_acces_expedient">
+               		<title>8.1.1 - Classificació accés</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default>Públic</default>
+               		<constraints>
+                		<constraint ref="udlrm:classificacioAccesUD"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:codi_politica_control_acces_expedient">
+               		<title>8.1.2 - Codi política control accés</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:sensibilitat_dades_caracter_personal_expedient">
+               		<title>8.4 - Sensibilitat dades caràcter personal</title>
+               		<type>d:text</type>               		
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:sensibilitat_dades_caracter_personal_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:classificacio_ENS_expedient">
+               		<title>8.5 - Classificació ENS</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:condicions_acces_1_expedient">
+               		<title>Condicions accés ús reutilització 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:condicions_acces_2_expedient">
+               		<title>Condicions accés ús reutilització 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:tipus_acces_1_expedient">
+               		<title>Tipus accés 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:tipus_acces_2_expedient">
+               		<title>Tipus accés 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:idioma_1_expedient">
+               		<title>11 - Idioma 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default>ca. Català</default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:idioma_2_expedient">
+               		<title>11 - Idioma 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:idioma_3_expedient">
+               		<title>11 - Idioma 3</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:idioma_4_expedient">
+               		<title>11 - Idioma 4</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>            	
+				<property name="udlrm:valoracio_expedient">
+               		<title>13.1 - Valoració</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default>Sense cobertura d'avaluació</default> 
+               		<constraints>
+                		<constraint ref="udlrm:valoracio_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:tipus_dictamen_1_expedient">
+               		<title>13.2.1 - Tipus dictamen 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>   
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:tipus_dictamen_constraint"/>                 		
+             		</constraints>            		
+            	</property>
+            	<property name="udlrm:tipus_dictamen_2_expedient">
+               		<title>13.2.1 - Tipus dictamen 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:tipus_dictamen_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:accio_dictaminada_1_expedient">
+               		<title>13.2.2 - Acció dictaminada 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:accio_dictaminada_2_expedient">
+               		<title>13.2.2 - Acció dictaminada 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:suport_origen_expedient">
+               		<title>14.1 - Suport origen</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>             
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:suport_origen_constraint"/>                 		
+             		</constraints>  		
+            	</property>
+				<property name="udlrm:nom_format_expedient">
+               		<title>14.2 - Nom format</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:versio_format_expedient">
+               		<title>14.3 - Versió format</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:nom_aplicacio_creacio_expedient">
+               		<title>Nom aplicació creació</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:versio_aplicacio_creacio_expedient">
+               		<title>Versió aplicació creació</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:registre_formats_expedient">
+               		<title>Registre formats</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:dimensions_fisiques_expedient">
+               		<title>14.8.2 - Tamany lògic</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:volums_expedient">
+               		<title>Volums</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:tamany_logic_expedient">
+               		<title>14.8.2 - Tamany lògic</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:quantitat_expedient">
+               		<title>14.8.3 - Quantitat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:unitats_expedient">
+               		<title>14.8.4 - Unitats</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>       
+               		<constraints>
+                		<constraint ref="udlrm:unitats_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+				<property name="udlrm:suport_1_expedient">
+               		<title>15.1 - Suport 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_2_expedient">
+               		<title>15.1 - Suport 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_3_expedient">
+               		<title>15.1 - Suport 3</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_4_expedient">
+               		<title>15.1 - Suport 4</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_5_expedient">
+               		<title>15.1 - Suport 5</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_6_expedient">
+               		<title>15.1 - Suport 6</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_7_expedient">
+               		<title>15.1 - Suport 7</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_8_expedient">
+               		<title>15.1 - Suport 8</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_9_expedient">
+               		<title>15.1 - Suport 9</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_10_expedient">
+               		<title>15.1 - Suport 10</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_11_expedient">
+               		<title>15.1 - Suport 11</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_12_expedient">
+               		<title>15.1 - Suport 12</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_13_expedient">
+               		<title>15.1 - Suport 13</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_14_expedient">
+               		<title>15.1 - Suport 14</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_15_expedient">
+               		<title>15.1 - Suport 15</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_16_expedient">
+               		<title>15.1 - Suport 16</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_17_expedient">
+               		<title>15.1 - Suport 17</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_18_expedient">
+               		<title>15.1 - Suport 18</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_19_expedient">
+               		<title>15.1 - Suport 19</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_20_expedient">
+               		<title>15.1 - Suport 20</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_21_expedient">
+               		<title>15.1 - Suport 21</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:localitzacio_1_expedient">
+               		<title>15.2 - Localització 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:localitzacio_2_expedient">
+               		<title>15.2 - Localització 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:algoritme_expedient">
+               		<title>16.1 - Algoritme</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:valor_expedient">
+               		<title>16.2 - Valor</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:tipus_signatura_expedient">
+               		<title>Tipus signatura</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:format_signatura_expedient">
+               		<title>Format signatura</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:rol_signatura_expedient">
+               		<title>Rol signatura</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:denominacio_estat_expedient">
+               		<title>20.1 - Denominació estat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:accio_expedient">
+               		<title>21.1 - Acció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:motiu_reglat_expedient">
+               		<title>21.2 - Motiu reglat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:usuari_accio_expedient">
+               		<title>21.3 - Usuari acció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:modificacio_metadades_expedient">
+               		<title>21.5 - Modificació metadades</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:codi_classificacio_1_expedient">
+               		<title>22.1 - Codi classificació 1</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+            	<property name="udlrm:codi_classificacio_2_expedient">
+               		<title>22.1 - Codi classificació 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:denominacio_classe_1_expedient">
+               		<title>22.2 - Denominació classe 1</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+            	<property name="udlrm:denominacio_classe_2_expedient">
+               		<title>22.2 - Denominació classe 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:grup_creador_expedient">
+               		<title>Grup creador</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:advertencia_seguretat_expedient">
+               		<title>8.2.1 - Text advertència seguretat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:categoria_advertencia_seguretat_expedient">
+               		<title>8.2.2 - Categoria advertència seguretat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>       
+               		<constraints>
+                		<constraint ref="udlrm:categoria_advertencia_seguretat_constraint"/>                 		
+             		</constraints>        		
+            	</property>
+            </properties>       	
+      	</aspect>
+
+      	<aspect name="udlrm:agregacio">
+         	<title>Agregació</title>
+         	<properties>
+				<property name="udlrm:tipus_entitat_agregacio">
+               		<title>0 - Tipus entitat</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>
+               		<default>Document</default>               		
+            	</property>
+				<property name="udlrm:categoria_agregacio">
+               		<title>1 - Categoria</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>
+               		<default>Agregació</default>               		
+            	</property>
+				<property name="udlrm:secuencial_identificador_agregacio">
+               		<title>2.1 - Seqüencial identificador</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:esquema_identificador_agregacio">
+               		<title>2.2 - Esquema identificador</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:nom_natural_agregacio">
+               		<title>3.1 - Nom natural</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:data_inici_agregacio">
+               		<title>4.1 - Data inici</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+            	<property name="udlrm:data_creacio_agregacio">
+               		<title>4.1 - Data creació</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:data_fi_agregacio">
+               		<title>4.2 - Data fi</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:descripcio_agregacio">
+               		<title>5 - Descripció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:classificacio_acces_agregacio">
+               		<title>8.1.1 - Classificació accés</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+               		<default>Públic</default>
+               		<constraints>
+                		<constraint ref="udlrm:classificacioAccesUD"/>                 		
+             		</constraints> 
+            	</property>
+				<property name="udlrm:codi_politica_control_acces_agregacio">
+               		<title>8.1.2 - Codi política control accés</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:sensibilitat_dades_caracter_personal_agregacio">
+               		<title>8.4 - Sensibilitat dades caràcter personal</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:sensibilitat_dades_caracter_personal_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:classificacio_ENS_agregacio">
+               		<title>8.5 - Classificació ENS</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:condicions_acces_1_agregacio">
+               		<title>Condicions accés ús reutilització 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:condicions_acces_2_agregacio">
+               		<title>Condicions accés ús reutilització 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>             		
+            	</property>
+				<property name="udlrm:tipus_acces_1_agregacio">
+               		<title>Tipus accés 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:tipus_acces_2_agregacio">
+               		<title>Tipus accés 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:idioma_1_agregacio">
+               		<title>11 - Idioma 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>    
+               		<default>ca. Català</default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>           		
+            	</property>
+            	<property name="udlrm:idioma_2_agregacio">
+               		<title>11 - Idioma 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:idioma_3_agregacio">
+               		<title>11 - Idioma 3</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:idioma_4_agregacio">
+               		<title>11 - Idioma 4</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:valoracio_agregacio">
+               		<title>13.1 - Valoració</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default>Sense cobertura d'avaluació</default> 
+               		<constraints>
+                		<constraint ref="udlrm:valoracio_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:tipus_dictamen_1_agregacio">
+               		<title>13.2.1 - Tipus dictamen 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:tipus_dictamen_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:tipus_dictamen_2_agregacio">
+               		<title>13.2.1 - Tipus dictamen 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:tipus_dictamen_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:accio_dictaminada_1_agregacio">
+               		<title>13.2.2 - Acció dictaminada 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:accio_dictaminada_2_agregacio">
+               		<title>13.2.2 - Acció dictaminada 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:suport_origen_agregacio">
+               		<title>14.1 - Suport origen</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>        
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:suport_origen_constraint"/>                 		
+             		</constraints>       		
+            	</property>
+				<property name="udlrm:nom_format_agregacio">
+               		<title>14.2 - Nom format</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:versio_format_agregacio">
+               		<title>14.3 - Versió format</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:nom_aplicacio_creacio_agregacio">
+               		<title>Nom aplicació creació</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:versio_aplicacio_creacio_agregacio">
+               		<title>Versió aplicació creació</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:registre_formats_agregacio">
+               		<title>Registre formats</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:dimensions_fisiques_agregacio">
+               		<title>14.8.2 - Tamany lògic</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:volums_agregacio">
+               		<title>Volums</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:tamany_logic_agregacio">
+               		<title>14.8.2 - Tamany lògic</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:quantitat_agregacio">
+               		<title>14.8.3 - Quantitat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:unitats_agregacio">
+               		<title>14.8.4 - Unitats</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>       
+               		<default></default>       
+               		<constraints>
+                		<constraint ref="udlrm:unitats_constraint"/>                 		
+             		</constraints>        		
+            	</property>
+				<property name="udlrm:suport_1_agregacio">
+               		<title>15.1 - Suport 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_2_agregacio">
+               		<title>15.1 - Suport 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_3_agregacio">
+               		<title>15.1 - Suport 3</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_4_agregacio">
+               		<title>15.1 - Suport 4</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_5_agregacio">
+               		<title>15.1 - Suport 5</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_6_agregacio">
+               		<title>15.1 - Suport 6</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_7_agregacio">
+               		<title>15.1 - Suport 7</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_8_agregacio">
+               		<title>15.1 - Suport 8</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_9_agregacio">
+               		<title>15.1 - Suport 9</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_10_agregacio">
+               		<title>15.1 - Suport 10</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_11_agregacio">
+               		<title>15.1 - Suport 11</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_12_agregacio">
+               		<title>15.1 - Suport 12</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_13_agregacio">
+               		<title>15.1 - Suport 13</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_14_agregacio">
+               		<title>15.1 - Suport 14</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_15_agregacio">
+               		<title>15.1 - Suport 15</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_16_agregacio">
+               		<title>15.1 - Suport 16</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_17_agregacio">
+               		<title>15.1 - Suport 17</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_18_agregacio">
+               		<title>15.1 - Suport 18</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_19_agregacio">
+               		<title>15.1 - Suport 19</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_20_agregacio">
+               		<title>15.1 - Suport 20</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_21_agregacio">
+               		<title>15.1 - Suport 21</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:localitzacio_1_agregacio">
+               		<title>15.2 - Localització 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:localitzacio_2_agregacio">
+               		<title>15.2 - Localització 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:algoritme_agregacio">
+               		<title>16.1 - Algoritme</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:valor_agregacio">
+               		<title>16.2 - Valor</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:tipus_signatura_agregacio">
+               		<title>Tipus signatura</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:format_signatura_agregacio">
+               		<title>Format signatura</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:rol_signatura_agregacio">
+               		<title>Rol signatura</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:denominacio_estat_agregacio">
+               		<title>20.1 - Denominació estat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:accio_agregacio">
+               		<title>21.1 - Acció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:motiu_reglat_agregacio">
+               		<title>21.2 - Motiu reglat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:usuari_accio_agregacio">
+               		<title>21.3 - Usuari acció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:modificacio_metadades_agregacio">
+               		<title>21.5 - Modificació metadades</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:codi_classificacio_1_agregacio">
+               		<title>22.1 - Codi classificació 1</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+            	<property name="udlrm:codi_classificacio_2_agregacio">
+               		<title>22.1 - Codi classificació 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:denominacio_classe_1_agregacio">
+               		<title>22.2 - Denominació classe 1</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+            	<property name="udlrm:denominacio_classe_2_agregacio">
+               		<title>22.2 - Denominació classe 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:grup_creador_agregacio">
+               		<title>Grup creador</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:advertencia_seguretat_agregacio">
+               		<title>8.2.1 - Text advertència seguretat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:categoria_advertencia_seguretat_agregacio">
+               		<title>8.2.2 - Categoria advèrtencia seguretat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>       
+               		<constraints>
+                		<constraint ref="udlrm:categoria_advertencia_seguretat_constraint"/>                 		
+             		</constraints>        		
+            	</property>
+            </properties>       	
+      	</aspect>
+
+      	<aspect name="udlrm:serie">
+         	<title>Sèrie</title>
+         	<properties>
+				<property name="udlrm:tipus_entitat_serie">
+               		<title>0 - Tipus entitat</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>         
+               		<default>Document</default>      		
+            	</property>
+				<property name="udlrm:categoria_serie">
+               		<title>1 - Categoria</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>
+               		<default>Sèrie</default>               		
+            	</property>
+				<property name="udlrm:secuencial_identificador_serie">
+               		<title>2.1 - Seqüencial identificador</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:esquema_identificador_serie">
+               		<title>2.2 - Esquema identificador</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default>$9999$9999</default>               		
+            	</property>
+				<property name="udlrm:nom_natural_serie">
+               		<title>3.1 - Nom natural</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:esquema_nom_serie">
+               		<title>Esquema nom</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:data_inici_serie">
+               		<title>4.1 - Data inici</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+            	<property name="udlrm:data_creacio_serie">
+               		<title>4.1 - Data creació</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:data_fi_serie">
+               		<title>4.2 - Data fi</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:descripcio_serie">
+               		<title>5 - Descripció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:classificacio_acces_serie">
+               		<title>8.1.1 - Classificació accés</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>             
+               		<default>Públic</default>
+               		<constraints>
+                		<constraint ref="udlrm:classificacioAccesSerie"/>                 		
+             		</constraints>  		
+            	</property>
+				<property name="udlrm:codi_politica_control_acces_serie">
+               		<title>8.1.2 - Codi política control accés</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:sensibilitat_dades_caracter_personal_serie">
+               		<title>8.4 - Sensibilitat dades caràcter personal</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:sensibilitat_dades_caracter_personal_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:classificacio_ENS_serie">
+               		<title>8.5 - Classificació ENS</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:condicions_acces_1_serie">
+               		<title>Condicions accés ús reutilització 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:condicions_acces_2_serie">
+               		<title>Condicions accés ús reutilització 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:tipus_acces_1_serie">
+               		<title>Tipus accés 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:tipus_acces_2_serie">
+               		<title>Tipus accés 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:idioma_1_serie">
+               		<title>11 - Idioma 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default>ca. Català</default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:idioma_2_serie">
+               		<title>11 - Idioma 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:idioma_3_serie">
+               		<title>11 - Idioma 3</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:idioma_4_serie">
+               		<title>11 - Idioma 4</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:valoracio_serie">
+               		<title>13.1 - Valoració</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default>Sense cobertura d'avaluació</default>
+               		<constraints>
+                		<constraint ref="udlrm:valoracio_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+				<property name="udlrm:tipus_dictamen_1_serie">
+               		<title>13.2.1 - Tipus dictamen 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:tipus_dictamen_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:tipus_dictamen_2_serie">
+               		<title>13.2.1 - Tipus dictamen 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:tipus_dictamen_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:accio_dictaminada_1_serie">
+               		<title>13.2.2 - Acció dictaminada 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:accio_dictaminada_2_serie">
+               		<title>13.2.2 - Acció dictaminada 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:suport_origen_serie">
+               		<title>14.1 - Suport origen</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory> 
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:suport_origen_constraint"/>                 		
+             		</constraints>              		
+            	</property>
+				<property name="udlrm:nom_format_serie">
+               		<title>14.2 - Nom format</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:versio_format_serie">
+               		<title>14.3 - Versió format</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:nom_aplicacio_creacio_serie">
+               		<title>Nom aplicació creació</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:versio_aplicacio_creacio_serie">
+               		<title>Versió aplicació creació</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:registre_formats_serie">
+               		<title>Registre formats</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:dimensions_fisiques_serie">
+               		<title>14.8.2 - Tamany lògic</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:tamany_logic_serie">
+               		<title>14.8.2 - Tamany lògic</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:quantitat_serie">
+               		<title>14.8.3 - Quantitat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:unitats_serie">
+               		<title>14.8.4 - Unitats</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		               		
+               		<constraints>
+                		<constraint ref="udlrm:unitats_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:suport_1_serie">
+               		<title>15.1 - Suport 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>                 		
+            	</property>
+            	<property name="udlrm:suport_2_serie">
+               		<title>15.1 - Suport 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_3_serie">
+               		<title>15.1 - Suport 3</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_4_serie">
+               		<title>15.1 - Suport 4</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_5_serie">
+               		<title>15.1 - Suport 5</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_6_serie">
+               		<title>15.1 - Suport 6</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_7_serie">
+               		<title>15.1 - Suport 7</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_8_serie">
+               		<title>15.1 - Suport 8</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_9_serie">
+               		<title>15.1 - Suport 9</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_10_serie">
+               		<title>15.1 - Suport 10</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_11_serie">
+               		<title>15.1 - Suport 11</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_12_serie">
+               		<title>15.1 - Suport 12</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_13_serie">
+               		<title>15.1 - Suport 13</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_14_serie">
+               		<title>15.1 - Suport 14</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_15_serie">
+               		<title>15.1 - Suport 15</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_16_serie">
+               		<title>15.1 - Suport 16</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_17_serie">
+               		<title>15.1 - Suport 17</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_18_serie">
+               		<title>15.1 - Suport 18</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_19_serie">
+               		<title>15.1 - Suport 19</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_20_serie">
+               		<title>15.1 - Suport 20</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+            	<property name="udlrm:suport_21_serie">
+               		<title>15.1 - Suport 21</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:localitzacio_1_serie">
+               		<title>15.2 - Localització 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:localitzacio_2_serie">
+               		<title>15.2 - Localització 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:denominacio_estat_serie">
+               		<title>20.1 - Denominació estat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:accio_serie">
+               		<title>21.1 - Acció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:motiu_reglat_serie">
+               		<title>21.2 - Motiu reglat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:usuari_accio_serie">
+               		<title>21.3 - Usuari acció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:modificacio_metadades_serie">
+               		<title>21.5 - Modificació metadades</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:codi_classificacio_serie">
+               		<title>22.1 - Codi classificació</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:denominacio_classe_serie">
+               		<title>22.2 - Denominació classe</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+            	<property name="udlrm:advertencia_seguretat_serie">
+               		<title>8.2.1 - Text advertència seguretat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:categoria_advertencia_seguretat_serie">
+               		<title>8.2.2 - Categoria advertència seguretat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>    
+               		<default></default>       
+               		<constraints>
+                		<constraint ref="udlrm:categoria_advertencia_seguretat_constraint"/>                 		
+             		</constraints>           		        		
+            	</property>
+            	<property name="udlrm:grup_creador_serie">
+               		<title>Grup creador</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            </properties>       	
+      	</aspect>
+
+      	<aspect name="udlrm:fons">
+         	<title>Fons</title>
+         	<properties>
+				<property name="udlrm:tipus_entitat_fons">
+               		<title>0 - Tipus entitat</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>            
+               		<default>Document</default>   		
+            	</property>
+				<property name="udlrm:categoria_fons">
+               		<title>1 - Categoria</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>
+               		<default>Fons</default>               		
+            	</property>
+				<property name="udlrm:secuencial_identificador_fons">
+               		<title>2.1 - Seqüencial identificador</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:esquema_identificador_fons">
+               		<title>2.2 - Esquema identificador</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory> 
+               		<default><![CDATA[CAT_UDL_<FONS_9999>]]></default>              		
+            	</property>
+				<property name="udlrm:nom_natural_fons">
+               		<title>3.1 - Nom natural</title>
+               		<type>d:text</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:esquema_nom_fons">
+               		<title>Esquema nom</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:data_inici_fons">
+               		<title>4.1 - Data inici</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+            	<property name="udlrm:data_creacio_fons">
+               		<title>4.1 - Data creació</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:data_fi_fons">
+               		<title>4.2 - Data fi</title>
+               		<type>d:date</type>
+               		<mandatory>true</mandatory>               		
+            	</property>
+				<property name="udlrm:descripcio_fons">
+               		<title>5 - Descripció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:classificacio_ENS_fons">
+               		<title>8.5 - Classificació ENS</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:idioma_1_fons">
+               		<title>11 - Idioma 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default>ca. Català</default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>              		              		
+            	</property>
+            	<property name="udlrm:idioma_2_fons">
+               		<title>11 - Idioma 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		               		               		
+            	</property>
+            	<property name="udlrm:idioma_3_fons">
+               		<title>11 - Idioma 3</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>               		               		               		
+            	</property>
+            	<property name="udlrm:idioma_4_fons">
+               		<title>11 - Idioma 4</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:idioma_constraint"/>                 		
+             		</constraints>
+            	</property>
+				<property name="udlrm:suport_origen_fons">
+               		<title>14.1 - Suport origen</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+               		<default></default>
+               		<constraints>
+                		<constraint ref="udlrm:suport_origen_constraint"/>                 		
+             		</constraints>
+            	</property>
+				<property name="udlrm:nom_format_fons">
+               		<title>14.2 - Nom format</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:versio_format_fons">
+               		<title>14.3 - Versió format</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:tamany_logic_fons">
+               		<title>14.8.2 - Tamany lògic</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:quantitat_fons">
+               		<title>14.8.3 - Quantitat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:unitats_fons">
+               		<title>14.8.4 - Unitats</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:unitats_constraint"/>                 		
+             		</constraints>               		
+            	</property>
+				<property name="udlrm:suport_1_fons">
+               		<title>15.1 - Suport 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>              		
+            	</property>
+            	<property name="udlrm:suport_2_fons">
+               		<title>15.1 - Suport 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_3_fons">
+               		<title>15.1 - Suport 3</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_4_fons">
+               		<title>15.1 - Suport 4</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_5_fons">
+               		<title>15.1 - Suport 5</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_6_fons">
+               		<title>15.1 - Suport 6</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_7_fons">
+               		<title>15.1 - Suport 7</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_8_fons">
+               		<title>15.1 - Suport 8</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_9_fons">
+               		<title>15.1 - Suport 9</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_10_fons">
+               		<title>15.1 - Suport 10</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_11_fons">
+               		<title>15.1 - Suport 11</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_12_fons">
+               		<title>15.1 - Suport 12</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_13_fons">
+               		<title>15.1 - Suport 13</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_14_fons">
+               		<title>15.1 - Suport 14</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_15_fons">
+               		<title>15.1 - Suport 15</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_16_fons">
+               		<title>15.1 - Suport 16</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_17_fons">
+               		<title>15.1 - Suport 17</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_18_fons">
+               		<title>15.1 - Suport 18</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_19_fons">
+               		<title>15.1 - Suport 19</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_20_fons">
+               		<title>15.1 - Suport 20</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+            	<property name="udlrm:suport_21_fons">
+               		<title>15.1 - Suport 21</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>  
+               		<default></default>               		
+               		<constraints>
+                		<constraint ref="udlrm:suport_constraint"/>                 		
+             		</constraints>             		
+            	</property>
+				<property name="udlrm:localitzacio_1_fons">
+               		<title>15.2 - Localització 1</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:localitzacio_2_fons">
+               		<title>15.2 - Localització 2</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:denominacio_estat_fons">
+               		<title>20.1 - Denominació estat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:accio_fons">
+               		<title>21.1 - Acció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:motiu_reglat_fons">
+               		<title>21.2 - Motiu reglat</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:usuari_accio_fons">
+               		<title>21.3 - Usuari acció</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:modificacio_metadades_fons">
+               		<title>21.5 - Modificació metadades</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:codi_classificacio_fons">
+               		<title>22.1 - Codi classificació</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+				<property name="udlrm:denominacio_classe_fons">
+               		<title>22.2 - Denominació classe</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            	<property name="udlrm:grup_creador_fons">
+               		<title>Grup creador</title>
+               		<type>d:text</type>
+               		<mandatory>false</mandatory>               		
+            	</property>
+            </properties>       	
+      	</aspect>
+      	      	
+      	<aspect name="udlrm:signaturaDettached">
+         	<title>Signatura</title>
+         	<properties>
+            	<property name="udlrm:tipus_signatura">
+               		<title>Tipus</title>
+               		<type>d:text</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>            	
+            	<property name="udlrm:id_document_signat">
+               		<title>Document signat</title>
+               		<type>d:text</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>            	         
+            	<property name="udlrm:data_signatura">
+               		<title>Data de la signatura</title>
+               		<type>d:date</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>
+            	<property name="udlrm:data_ini_validacio_signatura">
+               		<title>Data d'inici de validesa de la signatura</title>
+               		<type>d:date</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>            	
+            	<property name="udlrm:data_fi_validacio_signatura">
+               		<title>Data final de validesa de la signatura</title>
+               		<type>d:date</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>           	
+            	<property name="udlrm:validacio_signatura">
+               		<title>Resultat validació</title>
+               		<type>d:text</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>
+            	<property name="udlrm:nom_signatari_signatura">
+               		<title>Nom signatari</title>
+               		<type>d:text</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>
+            	<property name="udlrm:identificador_signatari_signatura">
+               		<title>Identificador signatari</title>
+               		<type>d:text</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>
+            	<property name="udlrm:organitzacio_signatura">
+               		<title>Organització</title>
+               		<type>d:text</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>
+            	<property name="udlrm:unitat_organica_signatura">
+               		<title>Unitat orgànica</title>
+               		<type>d:text</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>
+            	<property name="udlrm:politica_signatura">
+               		<title>Política de signatura</title>
+               		<type>d:text</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>
+            	<property name="udlrm:proveidor_certificat_signatura">
+               		<title>Proveïdor de certificat</title>
+               		<type>d:text</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>
+            	<property name="udlrm:tipus_certificat_signatura">
+               		<title>Tipus de certificat</title>
+               		<type>d:text</type>               		               		
+               		<mandatory>false</mandatory>
+            	</property>
+         	</properties>         	
+      	</aspect>  
+    </aspects>    
+</model>

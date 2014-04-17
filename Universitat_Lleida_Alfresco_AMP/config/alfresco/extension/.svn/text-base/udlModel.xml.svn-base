@@ -1,0 +1,3608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="udl:model" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+	<description>UdL custom Model</description>
+	<author>Smile</author>
+	<version>1.0</version>
+	<imports>
+		<!-- Import Alfresco Dictionary Definitions -->
+		<import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+		<!-- Import Alfresco Content Domain Model Definitions -->
+		<import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+	</imports>
+	<namespaces>
+		<!-- Define a Namespace for my new definitions -->
+		<namespace uri="http://www.smile.com/model/udl/1.0" prefix="udl" />
+	</namespaces>
+	<constraints>
+		<constraint name="udl:classificacio" type="com.smile.constraints.DataListConstraint">
+			<title>Classificació</title>
+			<parameter name="allowedValues">
+				<list></list>
+			</parameter>
+			<parameter name="caseSensitive">
+				<value>false</value>
+			</parameter>
+			<parameter name="sorted">
+				<value>true</value>
+			</parameter>
+			<parameter name="datalist">
+				<value>classificacio</value>
+			</parameter>
+			<parameter name="site">
+				<value>arxiuFisic</value>
+			</parameter>
+		</constraint>
+		<constraint name="udl:unitats" type="com.smile.constraints.DataListConstraint">
+			<title>14.8.4 - Unitats</title>
+			<parameter name="allowedValues">
+				<list></list>
+			</parameter>
+			<parameter name="caseSensitive">
+				<value>false</value>
+			</parameter>
+			<parameter name="sorted">
+				<value>true</value>
+			</parameter>
+			<parameter name="datalist">
+				<value>unitats</value>
+			</parameter>
+			<parameter name="site">
+				<value>arxiuFisic</value>
+			</parameter>
+		</constraint>
+		<constraint name="udl:especifica" type="com.smile.constraints.DataListConstraint">
+			<title>Específica</title>
+			<parameter name="allowedValues">
+				<list></list>
+			</parameter>
+			<parameter name="caseSensitive">
+				<value>false</value>
+			</parameter>
+			<parameter name="sorted">
+				<value>true</value>
+			</parameter>
+			<parameter name="datalist">
+				<value>especifica</value>
+			</parameter>
+			<parameter name="site">
+				<value>arxiuFisic</value>
+			</parameter>
+		</constraint>
+		<constraint name="udl:suport" type="com.smile.constraints.DataListConstraint">
+			<title>Suport</title>
+			<parameter name="allowedValues">
+				<list></list>
+			</parameter>
+			<parameter name="caseSensitive">
+				<value>false</value>
+			</parameter>
+			<parameter name="sorted">
+				<value>true</value>
+			</parameter>
+			<parameter name="datalist">
+				<value>suport</value>
+			</parameter>
+			<parameter name="site">
+				<value>arxiuFisic</value>
+			</parameter>
+		</constraint>
+		<constraint name="udl:nominativa" type="com.smile.constraints.DataListConstraint">
+			<title>Nominativa</title>
+			<parameter name="allowedValues">
+				<list></list>
+			</parameter>
+			<parameter name="caseSensitive">
+				<value>false</value>
+			</parameter>
+			<parameter name="sorted">
+				<value>true</value>
+			</parameter>
+			<parameter name="datalist">
+				<value>nominativa</value>
+			</parameter>
+			<parameter name="site">
+				<value>arxiuFisic</value>
+			</parameter>
+		</constraint>
+		<constraint name="udl:uniforme" type="com.smile.constraints.DataListConstraint">
+			<title>Uniforme</title>
+			<parameter name="allowedValues">
+				<list></list>
+			</parameter>
+			<parameter name="caseSensitive">
+				<value>false</value>
+			</parameter>
+			<parameter name="sorted">
+				<value>true</value>
+			</parameter>
+			<parameter name="datalist">
+				<value>uniforme</value>
+			</parameter>
+			<parameter name="site">
+				<value>arxiuFisic</value>
+			</parameter>
+		</constraint>
+		<constraint name="udl:classificacioAccesUD" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value>Públic</value>
+					<value>Restringit</value>
+					<value>Confidencial</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:classificacioAccesSerie" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value>Públic</value>
+					<value>Restringit</value>
+					<value>Confidencial</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:classificacioAccesDoc" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value>Públic</value>
+					<value>Confidencial</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:regulacio_constraint" type="com.smile.constraints.DataListConstraint">
+			<title>Regulació</title>
+			<parameter name="allowedValues">
+				<list></list>
+			</parameter>
+			<parameter name="caseSensitive">
+				<value>false</value>
+			</parameter>
+			<parameter name="sorted">
+				<value>true</value>
+			</parameter>
+			<parameter name="datalist">
+				<value>regulacio</value>
+			</parameter>
+			<parameter name="viewMetadata">
+				<value>nom_natural_regulacio</value>
+			</parameter>
+			<parameter name="site">
+				<value>dm</value>
+			</parameter>
+		</constraint>
+		<constraint name="udl:institucio_constraint" type="com.smile.constraints.DataListConstraint">
+			<title>Institució</title>
+			<parameter name="allowedValues">
+				<list></list>
+			</parameter>
+			<parameter name="caseSensitive">
+				<value>false</value>
+			</parameter>
+			<parameter name="sorted">
+				<value>true</value>
+			</parameter>
+			<parameter name="datalist">
+				<value>institucio</value>
+			</parameter>
+			<parameter name="viewMetadata">
+				<value>nom_natural_institucio</value>
+			</parameter>
+			<parameter name="site">
+				<value>dm</value>
+			</parameter>
+		</constraint>
+		<constraint name="udl:organ_constraint" type="com.smile.constraints.DataListConstraint">
+			<title>Òrgan</title>
+			<parameter name="allowedValues">
+				<list></list>
+			</parameter>
+			<parameter name="caseSensitive">
+				<value>false</value>
+			</parameter>
+			<parameter name="sorted">
+				<value>true</value>
+			</parameter>
+			<parameter name="datalist">
+				<value>organ</value>
+			</parameter>
+			<parameter name="viewMetadata">
+				<value>nom_natural_organ</value>
+			</parameter>
+			<parameter name="site">
+				<value>dm</value>
+			</parameter>
+		</constraint>
+		<constraint name="udl:dispositiu_constraint" type="com.smile.constraints.DataListConstraint">
+			<title>Dispositiu</title>
+			<parameter name="allowedValues">
+				<list></list>
+			</parameter>
+			<parameter name="caseSensitive">
+				<value>false</value>
+			</parameter>
+			<parameter name="sorted">
+				<value>true</value>
+			</parameter>
+			<parameter name="datalist">
+				<value>dispositiu</value>
+			</parameter>
+			<parameter name="viewMetadata">
+				<value>nom_dispositiu</value>
+			</parameter>
+			<parameter name="site">
+				<value>dm</value>
+			</parameter>
+		</constraint>
+		<constraint name="udl:suport_origen_constraint" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value></value>
+					<value>Físic</value>
+					<value>Híbrid</value>
+					<value>Electrònic</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:suport_origen_constraint_doc" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value></value>
+					<value>Físic</value>
+					<value>Híbrid</value>
+					<value>Electrònic</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:categoria_advertencia_seguretat_constraint" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value></value>
+					<value>Solament accès autoritzat</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:sensibilitat_dades_caracter_personal_constraint" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value></value>
+					<value>Basic</value>
+					<value>Mig</value>
+					<value>Alt</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:idioma_constraint" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value></value>
+					<value>de. Alemany</value>
+					<value>ar. Àrab</value>
+					<value>en. Anglès</value>
+					<value>eu. Basc</value>
+					<value>bg. Búlgar</value>
+					<value>ca. Català</value>
+					<value>da. Danès</value>
+					<value>sk. Eslovac</value>
+					<value>sl. Eslovè</value>
+					<value>es. Espanyol;Castellà</value>
+					<value>et. Estonià</value>
+					<value>fi. Finès</value>
+					<value>fr. Francès</value>
+					<value>gl. Gallec</value>
+					<value>el. Grec, Modern (1453-)</value>
+					<value>hu. Hongarès</value>
+					<value>ga. Irlandès</value>
+					<value>it. Italià</value>
+					<value>lv. Letó</value>
+					<value>lt. Lituà</value>
+					<value>mt. Maltès</value>
+					<value>nl. Neerlandès; Flamenc</value>
+					<value>pl. Polac</value>
+					<value>pt. Portuguès</value>
+					<value>ro. Romanès; Moldau;</value>
+					<value>ru. Rus</value>
+					<value>sv. Suec</value>
+					<value>cs. Txec</value>
+					<value>uk. Ucraïnès</value>
+					<value>zh. Xinès</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:unitats_constraint" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value></value>
+					<value>B</value>
+					<value>Volum</value>
+					<value>Cm</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:tipus_dictamen_constraint" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value></value>
+					<value>Conservació permanent</value>
+					<value>Eliminació</value>
+					<value>Eliminació parcial</value>
+					<value>Transferència</value>
+					<value>Mostreig</value>
+					<value>Duplicació por essencial</value>
+					<value>Sense avaluació</value>
+					<value>Revisió posterior</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:suport_constraint" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value></value>
+					<value>Paper DIN A4</value>
+					<value>Paper DIN-A5</value>
+					<value>Paper DIN-A3-Gran format</value>
+					<value>Paper DIN-Publicacions</value>
+					<value>Paper-Fotogràfic: positius</value>
+					<value>Paper-Fotogràfic: negatius</value>
+					<value>Plàstic-Fotogràfic: diapositives</value>
+					<value>Paper/Plàstic-Plànols i mapes</value>
+					<value>Paper/Plàstic-Cartells</value>
+					<value>Microformes-Microfitxa</value>
+					<value>Microformes-Bobina</value>
+					<value>Plàstic-Negatius (rodet/reportatge)</value>
+					<value>Magnètic 3 1/2”</value>
+					<value>Magnètic 5 1/4”</value>
+					<value>Magnètic Vídeos</value>
+					<value>Òptic-CD</value>
+					<value>Òptic-DVD</value>
+					<value>Magnètic-Casset</value>
+					<value>Magnètic</value>
+					<value>Electrònic</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:valoracio_constraint" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value>Sense cobertura d'avaluació</value>
+					<value></value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:denominacion_estado_constraint" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value>Original</value>
+					<value>Còpia</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:tipus_copia_constraint" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value></value>
+					<value>Còpia simple</value>
+					<value>Còpia autèntica en paper de document paper</value>
+					<value>Còpia electrònica autèntica de document paper</value>
+					<value>Còpia autèntica en paper de document electrònic</value>
+				</list>
+			</parameter>
+		</constraint>
+		<constraint name="udl:tipus_documental_constraint" type="LIST">
+			<parameter name="allowedValues">
+				<list>
+					<value>U00 DOCUMENT ADMINISTRATIU</value>
+					<value>U01 INFORME</value>
+					<value>U02 ESTADÍSTICA</value>
+					<value>U03 ENQUESTA</value>
+					<value>U04 SUBVENCIÓ</value>
+					<value>U05 RESOLUCIÓ</value>
+					<value>U06 ACORD</value>
+					<value>U07 ASSEGURANÇA</value>
+					<value>U08 CENS</value>
+					<value>U09 AJUT</value>
+					<value>U10 ACTA</value>
+					<value>U11 ACUSAMENT DE REBUDA</value>
+					<value>U12 ALBARÀ</value>
+					<value>U13 AL·LEGACIÓ</value>
+					<value>U14 ANUNCI/AVÍS</value>
+					<value>U15 BUROFAX</value>
+					<value>U16 CARTA</value>
+					<value>U17 CARTELL</value>
+					<value>U18 CATÀLEG</value>
+					<value>U19 CERTIFICAT</value>
+					<value>U20 CIRCULAR</value>
+					<value>U21 CITACIÓ</value>
+					<value>U22 COMUNICACIÓ</value>
+					<value>U23 COMUNICAT</value>
+					<value>U24 CONTRACTE</value>
+					<value>U25 CONVENI</value>
+					<value>U26 CONVOCATÒRIA/ORDRE DEL DIA</value>
+					<value>U27 CORREU ELECTRÒNIC</value>
+					<value>U28 DECLARACIÓ</value>
+					<value>U29 DEMANDA</value>
+					<value>U30 DICTAMEN</value>
+					<value>U31 DILIGÈNCIA</value>
+					<value>U32 ESTATUT</value>
+					<value>U33 ESTUDI</value>
+					<value>U34 EXAMEN</value>
+					<value>U35 EXTRACTE</value>
+					<value>U36 FACTURA</value>
+					<value>U37 FAX</value>
+					<value>U38 FORMULARI</value>
+					<value>U39 FOTOGRAFIA</value>
+					<value>U40 FULLETÓ</value>
+					<value>U41 GUIA</value>
+					<value>U42 IMATGE DIGITAL</value>
+					<value>U43 INSTRUCCIÓ</value>
+					<value>U44 INVENTARI</value>
+					<value>U45 INVITACIÓ</value>
+					<value>U46 JUSTIFICANT</value>
+					<value>U47 LLIBRE</value>
+					<value>U48 LLICÈNCIA</value>
+					<value>U49 LLISTAT</value>
+					<value>U50 MANAMENT D'INGRÉS</value>
+					<value>U51 MANAMENT DE PAGAMENT</value>
+					<value>U52 MEMÒRIA</value>
+					<value>U53 MOCIÓ</value>
+					<value>U54 NOMENAMENT</value>
+					<value>U55 NORMA</value>
+					<value>U56 NOTA DE PREMSA</value>
+					<value>U57 NOTA SIMPLE</value>
+					<value>U58 NOTIFICACIÓ</value>
+					<value>U59 AUDIOVISUAL</value>
+					<value>U60 OFICI</value>
+					<value>U61 ORDRE DE PAGAMANENT</value>
+					<value>U62 ORGANIGRAMA</value>
+					<value>U63 PERMÍS</value>
+					<value>U64 PLA</value>
+					<value>U65 PLÀNOL</value>
+					<value>U66 PLEC DE CLÀUSULES</value>
+					<value>U67 PLICA</value>
+					<value>U68 PRESSUPOST</value>
+					<value>U69 PROCEDIMENT</value>
+					<value>U70 PROGRAMA</value>
+					<value>U71 PROJECTE</value>
+					<value>U72 PROPOSTA DE RESOLUCIÓ</value>
+					<value>U73 PUBLICACIÓ</value>
+					<value>U74 QUEIXA</value>
+					<value>U75 QÜESTIONARI</value>
+					<value>U76 REBUT</value>
+					<value>U77 RECLAMACIÓ</value>
+					<value>U78 RECURS</value>
+					<value>U79 REGISTRE</value>
+					<value>U80 REGLAMENT</value>
+					<value>U81 RECULL DE PREMSA</value>
+					<value>U82 REVISTA</value>
+					<value>U83 SALUDA</value>
+					<value>U84 SENTÈNCIA</value>
+					<value>U85 SOL·LICITUD</value>
+					<value>U86 TELEGRAMA</value>
+					<value>U87 TRÍPTIC</value>
+					<value>U88 DÍPTIC</value>
+				</list>
+			</parameter>
+		</constraint>
+	</constraints>
+	<types>
+		<type name="udl:expedientFisic">
+			<title>Expedient físic</title>
+			<parent>cm:folder</parent>
+			<properties>
+				<property name="udl:codiRegistre">
+					<title>Registre</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:numExpedient">
+					<title>Expedient</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tipus">
+					<title>Tipus</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:unitat">
+					<title>Unitat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:unitats" />
+					</constraints>
+				</property>
+				<property name="udl:codiFuncio">
+					<title>Classificació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:classificacio" />
+					</constraints>
+				</property>
+				<property name="udl:codiFuncio2">
+					<title>Funció 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:classificacio" />
+					</constraints>
+				</property>
+				<property name="udl:especifica">
+					<title>Específica</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:especifica" />
+					</constraints>
+				</property>
+				<property name="udl:especifica2">
+					<title>Específica 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:especifica" />
+					</constraints>
+				</property>
+				<!-- <property name="udl:nomExpedientFisic"> <title>Nom</title> <type>d:text</type> <mandatory>false</mandatory> </property> -->
+				<property name="udl:dataIni">
+					<title>4.1 - Data inici</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:dataFi">
+					<title>4.2 - Data fi</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:nominal">
+					<title>Nominativa</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:nominativa" />
+					</constraints>
+				</property>
+				<property name="udl:altresNominal">
+					<title>Especificar nominativa</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:uniforme">
+					<title>Uniforme</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:uniforme" />
+					</constraints>
+				</property>
+				<property name="udl:tipusSuport">
+					<title>Suport</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:suport" />
+					</constraints>
+				</property>
+				<property name="udl:format">
+					<title>Format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:volum">
+					<title>Volum</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:instalacio">
+					<title>Instal·lació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:instalacioIni">
+					<title>Instal·lació inicial</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:instalacioFi">
+					<title>Instal·lació final</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:volumIni">
+					<title>Volum inicial</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:volumFi">
+					<title>Volum final</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:codiInventari">
+					<title>Inventari</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:essencial">
+					<title>Essencial</title>
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:eliminat">
+					<title>Eliminat</title>
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:observacions">
+					<title>Observacions</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:conservacio">
+					<title>Conservació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data">
+					<title>Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:inventari">
+					<title>Inventari</title>
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="udl:arxiuFisic">
+			<title>Arxiu físic</title>
+			<parent>cm:folder</parent>
+			<properties>
+				<property name="udl:metresLinealsLliures">
+					<title>Metres lineals lliures</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:metresLinealsOcupats">
+					<title>Metres lineals ocupats</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="udl:placaArxiuFisic">
+			<title>Carpeta de l'Arxiu Físic</title>
+			<parent>cm:folder</parent>
+			<properties>
+				<property name="udl:estatPlaca">
+					<title>Estat plaça</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:codiUbicacioFisica">
+					<title>Codi ubicació</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:codiInternUbicacioFisica">
+					<title>Codi intern ubicació</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:codiContenidor">
+					<title>Codi contenidor</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:tipusModelat">
+					<title>Tipus modelat</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:codiProces">
+					<title>Codi procés</title>
+					<type>d:text</type>
+				</property>
+			</properties>
+		</type>
+		<type name="udl:documentSimple">
+			<title>Document simple</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="udl:tipus_entitat_documentSimple">
+					<title>0 - Tipus entitat</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Document</default>
+				</property>
+				<property name="udl:categoria_documentSimple">
+					<title>1 - Categoria</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Document simple</default>
+				</property>
+				<property name="udl:secuencial_identificador_documentSimple">
+					<title>2.1 - Seqüencial identificador</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:esquema_identificador_documentSimple">
+					<title>2.2 - Esquema identificador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<!--<property name="udl:nom_natural_documentSimple"> <title>3.1 - Nom natural</title> <type>d:text</type> <mandatory>true</mandatory> </property> -->
+				<property name="udl:data_inici_documentSimple">
+					<title>4.1 - Data inici</title>
+					<type>d:date</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:data_registre_entrada_documentSimple">
+					<title>4.1 - Data registre entrada</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_registre_sortida_documentSimple">
+					<title>4.1 - Data registre sortida</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+<!-- 			<property name="udl:data_creacio_documentSimple">
+					<title>4.1 - Data creació</title>
+					<type>d:date</type>
+					<mandatory>true</mandatory>
+				</property> -->
+				<property name="udl:data_fi_documentSimple">
+					<title>4.2 - Data fi</title>
+					<type>d:date</type>
+					<mandatory>true</mandatory>
+				</property>
+				<!-- <property name="udl:descripcio_documentSimple"> <title>5 - Descripció</title> <type>d:text</type> <mandatory>false</mandatory> </property> -->
+				<property name="udl:classificacio_acces_documentSimple">
+					<title>8.1.1 - Classificació accés</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>Públic</default>
+					<constraints>
+						<constraint ref="udl:classificacioAccesDoc" />
+					</constraints>
+				</property>
+				<!-- <property name="udl:codi_politica_control_acces_documentSimple"> <title>8.1.2 - Codi política control accés</title> <type>d:text</type> <mandatory>false</mandatory> 
+					</property> -->
+				<property name="udl:sensibilitat_dades_caracter_personal_documentSimple">
+					<title>8.4 - Sensibilitat dades caràcter personal</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:sensibilitat_dades_caracter_personal_constraint" />
+					</constraints>
+				</property>
+				<!-- <property name="udl:classificacio_ENS_documentSimple"> <title>8.5 - Classificació ENS</title> <type>d:text</type> <mandatory>false</mandatory> 
+					</property> <property name="udl:condicions_acces_1_documentSimple"> <title>Condicions accés ús reutilització 1</title> <type>d:text</type> <mandatory>false</mandatory> 
+					</property> <property name="udl:condicions_acces_2_documentSimple"> <title>Condicions accés ús reutilització 2</title> <type>d:text</type> <mandatory>false</mandatory> 
+					</property> <property name="udl:tipus_acces_1_documentSimple"> <title>Tipus accés 1</title> <type>d:text</type> <mandatory>false</mandatory> </property> 
+					<property name="udl:tipus_acces_2_documentSimple"> <title>Tipus accés 2</title> <type>d:text</type> <mandatory>false</mandatory> </property> -->
+				<property name="udl:idioma_1_documentSimple">
+					<title>11 - Idioma 1</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>ca. Català</default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_2_documentSimple">
+					<title>11 - Idioma 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<!-- <property name="udl:idioma_3_documentSimple"> <title>11 - Idioma 3</title> <type>d:text</type> <mandatory>false</mandatory> <default></default> 
+					<constraints> <constraint ref="udl:idioma_constraint" /> </constraints> </property> <property name="udl:idioma_4_documentSimple"> <title>11 - Idioma 4</title> 
+					<type>d:text</type> <mandatory>false</mandatory> <default></default> <constraints> <constraint ref="udl:idioma_constraint" /> </constraints> </property> -->
+				<property name="udl:valoracio_documentSimple">
+					<title>13.1 - Valoració</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>Sense cobertura d'avaluació</default>
+					<constraints>
+						<constraint ref="udl:valoracio_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:tipus_dictamen_1_documentSimple">
+					<title>13.2.1 - Tipus dictamen 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:tipus_dictamen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:tipus_dictamen_2_documentSimple">
+					<title>13.2.1 - Tipus dictamen 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:tipus_dictamen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:accio_dictaminada_1_documentSimple">
+					<title>13.2.2 - Acció dictaminada 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:accio_dictaminada_2_documentSimple">
+					<title>13.2.2 - Acció dictaminada 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:suport_origen_documentSimple">
+					<title>14.1 - Suport origen</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_origen_constraint_doc" />
+					</constraints>
+				</property>
+				<!--<property name="udl:nom_format_documentSimple"> <title>14.2 - Nom format</title> <type>d:text</type> <mandatory>true</mandatory> </property> -->
+				<property name="udl:versio_format_documentSimple">
+					<title>14.3 - Versió format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:nom_aplicacio_creacio_documentSimple">
+					<title>14.4 - Nom aplicació creació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:versio_aplicacio_creacio_documentSimple">
+					<title>14.5 - Versió aplicació creació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:registre_formats_documentSimple">
+					<title>14.6 - Registre formats</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:resolucio_documentSimple">
+					<title>14.7 - Resolució</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:dimensions_fisiques_documentSimple">
+					<title>14.8.1 - Dimensions físiques</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<!--<property name="udl:tamany_logic_documentSimple"> <title>14.8.2 - Tamany lògic</title> <type>d:text</type> <mandatory>false</mandatory> </property> 
+					<property name="udl:quantitat_documentSimple"> <title>14.8.3 - Quantitat</title> <type>d:text</type> <mandatory>false</mandatory> </property> -->
+				<property name="udl:unitats_documentSimple">
+					<title>14.8.4 - Unitats</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:unitats_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_1_documentSimple">
+					<title>15.1 - Suport</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<!--<property name="udl:suport_2_documentSimple"> <title>15.1 - Suport 2</title> <type>d:text</type> <mandatory>true</mandatory> <default></default> 
+					<constraints> <constraint ref="udl:suport_constraint" /> </constraints> </property> -->
+				<property name="udl:localitzacio_1_documentSimple">
+					<title>15.2 - Localització 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:localitzacio_2_documentSimple">
+					<title>15.2 - Localització 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<!-- <property name="udl:algoritme_documentSimple"> <title>16.1 - Algoritme</title> <type>d:text</type> <mandatory>false</mandatory> </property> <property 
+					name="udl:valor_documentSimple"> <title>16.2 - Valor</title> <type>d:text</type> <mandatory>false</mandatory> </property> -->
+				<!--<property name="udl:tipus_signatura_documentSimple"> <title>Tipus signatura</title> <type>d:text</type> <mandatory>false</mandatory> </property> 
+					<property name="udl:format_signatura_documentSimple"> <title>Format signatura</title> <type>d:text</type> <mandatory>false</mandatory> </property> <property 
+					name="udl:rol_signatura_documentSimple"> <title>Rol signatura</title> <type>d:text</type> <mandatory>false</mandatory> </property> -->
+				<property name="udl:tipus_documental_documentSimple">
+					<title>18 - Tipus documental</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>U00 DOCUMENT ADMINISTRATIU</default>
+					<constraints>
+						<constraint ref="udl:tipus_documental_constraint" />
+					</constraints>
+				</property>
+				<!-- <property name="udl:prioritat_documentSimple"> <title>Prioritat</title> <type>d:text</type> <mandatory>false</mandatory> </property> -->
+				<property name="udl:denominacio_estat_documentSimple">
+					<title>20.1 - Denominació estat</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Original</default>
+					<constraints>
+						<constraint ref="udl:denominacion_estado_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:tipus_copia_documentSimple">
+					<title>20.2.1 - Tipus còpia</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:tipus_copia_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:motiu_documentSimple">
+					<title>20.2.2 - Motiu característiques còpia</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<!-- <property name="udl:accio_documentSimple"> <title>21.1 - Acció</title> <type>d:text</type> <mandatory>false</mandatory> </property> <property 
+					name="udl:motiu_reglat_documentSimple"> <title>21.2 - Motiu reglat</title> <type>d:text</type> <mandatory>false</mandatory> </property> <property name="udl:usuari_accio_documentSimple"> 
+					<title>21.3 - Usuari acció</title> <type>d:text</type> <mandatory>false</mandatory> </property> <property name="udl:modificacio_metadades_documentSimple"> 
+					<title>21.5 - Modificació metadades</title> <type>d:text</type> <mandatory>false</mandatory> </property> -->
+				<property name="udl:codi_classificacio_1_documentSimple">
+					<title>22.1 - Codi classificació 1</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:codi_classificacio_2_documentSimple">
+					<title>22.1 - Codi classificació 2</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:denominacio_classe_1_documentSimple">
+					<title>22.2 - Denominació classe 1</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:denominacio_classe_2_documentSimple">
+					<title>22.2 - Denominació classe 2</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:grup_creador_documentSimple">
+					<title>Grup creador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:advertencia_seguretat_documentSimple">
+					<title>8.2.1 - Text advertència seguretat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:categoria_advertencia_seguretat_documentSimple">
+					<title>8.2.2 - Categoria advertència seguretat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:categoria_advertencia_seguretat_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:verificacio_integritat_algorisme_documentSimple">
+					<title>16.1 - Algoritme</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>SHA-512</default>
+				</property>
+				<property name="udl:verificacio_integritat_valor_documentSimple">
+					<title>16.2 - Valor</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+			<associations>
+				<association name="udl:signaturesDocument">
+					<title>Signatures</title>
+					<source>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</source>
+					<target>
+						<class>udl:signaturaDettached</class>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</target>
+				</association>
+			</associations>
+		</type>
+		<type name="udl:signaturaDettached">
+			<title>Signatura</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="udl:tipus_signatura">
+					<title>Tipus</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:id_document_signat">
+					<title>Document signat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_signatura">
+					<title>Data de la signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_ini_validacio_signatura">
+					<title>Data d'inici de validesa de la signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_fi_validacio_signatura">
+					<title>Data final de validesa de la signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:validacio_signatura">
+					<title>Resultat validació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:nom_signatari_signatura">
+					<title>Nom signatari</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:identificador_signatari_signatura">
+					<title>Identificador signatari</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:organitzacio_signatura">
+					<title>Organització</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:unitat_organica_signatura">
+					<title>Unitat orgànica</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:politica_signatura">
+					<title>Política de signatura</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:proveidor_certificat_signatura">
+					<title>Proveïdor de certificat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tipus_certificat_signatura">
+					<title>Tipus de certificat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="udl:expedient">
+			<title>Expedient</title>
+			<parent>cm:folder</parent>
+			<properties>
+				<property name="udl:tipus_entitat_expedient">
+					<title>0 - Tipus entitat</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Document</default>
+				</property>
+				<property name="udl:categoria_expedient">
+					<title>1 - Categoria</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Expedient</default>
+				</property>
+				<property name="udl:secuencial_identificador_expedient">
+					<title>2.1 - Seqüencial identificador</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:esquema_identificador_expedient">
+					<title>2.2 - Esquema identificador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default><![CDATA[CAT_<AUdL>_<AAAA>_núm. reg._<999999999999>_núm. exp_<999999999999>_tipus<$>]]></default>
+				</property>
+				<property name="udl:nom_natural_expedient">
+					<title>3.1 - Nom natural</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:data_inici_expedient">
+					<title>4.1 - Data inici</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_creacio_expedient">
+					<title>4.1 - Data creació</title>
+					<type>d:date</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:data_fi_expedient">
+					<title>4.2 - Data fi</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:descripcio_expedient">
+					<title>5 - Descripció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:classificacio_acces_expedient">
+					<title>8.1.1 - Classificació accés</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>Públic</default>
+					<constraints>
+						<constraint ref="udl:classificacioAccesUD" />
+					</constraints>
+				</property>
+				<property name="udl:codi_politica_control_acces_expedient">
+					<title>8.1.2 - Codi política control accés</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:sensibilitat_dades_caracter_personal_expedient">
+					<title>8.4 - Sensibilitat dades caràcter personal</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:sensibilitat_dades_caracter_personal_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:classificacio_ENS_expedient">
+					<title>8.5 - Classificació ENS</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:condicions_acces_1_expedient">
+					<title>Condicions accés ús reutilització 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:condicions_acces_2_expedient">
+					<title>Condicions accés ús reutilització 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tipus_acces_1_expedient">
+					<title>Tipus accés 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tipus_acces_2_expedient">
+					<title>Tipus accés 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:idioma_1_expedient">
+					<title>11 - Idioma 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>ca. Català</default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_2_expedient">
+					<title>11 - Idioma 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_3_expedient">
+					<title>11 - Idioma 3</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_4_expedient">
+					<title>11 - Idioma 4</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:valoracio_expedient">
+					<title>13.1 - Valoració</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>Sense cobertura d'avaluació</default>
+					<constraints>
+						<constraint ref="udl:valoracio_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:tipus_dictamen_1_expedient">
+					<title>13.2.1 - Tipus dictamen 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:tipus_dictamen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:tipus_dictamen_2_expedient">
+					<title>13.2.1 - Tipus dictamen 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:tipus_dictamen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:accio_dictaminada_1_expedient">
+					<title>13.2.2 - Acció dictaminada 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:accio_dictaminada_2_expedient">
+					<title>13.2.2 - Acció dictaminada 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:suport_origen_expedient">
+					<title>14.1 - Suport origen</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_origen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:nom_format_expedient">
+					<title>14.2 - Nom format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:versio_format_expedient">
+					<title>14.3 - Versió format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:nom_aplicacio_creacio_expedient">
+					<title>Nom aplicació creació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:versio_aplicacio_creacio_expedient">
+					<title>Versió aplicació creació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:registre_formats_expedient">
+					<title>Registre formats</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:dimensions_fisiques_expedient">
+					<title>14.8.2 - Tamany lògic</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:volums_expedient">
+					<title>Volums</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tamany_logic_expedient">
+					<title>14.8.2 - Tamany lògic</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:quantitat_expedient">
+					<title>14.8.3 - Quantitat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:unitats_expedient">
+					<title>14.8.4 - Unitats</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:unitats_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_1_expedient">
+					<title>15.1 - Suport 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_2_expedient">
+					<title>15.1 - Suport 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_3_expedient">
+					<title>15.1 - Suport 3</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_4_expedient">
+					<title>15.1 - Suport 4</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_5_expedient">
+					<title>15.1 - Suport 5</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_6_expedient">
+					<title>15.1 - Suport 6</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_7_expedient">
+					<title>15.1 - Suport 7</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_8_expedient">
+					<title>15.1 - Suport 8</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_9_expedient">
+					<title>15.1 - Suport 9</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_10_expedient">
+					<title>15.1 - Suport 10</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_11_expedient">
+					<title>15.1 - Suport 11</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_12_expedient">
+					<title>15.1 - Suport 12</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_13_expedient">
+					<title>15.1 - Suport 13</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_14_expedient">
+					<title>15.1 - Suport 14</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_15_expedient">
+					<title>15.1 - Suport 15</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_16_expedient">
+					<title>15.1 - Suport 16</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_17_expedient">
+					<title>15.1 - Suport 17</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_18_expedient">
+					<title>15.1 - Suport 18</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_19_expedient">
+					<title>15.1 - Suport 19</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_20_expedient">
+					<title>15.1 - Suport 20</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_21_expedient">
+					<title>15.1 - Suport 21</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:localitzacio_1_expedient">
+					<title>15.2 - Localització 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:localitzacio_2_expedient">
+					<title>15.2 - Localització 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:algoritme_expedient">
+					<title>16.1 - Algoritme</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:valor_expedient">
+					<title>16.2 - Valor</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tipus_signatura_expedient">
+					<title>Tipus signatura</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:format_signatura_expedient">
+					<title>Format signatura</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:rol_signatura_expedient">
+					<title>Rol signatura</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:denominacio_estat_expedient">
+					<title>20.1 - Denominació estat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:accio_expedient">
+					<title>21.1 - Acció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:motiu_reglat_expedient">
+					<title>21.2 - Motiu reglat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:usuari_accio_expedient">
+					<title>21.3 - Usuari acció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:modificacio_metadades_expedient">
+					<title>21.5 - Modificació metadades</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:codi_classificacio_1_expedient">
+					<title>22.1 - Codi classificació 1</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:codi_classificacio_2_expedient">
+					<title>22.1 - Codi classificació 2</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:denominacio_classe_1_expedient">
+					<title>22.2 - Denominació classe 1</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:denominacio_classe_2_expedient">
+					<title>22.2 - Denominació classe 2</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:grup_creador_expedient">
+					<title>Grup creador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:advertencia_seguretat_expedient">
+					<title>8.2.1 - Text advertència seguretat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:categoria_advertencia_seguretat_expedient">
+					<title>8.2.2 - Categoria advertència seguretat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:categoria_advertencia_seguretat_constraint" />
+					</constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="udl:agregacio">
+			<title>Agregació</title>
+			<parent>cm:folder</parent>
+			<properties>
+				<property name="udl:tipus_entitat_agregacio">
+					<title>0 - Tipus entitat</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Document</default>
+				</property>
+				<property name="udl:categoria_agregacio">
+					<title>1 - Categoria</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Agregació</default>
+				</property>
+				<property name="udl:secuencial_identificador_agregacio">
+					<title>2.1 - Seqüencial identificador</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:esquema_identificador_agregacio">
+					<title>2.2 - Esquema identificador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:nom_natural_agregacio">
+					<title>3.1 - Nom natural</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:data_inici_agregacio">
+					<title>4.1 - Data inici</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_creacio_agregacio">
+					<title>4.1 - Data creació</title>
+					<type>d:date</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:data_fi_agregacio">
+					<title>4.2 - Data fi</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:descripcio_agregacio">
+					<title>5 - Descripció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:classificacio_acces_agregacio">
+					<title>8.1.1 - Classificació accés</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>Públic</default>
+					<constraints>
+						<constraint ref="udl:classificacioAccesUD" />
+					</constraints>
+				</property>
+				<property name="udl:codi_politica_control_acces_agregacio">
+					<title>8.1.2 - Codi política control accés</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:sensibilitat_dades_caracter_personal_agregacio">
+					<title>8.4 - Sensibilitat dades caràcter personal</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:sensibilitat_dades_caracter_personal_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:classificacio_ENS_agregacio">
+					<title>8.5 - Classificació ENS</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:condicions_acces_1_agregacio">
+					<title>Condicions accés ús reutilització 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:condicions_acces_2_agregacio">
+					<title>Condicions accés ús reutilització 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tipus_acces_1_agregacio">
+					<title>Tipus accés 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tipus_acces_2_agregacio">
+					<title>Tipus accés 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:idioma_1_agregacio">
+					<title>11 - Idioma 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>ca. Català</default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_2_agregacio">
+					<title>11 - Idioma 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_3_agregacio">
+					<title>11 - Idioma 3</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_4_agregacio">
+					<title>11 - Idioma 4</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:valoracio_agregacio">
+					<title>13.1 - Valoració</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>Sense cobertura d'avaluació</default>
+					<constraints>
+						<constraint ref="udl:valoracio_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:tipus_dictamen_1_agregacio">
+					<title>13.2.1 - Tipus dictamen 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:tipus_dictamen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:tipus_dictamen_2_agregacio">
+					<title>13.2.1 - Tipus dictamen 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:tipus_dictamen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:accio_dictaminada_1_agregacio">
+					<title>13.2.2 - Acció dictaminada 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:accio_dictaminada_2_agregacio">
+					<title>13.2.2 - Acció dictaminada 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:suport_origen_agregacio">
+					<title>14.1 - Suport origen</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_origen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:nom_format_agregacio">
+					<title>14.2 - Nom format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:versio_format_agregacio">
+					<title>14.3 - Versió format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:nom_aplicacio_creacio_agregacio">
+					<title>Nom aplicació creació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:versio_aplicacio_creacio_agregacio">
+					<title>Versió aplicació creació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:registre_formats_agregacio">
+					<title>Registre formats</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:dimensions_fisiques_agregacio">
+					<title>14.8.2 - Tamany lògic</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:volums_agregacio">
+					<title>Volums</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tamany_logic_agregacio">
+					<title>14.8.2 - Tamany lògic</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:quantitat_agregacio">
+					<title>14.8.3 - Quantitat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:unitats_agregacio">
+					<title>14.8.4 - Unitats</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:unitats_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_1_agregacio">
+					<title>15.1 - Suport 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_2_agregacio">
+					<title>15.1 - Suport 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_3_agregacio">
+					<title>15.1 - Suport 3</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_4_agregacio">
+					<title>15.1 - Suport 4</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_5_agregacio">
+					<title>15.1 - Suport 5</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_6_agregacio">
+					<title>15.1 - Suport 6</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_7_agregacio">
+					<title>15.1 - Suport 7</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_8_agregacio">
+					<title>15.1 - Suport 8</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_9_agregacio">
+					<title>15.1 - Suport 9</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_10_agregacio">
+					<title>15.1 - Suport 10</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_11_agregacio">
+					<title>15.1 - Suport 11</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_12_agregacio">
+					<title>15.1 - Suport 12</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_13_agregacio">
+					<title>15.1 - Suport 13</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_14_agregacio">
+					<title>15.1 - Suport 14</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_15_agregacio">
+					<title>15.1 - Suport 15</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_16_agregacio">
+					<title>15.1 - Suport 16</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_17_agregacio">
+					<title>15.1 - Suport 17</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_18_agregacio">
+					<title>15.1 - Suport 18</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_19_agregacio">
+					<title>15.1 - Suport 19</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_20_agregacio">
+					<title>15.1 - Suport 20</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_21_agregacio">
+					<title>15.1 - Suport 21</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:localitzacio_1_agregacio">
+					<title>15.2 - Localització 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:localitzacio_2_agregacio">
+					<title>15.2 - Localització 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:algoritme_agregacio">
+					<title>16.1 - Algoritme</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:valor_agregacio">
+					<title>16.2 - Valor</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tipus_signatura_agregacio">
+					<title>Tipus signatura</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:format_signatura_agregacio">
+					<title>Format signatura</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:rol_signatura_agregacio">
+					<title>Rol signatura</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:denominacio_estat_agregacio">
+					<title>20.1 - Denominació estat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:accio_agregacio">
+					<title>21.1 - Acció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:motiu_reglat_agregacio">
+					<title>21.2 - Motiu reglat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:usuari_accio_agregacio">
+					<title>21.3 - Usuari acció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:modificacio_metadades_agregacio">
+					<title>21.5 - Modificació metadades</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:codi_classificacio_1_agregacio">
+					<title>22.1 - Codi classificació 1</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:codi_classificacio_2_agregacio">
+					<title>22.1 - Codi classificació 2</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:denominacio_classe_1_agregacio">
+					<title>22.2 - Denominació classe 1</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:denominacio_classe_2_agregacio">
+					<title>22.2 - Denominació classe 2</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:grup_creador_agregacio">
+					<title>Grup creador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:advertencia_seguretat_agregacio">
+					<title>8.2.1 - Text advertència seguretat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:categoria_advertencia_seguretat_agregacio">
+					<title>8.2.2 - Categoria advèrtencia seguretat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:categoria_advertencia_seguretat_constraint" />
+					</constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="udl:serie">
+			<title>Sèrie</title>
+			<parent>cm:folder</parent>
+			<properties>
+				<property name="udl:rm_uuid_serie">
+					<title></title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tipus_entitat_serie">
+					<title>0 - Tipus entitat</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Document</default>
+				</property>
+				<property name="udl:categoria_serie">
+					<title>1 - Categoria</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Sèrie</default>
+				</property>
+				<property name="udl:secuencial_identificador_serie">
+					<title>2.1 - Seqüencial identificador</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:esquema_identificador_serie">
+					<title>2.2 - Esquema identificador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>$9999$9999</default>
+				</property>
+				<property name="udl:nom_natural_serie">
+					<title>3.1 - Nom natural</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:esquema_nom_serie">
+					<title>Esquema nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_inici_serie">
+					<title>4.1 - Data inici</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_creacio_serie">
+					<title>4.1 - Data creació</title>
+					<type>d:date</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:data_fi_serie">
+					<title>4.2 - Data fi</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:descripcio_serie">
+					<title>5 - Descripció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:classificacio_acces_serie">
+					<title>8.1.1 - Classificació accés</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Públic</default>
+					<constraints>
+						<constraint ref="udl:classificacioAccesSerie" />
+					</constraints>
+				</property>
+				<property name="udl:codi_politica_control_acces_serie">
+					<title>8.1.2 - Codi política control accés</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:sensibilitat_dades_caracter_personal_serie">
+					<title>8.4 - Sensibilitat dades caràcter personal</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:sensibilitat_dades_caracter_personal_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:classificacio_ENS_serie">
+					<title>8.5 - Classificació ENS</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:condicions_acces_1_serie">
+					<title>Condicions accés ús reutilització 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:condicions_acces_2_serie">
+					<title>Condicions accés ús reutilització 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tipus_acces_1_serie">
+					<title>Tipus accés 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tipus_acces_2_serie">
+					<title>Tipus accés 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:idioma_1_serie">
+					<title>11 - Idioma 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>ca. Català</default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_2_serie">
+					<title>11 - Idioma 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_3_serie">
+					<title>11 - Idioma 3</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_4_serie">
+					<title>11 - Idioma 4</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:valoracio_serie">
+					<title>13.1 - Valoració</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>Sense cobertura d'avaluació</default>
+					<constraints>
+						<constraint ref="udl:valoracio_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:tipus_dictamen_1_serie">
+					<title>13.2.1 - Tipus dictamen 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:tipus_dictamen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:tipus_dictamen_2_serie">
+					<title>13.2.1 - Tipus dictamen 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:tipus_dictamen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:accio_dictaminada_1_serie">
+					<title>13.2.2 - Acció dictaminada 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:accio_dictaminada_2_serie">
+					<title>13.2.2 - Acció dictaminada 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:suport_origen_serie">
+					<title>14.1 - Suport origen</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_origen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:nom_format_serie">
+					<title>14.2 - Nom format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:versio_format_serie">
+					<title>14.3 - Versió format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:nom_aplicacio_creacio_serie">
+					<title>Nom aplicació creació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:versio_aplicacio_creacio_serie">
+					<title>Versió aplicació creació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:registre_formats_serie">
+					<title>Registre formats</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:dimensions_fisiques_serie">
+					<title>14.8.2 - Tamany lògic</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tamany_logic_serie">
+					<title>14.8.2 - Tamany lògic</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:quantitat_serie">
+					<title>14.8.3 - Quantitat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:unitats_serie">
+					<title>14.8.4 - Unitats</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:unitats_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_1_serie">
+					<title>15.1 - Suport 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_2_serie">
+					<title>15.1 - Suport 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_3_serie">
+					<title>15.1 - Suport 3</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_4_serie">
+					<title>15.1 - Suport 4</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_5_serie">
+					<title>15.1 - Suport 5</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_6_serie">
+					<title>15.1 - Suport 6</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_7_serie">
+					<title>15.1 - Suport 7</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_8_serie">
+					<title>15.1 - Suport 8</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_9_serie">
+					<title>15.1 - Suport 9</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_10_serie">
+					<title>15.1 - Suport 10</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_11_serie">
+					<title>15.1 - Suport 11</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_12_serie">
+					<title>15.1 - Suport 12</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_13_serie">
+					<title>15.1 - Suport 13</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_14_serie">
+					<title>15.1 - Suport 14</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_15_serie">
+					<title>15.1 - Suport 15</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_16_serie">
+					<title>15.1 - Suport 16</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_17_serie">
+					<title>15.1 - Suport 17</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_18_serie">
+					<title>15.1 - Suport 18</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_19_serie">
+					<title>15.1 - Suport 19</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_20_serie">
+					<title>15.1 - Suport 20</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_21_serie">
+					<title>15.1 - Suport 21</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:localitzacio_1_serie">
+					<title>15.2 - Localització 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:localitzacio_2_serie">
+					<title>15.2 - Localització 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:denominacio_estat_serie">
+					<title>20.1 - Denominació estat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:accio_serie">
+					<title>21.1 - Acció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:motiu_reglat_serie">
+					<title>21.2 - Motiu reglat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:usuari_accio_serie">
+					<title>21.3 - Usuari acció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:modificacio_metadades_serie">
+					<title>21.5 - Modificació metadades</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:codi_classificacio_serie">
+					<title>22.1 - Codi classificació</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:denominacio_classe_serie">
+					<title>22.2 - Denominació classe</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:advertencia_seguretat_serie">
+					<title>8.2.1 - Text advertència seguretat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:categoria_advertencia_seguretat_serie">
+					<title>8.2.2 - Categoria advertència seguretat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:categoria_advertencia_seguretat_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:grup_creador_serie">
+					<title>Grup creador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="udl:fons">
+			<title>Fons</title>
+			<parent>cm:folder</parent>
+			<properties>
+				<property name="udl:tipus_entitat_fons">
+					<title>0 - Tipus entitat</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Document</default>
+				</property>
+				<property name="udl:categoria_fons">
+					<title>1 - Categoria</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<default>Fons</default>
+				</property>
+				<property name="udl:secuencial_identificador_fons">
+					<title>2.1 - Seqüencial identificador</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:esquema_identificador_fons">
+					<title>2.2 - Esquema identificador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default><![CDATA[CAT_UDL_<FONS_9999>]]></default>
+				</property>
+				<property name="udl:nom_natural_fons">
+					<title>3.1 - Nom natural</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:esquema_nom_fons">
+					<title>Esquema nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_inici_fons">
+					<title>4.1 - Data inici</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_creacio_fons">
+					<title>4.1 - Data creació</title>
+					<type>d:date</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:data_fi_fons">
+					<title>4.2 - Data fi</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:descripcio_fons">
+					<title>5 - Descripció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:classificacio_ENS_fons">
+					<title>8.5 - Classificació ENS</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:idioma_1_fons">
+					<title>11 - Idioma 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>ca. Català</default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_2_fons">
+					<title>11 - Idioma 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_3_fons">
+					<title>11 - Idioma 3</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:idioma_4_fons">
+					<title>11 - Idioma 4</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:idioma_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_origen_fons">
+					<title>14.1 - Suport origen</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_origen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:nom_format_fons">
+					<title>14.2 - Nom format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:versio_format_fons">
+					<title>14.3 - Versió format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tamany_logic_fons">
+					<title>14.8.2 - Tamany lògic</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:quantitat_fons">
+					<title>14.8.3 - Quantitat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:unitats_fons">
+					<title>14.8.4 - Unitats</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:unitats_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_1_fons">
+					<title>15.1 - Suport 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_2_fons">
+					<title>15.1 - Suport 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_3_fons">
+					<title>15.1 - Suport 3</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_4_fons">
+					<title>15.1 - Suport 4</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_5_fons">
+					<title>15.1 - Suport 5</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_6_fons">
+					<title>15.1 - Suport 6</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_7_fons">
+					<title>15.1 - Suport 7</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_8_fons">
+					<title>15.1 - Suport 8</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_9_fons">
+					<title>15.1 - Suport 9</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_10_fons">
+					<title>15.1 - Suport 10</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_11_fons">
+					<title>15.1 - Suport 11</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_12_fons">
+					<title>15.1 - Suport 12</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_13_fons">
+					<title>15.1 - Suport 13</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_14_fons">
+					<title>15.1 - Suport 14</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_15_fons">
+					<title>15.1 - Suport 15</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_16_fons">
+					<title>15.1 - Suport 16</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_17_fons">
+					<title>15.1 - Suport 17</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_18_fons">
+					<title>15.1 - Suport 18</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_19_fons">
+					<title>15.1 - Suport 19</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_20_fons">
+					<title>15.1 - Suport 20</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:suport_21_fons">
+					<title>15.1 - Suport 21</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:localitzacio_1_fons">
+					<title>15.2 - Localització 1</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:localitzacio_2_fons">
+					<title>15.2 - Localització 2</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:denominacio_estat_fons">
+					<title>20.1 - Denominació estat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:accio_fons">
+					<title>21.1 - Acció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:motiu_reglat_fons">
+					<title>21.2 - Motiu reglat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:usuari_accio_fons">
+					<title>21.3 - Usuari acció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:modificacio_metadades_fons">
+					<title>21.5 - Modificació metadades</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:codi_classificacio_fons">
+					<title>22.1 - Codi classificació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:denominacio_classe_fons">
+					<title>22.2 - Denominació classe</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:grup_creador_fons">
+					<title>Grup creador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="udl:grupDeFons">
+			<title>Grup de fons</title>
+			<parent>cm:folder</parent>
+			<properties>
+				<property name="udl:tipus_entitat_grupDeFons">
+					<title>0 - Tipus entitat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default>Document</default>
+				</property>
+				<property name="udl:categoria_grupDeFons">
+					<title>1 - Categoria</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:secuencial_identificador_grupDeFons">
+					<title>2.1 - Seqüencial identificador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:esquema_identificador_grupDeFons">
+					<title>2.2 - Esquema identificador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_inici_grupDeFons">
+					<title>4.1 - Data inici</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_fi_grupDeFons">
+					<title>4.2 - Data fi</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:descripcio_grupDeFons">
+					<title>5 - Descripció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:suport_origen_grupDeFons">
+					<title>14.1 - Suport origen</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<default></default>
+					<constraints>
+						<constraint ref="udl:suport_origen_constraint" />
+					</constraints>
+				</property>
+				<property name="udl:nom_format_grupDeFons">
+					<title>14.2 - Nom format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:versio_format_grupDeFons">
+					<title>14.3 - Versió format</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:tamany_logic_grupDeFons">
+					<title>14.8.2 - Tamany lògic</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:quantitat_grupDeFons">
+					<title>14.8.3 - Quantitat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:unitats_grupDeFons">
+					<title>14.8.4 - Unitats</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:denominacio_estat_grupDeFons">
+					<title>20.1 - Denominació estat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:accio_grupDeFons">
+					<title>21.1 - Acció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:motiu_reglat_grupDeFons">
+					<title>21.2 - Motiu reglat</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:usuari_accio_grupDeFons">
+					<title>21.3 - Usuari acció</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:modificacio_metadades_grupDeFons">
+					<title>21.5 - Modificació metadades</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:codi_classificacio_grupDeFons">
+					<title>22.1 - Codi classificació</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:denominacio_classe_grupDeFons">
+					<title>22.2 - Denominació classe</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:grup_creador_grupDeFons">
+					<title>Grup creador</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+	</types>
+	<aspects>
+		<aspect name="udl:regulacio">
+			<title>Regulació</title>
+			<properties>
+				<property name="udl:nom_natural_regulacio">
+					<title>3.1 - Nom natural</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<constraints>
+						<constraint ref="udl:regulacio_constraint" />
+					</constraints>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="udl:institucio">
+			<title>Institució</title>
+			<properties>
+				<property name="udl:nom_natural_institucio">
+					<title>3.1 - Nom natural</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<constraints>
+						<constraint ref="udl:institucio_constraint" />
+					</constraints>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="udl:organ">
+			<title>Òrgan</title>
+			<properties>
+				<property name="udl:nom_natural_organ">
+					<title>3.1 - Nom natural</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<constraints>
+						<constraint ref="udl:organ_constraint" />
+					</constraints>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="udl:dispositiu">
+			<title>Dispositiu</title>
+			<properties>
+				<property name="udl:nom_dispositiu">
+					<title>3.1 - Nom natural</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<constraints>
+						<constraint ref="udl:dispositiu_constraint" />
+					</constraints>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="udl:persona">
+			<title>Persona</title>
+			<properties>
+				<property name="udl:secuencial_identificador_persona">
+					<title>2.1 - Seqüencial identificador</title>
+					<type>d:text</type>
+				</property>
+				<property name="udl:esquema_identificador_persona">
+					<title>2.2 - Esquema identificador</title>
+					<type>d:text</type>
+				</property>
+				<property name="udl:nom_natural_persona">
+					<title>3.1 - Nom natural</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:esquema_nom_persona">
+					<title>Esquema nom</title>
+					<type>d:text</type>
+				</property>
+				<property name="udl:data_inici_persona">
+					<title>4.1 - Data inici</title>
+					<type>d:date</type>
+				</property>
+				<property name="udl:data_fi_persona">
+					<title>4.2 - Data fi</title>
+					<type>d:date</type>
+				</property>
+				<property name="udl:tipus_contacte_persona">
+					<title>Tipus contacte</title>
+					<type>d:text</type>
+				</property>
+				<property name="udl:dada_contacte_persona">
+					<title>Dada contacte</title>
+					<type>d:text</type>
+				</property>
+				<property name="udl:ocupacio_persona">
+					<title>Ocupació</title>
+					<type>d:text</type>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="udl:iarxiu">
+			<title>iArxiu</title>
+			<properties>
+				<property name="udl:id_ref_PIA">
+					<title>Identificador de paquet (PIA)</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:id_peticio">
+					<title>Identificador petició trasllat a iArxiu</title>
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>
+			</properties>
+		</aspect>
+		<aspect name="udl:signatura">
+			<title>Signatura</title>
+			<properties>
+				<property name="udl:signatura1_nom">
+					<title>Signatura 1: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura1_dni">
+					<title>Signatura 1: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura1_data">
+					<title>Signatura 1: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura1_carrec">
+					<title>Signatura 1: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura1_data_fi_certificat">
+					<title>Signatura 1: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura1_data_caducitat">
+					<title>Signatura 1: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura2_nom">
+					<title>Signatura 2: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura2_dni">
+					<title>Signatura 2: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura2_data">
+					<title>Signatura 2: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura2_carrec">
+					<title>Signatura 2: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura2_data_fi_certificat">
+					<title>Signatura 2: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura2_data_caducitat">
+					<title>Signatura 2: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura3_nom">
+					<title>Signatura 3: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura3_dni">
+					<title>Signatura 3: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura3_data">
+					<title>Signatura 3: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura3_carrec">
+					<title>Signatura 3: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura3_data_fi_certificat">
+					<title>Signatura 3: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura3_data_caducitat">
+					<title>Signatura 3: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura4_nom">
+					<title>Signatura 4: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura4_dni">
+					<title>Signatura 4: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura4_data">
+					<title>Signatura 4: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura4_carrec">
+					<title>Signatura 4: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura4_data_fi_certificat">
+					<title>Signatura 4: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura4_data_caducitat">
+					<title>Signatura 4: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura5_nom">
+					<title>Signatura 5: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura5_dni">
+					<title>Signatura 5: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura5_data">
+					<title>Signatura 5: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura5_carrec">
+					<title>Signatura 5: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura5_data_fi_certificat">
+					<title>Signatura 5: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura5_data_caducitat">
+					<title>Signatura 5: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura6_nom">
+					<title>Signatura 6: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura6_dni">
+					<title>Signatura 6: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura6_data">
+					<title>Signatura 6: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura6_carrec">
+					<title>Signatura 6: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura6_data_fi_certificat">
+					<title>Signatura 6: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura6_data_caducitat">
+					<title>Signatura 6: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura7_nom">
+					<title>Signatura 7: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura7_dni">
+					<title>Signatura 7: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura7_data">
+					<title>Signatura 7: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura7_carrec">
+					<title>Signatura 7: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura7_data_fi_certificat">
+					<title>Signatura 7: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura7_data_caducitat">
+					<title>Signatura 7: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura8_nom">
+					<title>Signatura 8: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura8_dni">
+					<title>Signatura 8: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura8_data">
+					<title>Signatura 8: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura8_carrec">
+					<title>Signatura 8: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura8_data_fi_certificat">
+					<title>Signatura 8: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura8_data_caducitat">
+					<title>Signatura 8: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura9_nom">
+					<title>Signatura 9: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura9_dni">
+					<title>Signatura 9: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura9_data">
+					<title>Signatura 9: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura9_carrec">
+					<title>Signatura 9: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura9_data_fi_certificat">
+					<title>Signatura 9: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura9_data_caducitat">
+					<title>Signatura 9: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura10_nom">
+					<title>Signatura 10: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura10_dni">
+					<title>Signatura 10: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura10_data">
+					<title>Signatura 10: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura10_carrec">
+					<title>Signatura 10: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura10_data_fi_certificat">
+					<title>Signatura 10: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura10_data_caducitat">
+					<title>Signatura 10: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura11_nom">
+					<title>Signatura 11: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura11_dni">
+					<title>Signatura 11: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura11_data">
+					<title>Signatura 11: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura11_carrec">
+					<title>Signatura 11: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura11_data_fi_certificat">
+					<title>Signatura 11: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura11_data_caducitat">
+					<title>Signatura 11: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura12_nom">
+					<title>Signatura 12: Nom</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura12_dni">
+					<title>Signatura 12: DNI</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura12_data">
+					<title>Signatura 12: Data</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura12_carrec">
+					<title>Signatura 12: Càrrec</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura12_data_fi_certificat">
+					<title>Signatura 12: Data fi certificat</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:signatura12_data_caducitat">
+					<title>Signatura 12: Caducitat signatura</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</aspect>
+	</aspects>
+</model>

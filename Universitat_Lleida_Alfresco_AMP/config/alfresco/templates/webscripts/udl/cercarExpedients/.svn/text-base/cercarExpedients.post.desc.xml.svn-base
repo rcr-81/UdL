@@ -1,0 +1,6 @@
+<webscript>
+  <shortname>Universitat de Lleida. Cercar expedients y agregacions</shortname>
+  <description>Universitat de Lleida. Cercar expedients y agregacions</description>
+  <url>/cercarExpedients/cercarExpedients</url>
+  <authentication>none</authentication>
+</webscript>

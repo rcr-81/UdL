@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Arxiu UdL: cercador d'expedients</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />		
+		
+		<script type="text/javascript">	
+		
+			function getNewSubmitForm(action){
+				 var submitForm = document.createElement("form");
+				 submitForm.style.display = "none";
+				 submitForm.method = "POST";
+				 submitForm.action = action;
+				 submitForm.enctype="multipart/form-data";				 
+				 document.body.appendChild(submitForm);
+				 return submitForm;
+			}
+
+			function createNewFormElement(inputForm, elementName, elementValue){
+				 var newElement = document.createElement("input");
+				 newElement.setAttribute("type", "text");
+				 newElement.setAttribute("name", elementName);
+				 newElement.setAttribute("value", elementValue);
+				 inputForm.appendChild(newElement);				 
+				 return newElement;
+			}
+			
+			function cercarExpedients(){
+				 var filtro = document.getElementById("filtro").value;
+				 var submitForm = getNewSubmitForm(window.location.protocol + "//" + window.location.host + "/alfresco/service/cercarExpedients/cercarExpedients?filtro=" + filtro);
+				 submitForm.submit();
+			}
+
+			function foco(elemento) {
+				elemento.className = "textMarcado";
+			}
+
+			function no_foco(elemento) {
+				elemento.className = "text";
+			}						
+		</script>
+
+		<style>
+			input.boton
+			{
+				vertical-align: top;
+				background-color: #830051;
+				background-image: -moz-linear-gradient(center top , #830051, #830051);
+				border: 1px solid #830051;
+				color: #FFFFFF !important;
+				-moz-user-select: none;
+				border-radius: 2px 2px 2px 2px;
+				cursor: default !important;
+				display: inline-block;
+				font-weight: bold;
+				height: 28px;
+				line-height: 29px;
+				min-width: 54px;
+				padding: 0 8px;
+				text-align: center;
+				text-decoration: none !important;
+			}	
+	
+			div.titulo
+			{
+				text-align: center;
+				margin-top: 13em;
+				margin-bottom: 3em;
+			}
+	
+			div.descripcion
+			{
+				text-align: center;
+				margin-bottom: 1em;
+			}
+	
+			div.buscador
+			{
+				text-align: center;
+	
+			}
+	
+			input.text
+			{
+				height: 24px;
+				width: 550px;
+				border: 1px solid #C0C4C6;
+				margin-right: 10px;
+			}
+	
+			input.textMarcado
+			{
+				height: 24px;
+				width: 550px;
+				border: 1px solid #830051;
+				margin-right: 10px;
+			}
+		</style>		
+	</head>
+	<body>
+		<div class="titulo">
+			<img src="http://gdpreprod.udl.cat:8080/share/images/udl.png" />
+		</div>
+		<div class="descripcion">
+			Arxiu UdL: cercador d'expedients
+		</div>
+		<div class="buscador">
+			<input type="text" id="filtro" name="filtro" class="text" onfocus="foco(this)" onblur="no_foco(this)"/>			
+			<input type="button" value="Cercar" class="boton" onclick="javascript:cercarExpedients();" />
+		</div>
+	</body>
+</html>

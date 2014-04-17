@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Moure carpeta (fase activa)</shortname>
+  <description>Universitat de Lleida. Moure carpeta (fase activa)</description>
+  <url>/udl/carpeta/moureCarpeta</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+</webscript>

@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Crear node</shortname>
+  <description>Universitat de Lleida. Crear node</description>
+  <url>/udl/helper/createNode</url>
+  <format default="text">argument</format>
+  <authentication>admin</authentication>
+</webscript>

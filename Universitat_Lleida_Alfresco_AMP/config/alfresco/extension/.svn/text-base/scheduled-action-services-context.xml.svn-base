@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+    
+    <!--
+    Define the model factory used to generate object models suitable for use with freemarker templates. 
+    -->
+    <bean id="templateActionModelFactory" class="org.alfresco.repo.action.scheduled.FreeMarkerWithLuceneExtensionsModelFactory">
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+    </bean>
+       
+    <bean id="recalcular-dates" class="org.alfresco.repo.action.scheduled.SimpleTemplateActionDefinition">
+        <property name="actionName">
+            <value>recalcularDates</value>
+        </property>
+        <property name="parameterTemplates">
+            <map>
+                <entry>
+                    <key>
+                        <value>a-parameter</value>
+                    </key>
+                    <value>a-value</value>
+                </entry>               
+            </map>
+        </property>
+        <property name="templateActionModelFactory">
+            <ref bean="templateActionModelFactory"/>
+        </property>
+        <property name="dictionaryService">
+            <ref bean="DictionaryService"/>
+        </property>
+        <property name="actionService">
+            <ref bean="ActionService"/>
+        </property>
+        <property name="templateService">
+            <ref bean="TemplateService"/>
+        </property>
+    </bean>
+     
+    <bean id="recalcularDatesEveryDay" class="org.alfresco.repo.action.scheduled.CronScheduledQueryBasedTemplateActionDefinition">
+        <property name="transactionMode">
+            <value>UNTIL_FIRST_FAILURE</value>
+        </property>
+        <property name="compensatingActionMode">
+            <value>IGNORE</value>
+        </property>
+        <property name="searchService">
+            <ref bean="SearchService"/>
+        </property>
+        <property name="templateService">
+            <ref bean="TemplateService"/>
+        </property>
+        <property name="queryLanguage">
+            <value>lucene</value>
+        </property>
+        <property name="stores">
+            <list>
+                <value>workspace://SpacesStore</value>
+            </list>
+        </property>
+        <property name="queryTemplate">
+            <value>ASPECT:"udlrm:expedient" OR ASPECT:"udlrm:agregacio"</value>
+        </property>
+        <property name="cronExpression">
+        	<!-- a las 2:30am cada dia -->
+        	<value>0 30 2 * * ?</value>
+        	<!-- cada minuto -->
+        	<!-- <value>0 * * * * ?</value> -->
+            <!-- week <value>0 50 * * * ?</value> -->
+            <!-- 10 min <value>0 55 * * * ?</value> -->
+        </property>
+        <property name="jobName">
+            <value>jobA</value>
+        </property>
+        <property name="jobGroup">
+            <value>jobGroup</value>
+        </property>
+        <property name="triggerName">
+            <value>triggerA</value>
+        </property>
+        <property name="triggerGroup">
+            <value>triggerGroup</value>
+        </property>
+        <property name="scheduler">
+            <ref bean="schedulerFactory"/>
+        </property>
+        <property name="actionService">
+            <ref bean="ActionService"/>
+        </property>
+        <property name="templateActionModelFactory">
+            <ref bean="templateActionModelFactory"/>
+        </property>
+        <property name="templateActionDefinition">
+            <ref bean="recalcular-dates"/>
+        </property>
+        <property name="transactionService">
+            <ref bean="TransactionService"/>
+        </property>
+        <property name="runAsUser">
+            <value>admin</value>
+        </property>
+    </bean>
+    
+    <bean id="recalcular-tamany" class="org.alfresco.repo.action.scheduled.SimpleTemplateActionDefinition">
+        <property name="actionName">
+            <value>recalcularTamany</value>
+        </property>
+        <property name="parameterTemplates">
+            <map>
+                <entry>
+                    <key>
+                        <value>a-parameter</value>
+                    </key>
+                    <value>a-value</value>
+                </entry>               
+            </map>
+        </property>
+        <property name="templateActionModelFactory">
+            <ref bean="templateActionModelFactory"/>
+        </property>
+        <property name="dictionaryService">
+            <ref bean="DictionaryService"/>
+        </property>
+        <property name="actionService">
+            <ref bean="ActionService"/>
+        </property>
+        <property name="templateService">
+            <ref bean="TemplateService"/>
+        </property>
+    </bean>
+       
+        
+    <bean id="recalcularTamanyEveryDay" class="org.alfresco.repo.action.scheduled.CronScheduledQueryBasedTemplateActionDefinition">
+        <property name="transactionMode">
+            <value>UNTIL_FIRST_FAILURE</value>
+        </property>
+        <property name="compensatingActionMode">
+            <value>IGNORE</value>
+        </property>
+        <property name="searchService">
+            <ref bean="SearchService"/>
+        </property>
+        <property name="templateService">
+            <ref bean="TemplateService"/>
+        </property>
+        <property name="queryLanguage">
+            <value>lucene</value>
+        </property>
+        <property name="stores">
+            <list>
+                <value>workspace://SpacesStore</value>
+            </list>
+        </property>
+        <property name="queryTemplate">
+            <value>ASPECT:"udlrm:fons"</value>
+        </property>
+        <property name="cronExpression">
+        	<!-- a las 2:00am cada dia -->
+        	<value>0 00 2 * * ?</value> 
+        	<!-- cada minuto <value>0 * * * * ?</value>-->
+            <!-- week <value>0 50 * * * ?</value> -->
+            <!-- 10 min <value>0 55 * * * ?</value> -->
+        </property>
+        <property name="jobName">
+            <value>jobB</value>
+        </property>
+        <property name="jobGroup">
+            <value>jobGroup</value>
+        </property>
+        <property name="triggerName">
+            <value>triggerB</value>
+        </property>
+        <property name="triggerGroup">
+            <value>triggerGroup</value>
+        </property>
+        <property name="scheduler">
+            <ref bean="schedulerFactory"/>
+        </property>
+        <property name="actionService">
+            <ref bean="ActionService"/>
+        </property>
+        <property name="templateActionModelFactory">
+            <ref bean="templateActionModelFactory"/>
+        </property>
+        <property name="templateActionDefinition">
+            <ref bean="recalcular-tamany"/>
+        </property>
+        <property name="transactionService">
+            <ref bean="TransactionService"/>
+        </property>
+        <property name="runAsUser">
+            <value>admin</value>
+        </property>
+    </bean>
+</beans>

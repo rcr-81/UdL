@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Declarar com a registre recursivament</shortname>
+  <description>Universitat de Lleida. Declarar com a registre recursivament</description>
+  <url>/udl/helper/declareRecordRecursive</url>
+  <format default="text">argument</format>
+  <authentication>admin</authentication>
+</webscript>

@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Checkout document</shortname>
+  <description>Universitat de Lleida. Checkout document</description>
+  <url>/udl/document/checkoutDocument</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+</webscript>

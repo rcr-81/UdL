@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Attach signatures</shortname>
+  <description>Universitat de Lleida. Attach signatures</description>
+  <url>/udl/document/attachSignatures</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+</webscript>

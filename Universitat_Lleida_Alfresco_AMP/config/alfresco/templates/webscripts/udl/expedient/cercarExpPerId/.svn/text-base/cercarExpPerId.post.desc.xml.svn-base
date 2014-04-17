@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>cercarExpPerId</shortname>
+  <description>Universitat de Lleida. Cercar expedient per secuencial identificador</description>
+  <url>/udl/expedient/cercarExpPerId</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+</webscript>

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/document/adjuntarSignaturaElectronica
+END
+adjuntarSignaturaElectronica.post.desc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 203
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/document/adjuntarSignaturaElectronica/adjuntarSignaturaElectronica.post.desc.xml
+END
+adjuntarSignaturaElectronica.post.xml.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 202
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/document/adjuntarSignaturaElectronica/adjuntarSignaturaElectronica.post.xml.ftl
+END

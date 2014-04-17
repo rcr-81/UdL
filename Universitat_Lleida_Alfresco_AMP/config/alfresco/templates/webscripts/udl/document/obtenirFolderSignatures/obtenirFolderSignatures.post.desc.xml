@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Obtenir folder signatures</shortname>
+  <description>Universitat de Lleida. Obtenir folder signatures</description>
+  <url>/udl/document/obtenirFolderSignatures</url>
+  <format default="text">argument</format>
+  <authentication>admin</authentication>
+</webscript>

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/document/consultarDocument
+END
+consultarDocument.post.js
+K 25
+svn:wc:ra_dav:version-url
+V 175
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/document/consultarDocument/consultarDocument.post.js
+END
+consultarDocument.post.desc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 181
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/document/consultarDocument/consultarDocument.post.desc.xml
+END
+consultarDocument.post.xml.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 180
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/document/consultarDocument/consultarDocument.post.xml.ftl
+END

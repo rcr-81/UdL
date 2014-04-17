@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>Universitat de Lleida. Pujar document en Base64</shortname>
+  <description>Universitat de Lleida. Pujar document en Base64</description>
+  <url>/udl/document/pujarDocumentBase64</url>
+  <format default="text">argument</format>
+  <authentication>admin</authentication>
+  <transaction>required</transaction>
+</webscript>

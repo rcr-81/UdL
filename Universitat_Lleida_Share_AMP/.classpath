@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="**" kind="src" path="config"/>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="src" path="src/classes"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JRE-1.1"/>
+	<classpathentry kind="lib" path="/Universitat_Lleida_Alfresco_AMP/lib/MITyCLibAPI-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/Universitat_Lleida_Alfresco_AMP/lib/MITyCLibCert-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/Universitat_Lleida_Alfresco_AMP/lib/MITyCLibOCSP-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/Universitat_Lleida_Alfresco_AMP/lib/MITyCLibPolicy-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/Universitat_Lleida_Alfresco_AMP/lib/MITyCLibTrust-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/Universitat_Lleida_Alfresco_AMP/lib/MITyCLibTSA-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/Universitat_Lleida_Alfresco_AMP/lib/MITyCLibXADES-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/acegi-security-0.8.2_patched.jar"/>
+	<classpathentry kind="lib" path="lib/AlfrescoE4Xutils.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/bcmail-jdk16-146.jar"/>
+	<classpathentry kind="lib" path="lib/bcprov-jdk16-146.jar"/>
+	<classpathentry kind="lib" path="lib/bctsp-jdk16-146.jar"/>
+	<classpathentry kind="lib" path="lib/OpenPAPIFilter-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/alfresco-repository-3.4.13.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SDK AlfrescoEmbedded"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SDK AlfrescoRemote"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

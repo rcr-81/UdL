@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Modificar carpeta</shortname>
+  <description>Universitat de Lleida. Modificar carpeta</description>
+  <url>/udl/carpeta/modificarCarpeta</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+</webscript>

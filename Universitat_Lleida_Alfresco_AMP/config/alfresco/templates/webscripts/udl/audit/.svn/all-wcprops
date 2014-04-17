@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/audit
+END
+clear.get.json.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/audit/clear.get.json.ftl
+END
+clear.get.desc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/audit/clear.get.desc.xml
+END
+audit.get.js
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/audit/audit.get.js
+END
+audit.get.desc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/audit/audit.get.desc.xml
+END
+audit.get.html.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/audit/audit.get.html.ftl
+END
+auditUdlJavaBacked.get.desc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/audit/auditUdlJavaBacked.get.desc.xml
+END
+query.get.desc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/audit/query.get.desc.xml
+END
+query.get.text.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/universitat-lleida/!svn/ver/565/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/config/alfresco/templates/webscripts/udl/audit/query.get.text.ftl
+END

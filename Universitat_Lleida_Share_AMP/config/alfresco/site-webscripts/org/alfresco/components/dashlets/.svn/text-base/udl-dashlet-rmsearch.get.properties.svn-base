@@ -1,0 +1,11 @@
+header.docSummary=Unresolved Events
+label.noItems=No items to display
+text.modified-by=Modified by {0}
+text.modified-on=on {0}
+
+register.destroy = Register to destroy since {0}  
+register.transfer = Register to transfer since {0}
+folder.destroy = Folder to destroy since {0}
+folder.transfer = Folder to transfer since {0}
+
+

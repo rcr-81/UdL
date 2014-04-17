@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Esborrar grup</shortname>
+  <description>Universitat de Lleida. Esborrar grup</description>
+  <url>/udl/grup/esborrarGrup</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+</webscript>

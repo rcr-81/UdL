@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Consultar document</shortname>
+  <description>Universitat de Lleida. Consultar document</description>
+  <url>/udl/document/consultarDocument</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+</webscript>

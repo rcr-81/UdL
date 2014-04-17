@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Actualitzar document en Base64</shortname>
+  <description>Universitat de Lleida. Actualitzar document en Base64</description>
+  <url>/udl/document/actualitzarDocumentBase64</url>
+  <format default="text">argument</format>
+  <authentication>admin</authentication>
+</webscript>

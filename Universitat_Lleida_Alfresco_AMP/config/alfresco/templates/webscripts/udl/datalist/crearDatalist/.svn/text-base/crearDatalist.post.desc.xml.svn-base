@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Crear llista de dades</shortname>
+  <description>Universitat de Lleida. Crear llista de dades</description>
+  <url>/udl/datalist/crearDatalist</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+</webscript>
