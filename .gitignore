@@ -1,0 +1,13 @@
+.gitignore.swp
+.metadata/
+Alfresco3.4.13/
+DOD_5015_Alfresco_PROJECT_AMP_NATIVE.3.4.8/
+DOD_5015_Share_PROJECT_AMP_NATIVE.3.4.8/
+RemoteSystemsTempFiles/
+Resignatura/
+SDK AlfrescoEmbedded/
+SDK AlfrescoRemote/
+Universitat_Lleida/
+Universitat_Lleida_Arxiu_Fisic_AMP/
+V3.4.13/
+alfresco-enterprise-sdk-3.4.13/
