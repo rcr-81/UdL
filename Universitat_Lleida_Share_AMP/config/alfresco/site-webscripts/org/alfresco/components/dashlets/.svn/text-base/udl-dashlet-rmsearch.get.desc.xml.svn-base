@@ -1,6 +1,0 @@
-<webscript>
-   <shortname>Llista d'evesdeveniments pendents</shortname>
-   <description>Llista amb els events pendents en el calendari de preservació</description>
-   <family>site-dashlet</family>
-   <url>/components/dashlets/udl-dashlet-rmsearch</url>
-</webscript>

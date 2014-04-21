@@ -1,8 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. zCallRecalcularDates.</shortname>
-  <description>Universitat de Lleida. Cridar al servei de recalcular dates.</description>
-  <url>/udl/qdc/lanzaDates</url>
-  <format default="html">argument</format>  
-  <authentication>admin</authentication>
-  <family>rm-console</family>
-</webscript>

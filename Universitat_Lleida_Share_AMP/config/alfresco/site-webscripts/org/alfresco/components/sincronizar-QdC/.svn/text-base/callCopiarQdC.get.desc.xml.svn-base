@@ -1,8 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Copiar QdC</shortname>
-  <description>Universitat de Lleida. Copiar cuadre de classificació del RM al DM</description>
-  <url>/udl/qdc/copiarQdC</url>
-  <format default="html">argument</format>  
-  <authentication>admin</authentication>
-  <family>rm-console</family>  
-</webscript>
