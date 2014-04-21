@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Transferir nodes</shortname>
-  <description>Universitat de Lleida. Transferir nodes</description>
-  <url>/udl/helper/transferNodes</url>
-  <format default="text">argument</format>
-  <authentication>admin</authentication>
-</webscript>

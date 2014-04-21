@@ -1,8 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Suplantar usuario</shortname>
-  <description>Universitat de Lleida. Suplantar usuario</description>
-  <url>/udl/helper/impersonate</url>
-  <format default="xml">argument</format>
-  <authentication>user</authentication>
-  <!--<transaction>required</transaction>-->
-</webscript>

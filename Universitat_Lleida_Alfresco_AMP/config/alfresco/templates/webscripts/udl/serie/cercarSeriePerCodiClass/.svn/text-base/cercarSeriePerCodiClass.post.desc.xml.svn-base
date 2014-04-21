@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>cercarSeriePerCodiClass</shortname>
-  <description>Universitat de Lleida. Cercar expedient per codi de classificació</description>
-  <url>/udl/serie/cercarSeriePerCodiClass</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

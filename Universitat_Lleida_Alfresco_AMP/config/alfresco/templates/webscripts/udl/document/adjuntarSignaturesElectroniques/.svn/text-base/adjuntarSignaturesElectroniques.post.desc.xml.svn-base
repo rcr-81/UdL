@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Adjuntar signatures electroniques</shortname>
-  <description>Universitat de Lleida. Adjuntar signatures electroniques</description>
-  <url>/udl/document/adjuntarSignaturesElectroniques</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

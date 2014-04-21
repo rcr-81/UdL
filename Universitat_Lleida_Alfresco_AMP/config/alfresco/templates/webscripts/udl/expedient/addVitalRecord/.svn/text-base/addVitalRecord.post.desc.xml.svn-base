@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>addVitalRecord</shortname>
-  <description>Universitat de Lleida. Afegeix l'aspecte de vital record a l'expedient</description>
-  <url>/udl/expedient/addVitalRecord</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

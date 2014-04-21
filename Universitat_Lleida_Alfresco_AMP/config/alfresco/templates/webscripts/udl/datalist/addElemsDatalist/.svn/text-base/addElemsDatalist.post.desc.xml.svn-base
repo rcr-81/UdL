@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Afegir elements a la llista de dades</shortname>
-  <description>Universitat de Lleida. Afegir elements a la llista de dades</description>
-  <url>/udl/datalist/addElemsDatalist</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

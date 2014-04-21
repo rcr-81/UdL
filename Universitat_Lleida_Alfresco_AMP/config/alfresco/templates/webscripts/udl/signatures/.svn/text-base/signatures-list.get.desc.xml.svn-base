@@ -1,6 +1,0 @@
-<webscript>
-  <shortname>Llista signatures</shortname>
-  <description>Llista de signatures</description>
-  <url>/signatures/signatures-list?nodeRef={nodeRef}</url>
-  <authentication>user</authentication> 
-</webscript>

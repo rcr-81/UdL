@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Reactivar expedient</shortname>
-  <description>Universitat de Lleida. Reactivar expedient</description>
-  <url>/udl/expedient/reactivarExpedient</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

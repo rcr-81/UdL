@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Cercar node</shortname>
-  <description>Universitat de Lleida. Cercar node</description>
-  <url>/udl/node/cercarNode</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

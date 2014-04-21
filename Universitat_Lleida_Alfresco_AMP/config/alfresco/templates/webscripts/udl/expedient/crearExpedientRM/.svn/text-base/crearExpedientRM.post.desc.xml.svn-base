@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>crearExpedient</shortname>
-  <description>Universitat de Lleida. Crear expedient RM</description>
-  <url>/udl/expedient/crearExpedientRM</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

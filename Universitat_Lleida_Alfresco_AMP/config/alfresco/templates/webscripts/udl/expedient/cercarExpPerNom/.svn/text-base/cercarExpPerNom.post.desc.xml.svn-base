@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>cercarExpPerNom</shortname>
-  <description>Universitat de Lleida. Cercar expedient per nom</description>
-  <url>/udl/expedient/cercarExpPerNom</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

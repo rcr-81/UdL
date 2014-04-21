@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Crear grup</shortname>
-  <description>Universitat de Lleida. Crear grup</description>
-  <url>/udl/grup/crearGrup</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

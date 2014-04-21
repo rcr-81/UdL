@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Crear carpeta</shortname>
-  <description>Universitat de Lleida. Crear carpeta</description>
-  <url>/udl/carpeta/crearCarpeta</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

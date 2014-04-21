@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Tancar expedient</shortname>
-  <description>Universitat de Lleida. Tancar expedient</description>
-  <url>/udl/expedient/tancarExpedient</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

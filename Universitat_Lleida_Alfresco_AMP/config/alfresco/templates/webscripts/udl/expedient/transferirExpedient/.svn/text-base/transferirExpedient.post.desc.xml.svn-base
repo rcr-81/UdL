@@ -1,9 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Transferir expedient</shortname>
-  <description>Universitat de Lleida. Transferir expedient</description>
-  <url>/slingshot/doclib/action/transferirExpedient?arguments={arguments}</url>
-  <url>/udl/expedient/transferirExpedient</url>    
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-  <transaction>requiresnew</transaction>
-</webscript>

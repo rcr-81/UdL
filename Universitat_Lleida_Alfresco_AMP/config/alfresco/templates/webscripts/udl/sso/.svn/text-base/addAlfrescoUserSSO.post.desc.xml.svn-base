@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Webscript Add Alfresco User SSO</shortname>
-  <description>Webscript Add Alfresco User SSO (java-backed)</description>
-  <url>/udl/sso/addAlfrescoUserSSO</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

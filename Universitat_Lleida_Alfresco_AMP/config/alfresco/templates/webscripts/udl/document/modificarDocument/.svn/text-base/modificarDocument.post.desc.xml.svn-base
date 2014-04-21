@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Modificar document</shortname>
-  <description>Universitat de Lleida. Modificar document</description>
-  <url>/udl/document/modificarDocument</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

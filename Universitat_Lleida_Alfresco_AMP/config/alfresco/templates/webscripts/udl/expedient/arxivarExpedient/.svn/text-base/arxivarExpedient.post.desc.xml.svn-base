@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Arxivar expedient</shortname>
-  <description>Universitat de Lleida. Arxivar expedient</description>
-  <url>/udl/expedient/arxivarExpedient</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

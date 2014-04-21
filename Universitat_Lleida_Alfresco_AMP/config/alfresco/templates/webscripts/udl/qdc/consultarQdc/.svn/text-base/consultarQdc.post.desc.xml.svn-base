@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Consultar Quadre de Clasificació</shortname>
-  <description>Universitat de Lleida. Consultar Quadre de Clasificació</description>
-  <url>/udl/qdc/consultarQdc</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

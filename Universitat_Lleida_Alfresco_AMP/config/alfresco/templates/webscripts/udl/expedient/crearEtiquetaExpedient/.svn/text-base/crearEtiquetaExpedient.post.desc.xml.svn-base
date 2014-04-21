@@ -1,8 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Crear etiqueta expedient</shortname>
-  <description>Universitat de Lleida. Crear etiqueta expedient</description>
-  <url>/slingshot/doclib/action/crearEtiquetaExpedient?arguments={arguments}</url>
-  <url>/udl/expedient/crearEtiquetaExpedient</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>  
-</webscript>

@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Esborrar document</shortname>
-  <description>Universitat de Lleida. Esborrar document</description>
-  <url>/udl/document/esborrarDocument</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>

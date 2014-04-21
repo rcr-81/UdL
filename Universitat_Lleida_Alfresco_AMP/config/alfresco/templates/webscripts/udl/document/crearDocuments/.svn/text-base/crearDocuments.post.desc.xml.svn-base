@@ -1,7 +1,0 @@
-<webscript>
-  <shortname>Universitat de Lleida. Crear documents</shortname>
-  <description>Universitat de Lleida. Crear documents</description>
-  <url>/udl/document/crearDocuments</url>
-  <format default="xml">argument</format>
-  <authentication>admin</authentication>
-</webscript>
