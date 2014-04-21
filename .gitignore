@@ -1,0 +1,16 @@
+\.classpath
+\.project
+\.settings
+\.metadata/
+alfresco-enterprise-sdk-3.4.13/
+Universitat_Lleida/
+Universitat_Lleida_Arxiu_Fisic_AMP/
+V3.4.13/
+SDK AlfrescoRemote/
+SDK AlfrescoEmbedded/
+Resignatura/
+Alfresco3.4.13/
+DOD_5015_Alfresco_PROJECT_AMP_NATIVE.3.4.8/
+DOD_5015_Share_PROJECT_AMP_NATIVE.3.4.8/
+Universitat_Lleida_Share_AMP/bin/**/*
+Universitat_Lleida_Alfresco_AMP/bin/**/*
