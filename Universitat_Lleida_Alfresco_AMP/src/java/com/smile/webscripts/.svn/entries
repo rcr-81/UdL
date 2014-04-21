@@ -1,80 +1,0 @@
-10
-
-dir
-565
-https://sources.bcn.intranet/svn/universitat-lleida/trunk/Universitat_Lleida_Alfresco_AMP_3.4.13/src/java/com/smile/webscripts
-https://sources.bcn.intranet/svn/universitat-lleida
-
-
-
-2013-11-22T08:40:39.738815Z
-565
-racor
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-3679b0db-e671-466a-b2d8-643237e4b702
-
-SignaturesList.java
-file
-
-
-
-
-2013-09-23T15:53:13.000000Z
-8592d5e37b3a22a3002b8bc867d63a19
-2013-11-22T08:40:39.738815Z
-565
-racor
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-22587
-
-audit
-dir
-
-cercarExpedients
-dir
-
-document
-dir
-
-expedient
-dir
-
-helper
-dir
-
-sso
-dir
-
