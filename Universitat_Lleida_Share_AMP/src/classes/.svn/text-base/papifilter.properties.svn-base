@@ -1,5 +1,0 @@
-com.prise.adas.papifilterlegacy.gpoa_url=https://autenticacio.udl.cat/PAPI/gpoa.php
-com.prise.adas.papifilterlegacy.gpoa_pubkey=/home/smiledev/workspaces/workspace_UdL_3.4.13/Universitat_Lleida/PAPI/_GPoA_pubkey.pem
-com.prise.adas.papifilterlegacy.lkey=01234567890123456789012345678901
-com.prise.adas.papifilterlegacy.poa_location=/
-com.prise.adas.papifilterlegacy.poa_serviceid=udlADAS
