@@ -11,3 +11,8 @@ Universitat_Lleida/
 Universitat_Lleida_Arxiu_Fisic_AMP/
 V3.4.13/
 alfresco-enterprise-sdk-3.4.13/
+Universitat_Lleida_Alfresco_AMP/bin/
+Universitat_Lleida_Share_AMP/bin/
+Universitat_Lleida_Alfresco_AMP/build/
+Universitat_Lleida_Share_AMP/build/
+*.class
