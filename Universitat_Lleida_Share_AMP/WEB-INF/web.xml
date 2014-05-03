@@ -116,7 +116,7 @@
       <url-pattern>/system/*</url-pattern>
    </filter-mapping>  
       
-   <!-- Autenticación normal de Alfresco -->
+   <!-- INICIO Autenticación normal de Alfresco -->
  
    <filter>
       <description>MT authentication support - NOTE: does not support portlets</description>
@@ -158,6 +158,7 @@
       <url-pattern>/p/*</url-pattern>
    </filter-mapping>
  
+   <!-- FIN Autenticación normal de Alfresco -->
    
    <!-- Spring Context Loader listener - the name of the default global context is passed to the DispatcherServlet
         in the servlet definition below - this is to allow the NTLM filter etc. to find the single app context -->
