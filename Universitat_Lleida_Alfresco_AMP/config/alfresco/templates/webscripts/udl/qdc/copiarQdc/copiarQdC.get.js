@@ -98,12 +98,12 @@ function main()
 	impersonate.impersonate('admin');
 	
 	// PRODUCTION
-	var dm = "Company Home/Sites/dm/documentLibrary";
-    var rm = "Company Home/Sites/rm/documentLibrary";
+	//var dm = "Company Home/Sites/dm/documentLibrary";
+    //var rm = "Company Home/Sites/rm/documentLibrary";
 	
 	// DEVELOPMENT
-	//var dm = "Espacio de empresa/Sitios/dm/documentLibrary";
-	//var rm = "Espacio de empresa/Sitios/rm/documentLibrary";
+	var dm = "Espacio de empresa/Sitios/dm/documentLibrary";
+	var rm = "Espacio de empresa/Sitios/rm/documentLibrary";
 
 	var folderDM = roothome.childByNamePath(dm);
 	var folderRM = roothome.childByNamePath(rm);
