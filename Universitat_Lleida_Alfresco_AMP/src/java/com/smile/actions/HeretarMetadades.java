@@ -179,6 +179,15 @@ public class HeretarMetadades extends ActionExecuterAbstractBase implements Cons
 				String typeHijo = nodeService.getType(nodeRef).getLocalName();			
 
 				if(typeHijo.equals("agregacio")){				
+					String agrCodiClass2 = (String)nodeService.getProperty(nodeRef, codiClassificacio2Agregacio);
+					String agrDenClass2 = (String)nodeService.getProperty(nodeRef, denominacioClasse2Agregacio);
+					
+					if("".equals(agrCodiClass2) || agrCodiClass2 == null) {
+						nodeService.setProperty(nodeRef, codiClassificacio2Agregacio, "-");
+					}
+					if("".equals(agrDenClass2) || agrDenClass2 == null) {
+						nodeService.setProperty(nodeRef, denominacioClasse2Agregacio, "-");
+					}
 					nodeService.setProperty(nodeRef, codiClassificacio1Agregacio, codiClassificacio1);
 					nodeService.setProperty(nodeRef, denominacioClasse1Agregacio, denominacioClasse1);				
 					nodeService.setProperty(nodeRef, sensibilitatDadesAgregacio, sensibilitatDades);
@@ -190,7 +199,16 @@ public class HeretarMetadades extends ActionExecuterAbstractBase implements Cons
 					nodeService.setProperty(nodeRef, accioDictaminada1Agregacio, accioDictaminada1);
 					nodeService.setProperty(nodeRef, accioDictaminada2Agregacio, accioDictaminada2);
 				}
-				else if(typeHijo.equals("expedient")){				
+				else if(typeHijo.equals("expedient")){
+					String expCodiClass2 = (String)nodeService.getProperty(nodeRef, codiClassificacio2Expedient);
+					String expDenClass2 = (String)nodeService.getProperty(nodeRef, denominacioClasse2Expedient);
+					
+					if("".equals(expCodiClass2) || expCodiClass2 == null) {
+						nodeService.setProperty(nodeRef, codiClassificacio2Expedient, "-");
+					}
+					if("".equals(expDenClass2) || expDenClass2 == null) {
+						nodeService.setProperty(nodeRef, denominacioClasse2Expedient, "-");
+					}
 					nodeService.setProperty(nodeRef, codiClassificacio1Expedient, codiClassificacio1);
 					nodeService.setProperty(nodeRef, denominacioClasse1Expedient, denominacioClasse1);
 					nodeService.setProperty(nodeRef, sensibilitatDadesExpedient, sensibilitatDades);

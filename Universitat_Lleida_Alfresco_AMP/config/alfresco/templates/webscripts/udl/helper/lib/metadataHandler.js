@@ -29,6 +29,8 @@ function getMetadatos(node) {
 
 // Setea en node los argumentos recibidos que perteneces al esquema de metadatos própio de la UdL
 function setMetadatos(node, arguments) {
+	var auxArgs = arguments;
+	
 	if(node != null) {
 		for(var propName in node.properties) {
 			if(node.properties[propName] != null) {
@@ -40,9 +42,26 @@ function setMetadatos(node, arguments) {
 						// newPropName no tiene el namespace
 						var newPropName = propName.substr(propName.lastIndexOf("}") + 1)
 						node.properties[propName] = String(arguments.metadades[newPropName]);
+						
+						delete auxArgs.metadades[newPropName];
 					}
 				}
 			}
+		}
+		
+		// En este bucle se acaban de setear las propiedades que faltan.
+		// Hay que hacer esto porque "node.properties" no retorna todos los metadatos del expediente
+		var i=0;
+
+		while(i < auxArgs.metadades.*.length()) {
+			if(String(auxArgs.metadades.*[i].name()).indexOf("data_") != -1) {
+				node.properties["udl:" + String(auxArgs.metadades.*[i].name())] = dateHelper.parse(auxArgs.metadades.*[i]);
+
+			}else {
+				node.properties["udl:" + String(auxArgs.metadades.*[i].name())] = String(auxArgs.metadades.*[i]);	
+			}
+
+			i++;
 		}
 	}
 	
