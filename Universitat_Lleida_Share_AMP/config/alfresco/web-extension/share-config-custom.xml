@@ -715,8 +715,8 @@
 					<field id="udl:unitats_documentSimple" set="caracteristiquesTamany" />
 					<field id="udl:suport_1_documentSimple" set="ubicacio" />
 					<field id="udl:suport_2_documentSimple" set="ubicacio" />
-					<field id="udl:localitzacio_1_documentSimple" set="ubicacio" />
-					<field id="udl:localitzacio_2_documentSimple" set="ubicacio" />
+					<field id="udl:localitzacio_1_documentSimple" set="ubicacio" read-only="true" />
+					<field id="udl:localitzacio_2_documentSimple" set="ubicacio" read-only="true" />
 					<field id="udl:denominacio_estat_documentSimple" set="estatElaboracio" />
 					<field id="udl:tipus_copia_documentSimple" set="estatElaboracioCaracCopia" />
 					<field id="udl:motiu_documentSimple" set="estatElaboracioCaracCopia" />
@@ -973,8 +973,8 @@
 					<field id="udl:unitats_documentSimple" set="caracteristiquesTamany" />
 					<field id="udl:suport_1_documentSimple" set="ubicacio" />
 					<field id="udl:suport_2_documentSimple" set="ubicacio" />
-					<field id="udl:localitzacio_1_documentSimple" set="ubicacio" />
-					<field id="udl:localitzacio_2_documentSimple" set="ubicacio" />
+					<field id="udl:localitzacio_1_documentSimple" set="ubicacio" read-only="true" />
+					<field id="udl:localitzacio_2_documentSimple" set="ubicacio" read-only="true" />
 					<field id="udl:denominacio_estat_documentSimple" set="estatElaboracio" />
 					<field id="udl:tipus_copia_documentSimple" set="estatElaboracioCaracCopia" />
 					<field id="udl:motiu_documentSimple" set="estatElaboracioCaracCopia" />
@@ -4724,9 +4724,9 @@
 					<field id="udlrm:secuencial_identificador_agregacio" set="identificador" read-only="true" />
 					<field id="udlrm:esquema_identificador_agregacio" set="identificador" read-only="true" />
 					<field id="udlrm:nom_natural_agregacio" set="nom" />
-					<field id="udlrm:data_inici_agregacio" set="dates" read-only="true" />
+					<field id="udlrm:data_inici_agregacio" set="dates" read-only="false" />
 					<field id="udlrm:data_creacio_agregacio" set="dates" />
-					<field id="udlrm:data_fi_agregacio" set="dates" read-only="true" />
+					<field id="udlrm:data_fi_agregacio" set="dates" read-only="false" />
 					<field id="udlrm:classificacio_acces_agregacio" set="seguretat" />
 					<field id="udlrm:sensibilitat_dades_caracter_personal_agregacio" set="seguretat" />
 					<field id="udlrm:classificacio_ENS_agregacio" set="seguretat" />
@@ -5015,9 +5015,9 @@
 					<field id="udlrm:secuencial_identificador_agregacio" set="identificador" read-only="true" />
 					<field id="udlrm:esquema_identificador_agregacio" set="identificador" read-only="true" />
 					<field id="udlrm:nom_natural_agregacio" set="nom" />
-					<field id="udlrm:data_inici_agregacio" set="dates" read-only="true" />
+					<field id="udlrm:data_inici_agregacio" set="dates" read-only="false" />
 					<field id="udlrm:data_creacio_agregacio" set="dates" />
-					<field id="udlrm:data_fi_agregacio" set="dates" read-only="true" />
+					<field id="udlrm:data_fi_agregacio" set="dates" read-only="false" />
 					<field id="udlrm:classificacio_acces_agregacio" set="seguretat" />
 					<field id="udlrm:sensibilitat_dades_caracter_personal_agregacio" set="seguretat" />
 					<field id="udlrm:classificacio_ENS_agregacio" set="seguretat" />
@@ -5093,8 +5093,8 @@
 					<field id="udlrm:secuencial_identificador_expedient" set="identificador" read-only="true" />
 					<field id="udlrm:esquema_identificador_expedient" set="identificador" read-only="true" />
 					<field id="udlrm:nom_natural_expedient" set="nom" />
-					<field id="udlrm:data_inici_expedient" set="dates" read-only="true" />
-					<field id="udlrm:data_fi_expedient" set="dates" read-only="true" />
+					<field id="udlrm:data_inici_expedient" set="dates" read-only="false" />
+					<field id="udlrm:data_fi_expedient" set="dates" read-only="false" />
 					<field id="udlrm:classificacio_acces_expedient" set="seguretat" />
 					<field id="udlrm:sensibilitat_dades_caracter_personal_expedient" set="seguretat" />
 					<field id="udlrm:classificacio_ENS_expedient" set="seguretat" />
@@ -5310,9 +5310,9 @@
 					<field id="udlrm:secuencial_identificador_agregacio" set="identificador" read-only="true" />
 					<field id="udlrm:esquema_identificador_agregacio" set="identificador" read-only="true" />
 					<field id="udlrm:nom_natural_agregacio" set="nom" />
-					<field id="udlrm:data_inici_agregacio" set="dates" read-only="true" />
+					<field id="udlrm:data_inici_agregacio" set="dates" read-only="false" />
 					<field id="udlrm:data_creacio_agregacio" set="dates" />
-					<field id="udlrm:data_fi_agregacio" set="dates" read-only="true" />
+					<field id="udlrm:data_fi_agregacio" set="dates" read-only="false" />
 					<field id="udlrm:classificacio_acces_agregacio" set="seguretat" />
 					<field id="udlrm:sensibilitat_dades_caracter_personal_agregacio" set="seguretat" />
 					<field id="udlrm:classificacio_ENS_agregacio" set="seguretat" />
@@ -5388,8 +5388,8 @@
 					<field id="udlrm:secuencial_identificador_expedient" set="identificador" read-only="true" />
 					<field id="udlrm:esquema_identificador_expedient" set="identificador" read-only="true" />
 					<field id="udlrm:nom_natural_expedient" set="nom" />
-					<field id="udlrm:data_inici_expedient" set="dates" read-only="true" />
-					<field id="udlrm:data_fi_expedient" set="dates" read-only="true" />
+					<field id="udlrm:data_inici_expedient" set="dates" read-only="false" />
+					<field id="udlrm:data_fi_expedient" set="dates" read-only="false" />
 					<field id="udlrm:classificacio_acces_expedient" set="seguretat" />
 					<field id="udlrm:sensibilitat_dades_caracter_personal_expedient" set="seguretat" />
 					<field id="udlrm:classificacio_ENS_expedient" set="seguretat" />
@@ -5544,9 +5544,9 @@
 					<field id="udlrm:secuencial_identificador_agregacio" set="identificador" />
 					<field id="udlrm:esquema_identificador_agregacio" set="identificador" />
 					<field id="udlrm:nom_natural_agregacio" set="nom" />
-					<field id="udlrm:data_inici_agregacio" set="dates" read-only="true" />
+					<field id="udlrm:data_inici_agregacio" set="dates" read-only="false" />
 					<field id="udlrm:data_creacio_agregacio" set="dates" />
-					<field id="udlrm:data_fi_agregacio" set="dates" read-only="true" />
+					<field id="udlrm:data_fi_agregacio" set="dates" read-only="false" />
 					<field id="udlrm:classificacio_acces_agregacio" set="seguretat" />
 					<field id="udlrm:sensibilitat_dades_caracter_personal_agregacio" set="seguretat" />
 					<field id="udlrm:classificacio_ENS_agregacio" set="seguretat" />
@@ -5740,8 +5740,8 @@
 					<field id="udlrm:secuencial_identificador_expedient" set="identificador" />
 					<field id="udlrm:esquema_identificador_expedient" set="identificador" />
 					<field id="udlrm:nom_natural_expedient" set="nom" />
-					<field id="udlrm:data_inici_expedient" set="dates" read-only="true" />
-					<field id="udlrm:data_fi_expedient" set="dates" read-only="true" />
+					<field id="udlrm:data_inici_expedient" set="dates" read-only="false" />
+					<field id="udlrm:data_fi_expedient" set="dates" read-only="false" />
 					<field id="udlrm:classificacio_acces_expedient" set="seguretat" />
 					<field id="udlrm:sensibilitat_dades_caracter_personal_expedient" set="seguretat" />
 					<field id="udlrm:classificacio_ENS_expedient" set="seguretat" />
