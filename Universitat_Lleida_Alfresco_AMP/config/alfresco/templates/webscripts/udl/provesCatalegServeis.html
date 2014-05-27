@@ -449,23 +449,23 @@
 			// ******************************************************************************************
 							
 			function crearExpedient(){
-				 //var submitForm = getNewSubmitForm("http://gdpreprod.udl.cat:8080/alfresco/service/udl/carpeta/crearCarpeta");
-				 var submitForm = getNewSubmitForm("http://localhost:8080/alfresco/service/udl/carpeta/crearCarpeta");
+				 var submitForm = getNewSubmitForm("http://gdpreprod.udl.cat:8080/alfresco/service/udl/carpeta/crearCarpeta");
+				 //var submitForm = getNewSubmitForm("http://localhost:8080/alfresco/service/udl/carpeta/crearCarpeta");
 				 createNewFormElement(submitForm, "arguments", 
 						 "<arguments>" + 
 					 			"<username>admin</username>" +
-					 			"<carpetaName>expedient1</carpetaName>" +
-					 			"<carpetaPath>Espacio de empresa/Sitios/dm/documentLibrary/fons1/serie1</carpetaPath>" +
-//					 			"<carpetaPath>Company Home/Sites/dm/documentLibrary/Test visualització docs</carpetaPath>" +
+					 			"<carpetaName>test RAUL</carpetaName>" +
+//					 			"<carpetaPath>Espacio de empresa/Sitios/dm/documentLibrary/Fons Universitat de Lleida/Serie 1</carpetaPath>" +
+					 			"<carpetaPath>Company Home/Sites/dm/documentLibrary/Fons Universitat de Lleida/C112 Promoció i informació de la universitat</carpetaPath>" +
 						 		"<carpetaType>udl:expedient</carpetaType>" + 
 				 				"<metadades>" +
-				 					"<descripcio_expedient>descripcio_expedient</descripcio_expedient>" +
+				 					"<descripcio_expedient>descripcio</descripcio_expedient>" +
 				 					"<tipus_entitat_expedient>tipus_entitat_expedient</tipus_entitat_expedient>" +
 				 					"<categoria_expedient>categoria_expedient</categoria_expedient>" +															
 				 					"<secuencial_identificador_expedient>secuencial_identificador_expedient</secuencial_identificador_expedient>" +
 				 					"<esquema_identificador_expedient>esquema_identificador_expedient</esquema_identificador_expedient>" +
-				 					"<data_inici_expedient>01/01/2013</data_inici_expedient>" +
-				 					"<data_fi_expedient>02/01/2013</data_fi_expedient>" +					
+				 					"<data_inici_expedient>2013/01/01</data_inici_expedient>" +
+				 					"<data_fi_expedient>2014/01/01</data_fi_expedient>" +					
 				 					"<classificacio_acces_expedient>Restringit</classificacio_acces_expedient>" +
 				 					"<advertencia_seguretat_expedient>advertencia_seguretat_expedient</advertencia_seguretat_expedient>" +
 				 					"<categoria_advertencia_seguretat_expedient>Solament accès autoritzat</categoria_advertencia_seguretat_expedient>" +
@@ -484,8 +484,8 @@
 				 					"<tipus_dictamen_2_expedient>Conservació permanent</tipus_dictamen_2_expedient>" +
 				 					"<accio_dictaminada_2_expedient>accio_dictaminada_2_expedient</accio_dictaminada_2_expedient>" +
 				 					"<suport_origen_expedient>Físic</suport_origen_expedient>" +
-				 					"<dimensions_fisiques_expedient>dimensions_fisiques_expedient</dimensions_fisiques_expedient>" +
-				 					"<quantitat_expedient>quantitat_expedient</quantitat_expedient>" +
+				 					"<dimensions_fisiques_expedient>6</dimensions_fisiques_expedient>" +
+				 					"<quantitat_expedient>5</quantitat_expedient>" +
 				 					"<unitats_expedient>Volum</unitats_expedient>" +
 				 					"<suport_1_expedient>Paper DIN A4</suport_1_expedient>" +
 				 					"<suport_2_expedient>Paper DIN A4</suport_2_expedient>" +
@@ -514,8 +514,8 @@
 				 					"<valor_expedient>valor_expedient</valor_expedient>" +
 				 					"<codi_classificacio_1_expedient>codi_classificacio_1_expedient</codi_classificacio_1_expedient>" +
 				 					"<denominacio_classe_1_expedient>denominacio_classe_1_expedient</denominacio_classe_1_expedient>" +
-				 					"<codi_classificacio_2_expedient>codi_classificacio_2_expedient</codi_classificacio_2_expedient>" +
-				 					"<denominacio_classe_2_expedient>denominacio_classe_2_expedient</denominacio_classe_2_expedient>" +
+				 					"<codi_classificacio_2_expedient></codi_classificacio_2_expedient>" +
+				 					"<denominacio_classe_2_expedient></denominacio_classe_2_expedient>" +
 				 				"</metadades>" + 
 				 		"</arguments>");
 				 submitForm.submit();
