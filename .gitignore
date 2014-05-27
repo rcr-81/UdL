@@ -16,3 +16,5 @@ Universitat_Lleida_Share_AMP/bin/
 Universitat_Lleida_Alfresco_AMP/build/
 Universitat_Lleida_Share_AMP/build/
 *.class
+Universitat_de_Lleida-ent34.lic.installed*
+Universitat_Lleida_Alfresco_AMP/config/alfresco/templates/webscripts/udl/provesCatalegServeis.html

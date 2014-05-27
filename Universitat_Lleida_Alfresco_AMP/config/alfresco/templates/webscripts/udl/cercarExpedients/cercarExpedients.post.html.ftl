@@ -1,6 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		<link rel="stylesheet" type="text/css" href="/share/css/jquery.dataTables.css">
+  		<link type="text/css" href="/share/css/osx.css" rel="stylesheet" media="screen" />
+  		
+		<script type="text/javascript" charset="utf8" src="/share/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" charset="utf8" src="/share/js/jquery.dataTables.js"></script>
+		<script type="text/javascript" src="/share/js/jquery.simplemodal.js"></script>
+		<script type="text/javascript" src="/share/js/osx.js"></script>		
+	
 		<script type="text/javascript">	
 		
 			function getNewSubmitForm(action){
@@ -45,7 +53,7 @@
 			document.onkeypress = function(event) {
 				var tecla = (document.all)? window.event.keyCode : event.which;
 				
-				if (tecla == 13 || tecla == 116){
+				if (tecla == 13){
 					cercarExpedients();
 				}
 			} 
@@ -72,6 +80,12 @@
 				text-align: center;
 				text-decoration: none !important;
 			}	
+	
+			img.help
+			{
+				cursor: pointer;
+				vertical-align: text-bottom;
+			}
 	
 			div.titulo
 			{
@@ -208,52 +222,147 @@
 		</div>
 		<div class="descripcion">
 			Arxiu UdL: cercador d'expedients
+			&nbsp;&nbsp;<img class="help" id="helpIcon" src="/share/images/help.gif" title="Ajuda" />
 		</div>
 		<div class="buscador">
 			<input type="text" id="filtro" name="filtro" class="text" onfocus="foco(this)" onblur="no_foco(this)"/>			
 			<input type="button" value="Cercar" class="boton" onclick="javascript:cercarExpedients();" />
 		</div>
 
-		<#if (size > 0)>
-                <#if (size = 1)>
-                        <div class="results">${size} resultat.</div>
-                <#else>
-                        <div class="results">${size} resultats.</div>
-                </#if>
-                <div class="headerRow">
-                <div class="headerColumns">
-                        <div class="columnId">Identificador</div>
-                        <div class="columnDate">Data inici</div>
-                        <div class="columnDate">Data fi</div>
-                        <div class="column">Nom natural</div>
-                        <div class="columnOrgan">Òrgan</div>
-                        <div class="columnOrgan">Institució</div>
-                        <div class="columnCodi">Codi class.</div>
-                        <div class="columnLoc">Localitzaci&#243;</div>                        
-                    </div>
-            </div>
-        <#else>   
-                <div class="results">No s'han trobat resultats.</div>
-        </#if>
-		 	
-		<#list expedients as exp>
-                <#if ((exp_index + 1) % 2) = 0>
-                        <div class="rowEven">
-                <#else>
-                        <div class="rowOdd">
-                </#if>
-                      <div class="image"><img src="/share/res/components/documentlibrary/images/record-folder-32.png"/></div>
-                      <div class="columns">
-                              <div class="columnId"><#if exp.numExp != "">${exp.numExp}<#else>-</#if></div>
-                              <div class="columnDate"><#if exp.dataInici??>${exp.dataInici?datetime}<#else>-</#if></div>
-                              <div class="columnDate"><#if exp.dataFi??>${exp.dataFi?datetime}<#else>-</#if></div>
-                              <div class="column"><#if exp.nomNatural != "">${exp.nomNatural}<#else>-</#if></div>
-                              <div class="columnOrgan"><#if exp.nomNaturalOrgan??>${exp.nomNaturalOrgan}<#else>-</#if></div>
-                              <div class="columnOrgan"><#if exp.nomNaturalInstitucio??>${exp.nomNaturalInstitucio}<#else>-</#if></div>
-                              <div class="columnCodi"><#if exp.codiClass != "">${exp.codiClass}<#else>-</#if></div>
-                              <div class="columnLoc"><#if exp.localitzacio != "">${exp.localitzacio}<#else>-</#if></div>                              
-                          </div>
-                </div>
-        </#list>
+		<br><br><br><br>
+				
+        <table id="table_id" class="display">
+		    <thead>
+		        <tr>
+                	<th>Identificador</th>
+                	<th>Grup creador</th>
+                    <th>Data inici</th>
+                    <th>Data fi</th>
+                    <th>Nom natural</th>
+                    <th>Òrgan</th>
+                    <th>Institució</th>
+                    <th>Codi class.</th>
+                    <th>Localitzaci&#243;</th>
+		        </tr>
+		    </thead>
+		</table>
+
+		<!-- modal content -->
+		<div id="osx-modal-content">
+			<div id="osx-modal-title">Arxiu UdL: cercador d'expedients</div>
+			<div class="close"><a href="#" class="simplemodal-close">x</a></div>
+			<div id="osx-modal-data">
+				<h2>Ajuda</h2>
+				<p>Introduir els criteris de cerca i prémer sobre el botó "Cercar".</p>
+				<p>Per a fer cerques per dates hi ha 2 opcions:
+					<ul>
+						<li>Cerca per data exacta: introduir una data amb el format "dd/mm/aaaa" o bé "dd-mm-aaaa". Exemple: 05/02/2014</li>
+						<li>Cerca per rang de dates: introduir 2 dates entre claudàtors separades per la paraula "TO". Exemple: [01/05/2014 TO 31/05/204]</li>
+						(La cerca per dates s'aplica a la data d'inici de l'expedient.)
+					</ul>
+				</p>
+				<p>IMPORTANT: per a que la cerca sugui més ràpida i retorni els expedients desitjats cal intentar sempre acotar el màxim possible i evitar fer cerques molt genèriques.</p>
+			</div>
+		</div>
+
+		<script>
+			$(document).ready( function () {
+			    $('#table_id').DataTable( {
+			    	data: ${expedients},
+					columns: [
+						{ data: 'numExp' },
+						{ data: 'grupCreador' },
+						{ data: 'dataInici' },
+						{ data: 'dataFi' },												
+				        { data: 'nomNatural' },
+				        { data: 'nomNaturalOrgan' },
+						{ data: 'nomNaturalInstitucio' },
+				        { data: 'codiClass' },
+				        { data: 'localitzacio' }
+					],
+			    	columnDefs: [
+					    {
+					      data: ${expedients},
+					      defaultContent: "",
+					      targets: "_all"
+					    }
+					],
+					language: {
+					    sProcessing:   "Processant...",
+					    sLengthMenu:   "Mostra _MENU_ resultats",
+					    sZeroRecords:  "No s'han trobat resultats.",
+					    sInfo:         "Mostrant de _START_ a _END_ de _TOTAL_ resultats",
+					    sInfoEmpty:    "Mostrant de 0 a 0 de 0 resultats",
+					    sInfoFiltered: "(filtrat de _MAX_ total resultats)",
+					    sInfoPostFix:  "",
+					    sSearch:       "Filtrar:",
+					    sUrl:          "",
+					    oPaginate: {
+					        "sFirst":    "Primer",
+					        "sPrevious": "Anterior",
+					        "sNext":     "Següent",
+					        "sLast":     "Últim"
+					    }
+					}
+			    } );
+			    
+				var OSX = {
+					container: null,
+					init: function () {
+						$("#helpIcon").click(function (e) {
+							e.preventDefault();	
+				
+							$("#osx-modal-content").modal({
+								overlayId: 'osx-overlay',
+								containerId: 'osx-container',
+								closeHTML: null,
+								minHeight: 80,
+								opacity: 65, 
+								position: ['0',],
+								overlayClose: true,
+								onOpen: OSX.open,
+								onClose: OSX.close
+							});
+						});
+					},
+					open: function (d) {
+						var self = this;
+						self.container = d.container[0];
+						d.overlay.fadeIn('slow', function () {
+							$("#osx-modal-content", self.container).show();
+							var title = $("#osx-modal-title", self.container);
+							title.show();
+							d.container.slideDown('slow', function () {
+								setTimeout(function () {
+									var h = $("#osx-modal-data", self.container).height()
+										+ title.height()
+										+ 20; // padding
+									d.container.animate(
+										{height: h}, 
+										200,
+										function () {
+											$("div.close", self.container).show();
+											$("#osx-modal-data", self.container).show();
+										}
+									);
+								}, 300);
+							});
+						})
+					},
+					close: function (d) {
+						var self = this; // this = SimpleModal object
+						d.container.animate(
+							{top:"-" + (d.container.height() + 20)},
+							500,
+							function () {
+								self.close(); // or $.modal.close();
+							}
+						);
+					}
+				};
+				
+				OSX.init();
+			} );
+		</script>
 	</body>
 </html>

@@ -1,22 +1,30 @@
 package com.smile.webscripts.cercarExpedients;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.alfresco.model.ContentModel;
 import org.alfresco.repo.jscript.ScriptNode;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.repository.StoreRef;
 import org.alfresco.service.cmr.search.ResultSet;
+import org.alfresco.service.cmr.search.SearchParameters;
 import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.namespace.QName;
+import org.alfresco.util.ISO8601DateFormat;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.simple.JSONObject;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 import org.springframework.extensions.webscripts.Cache;
@@ -44,88 +52,132 @@ public class CercarExpedients extends DeclarativeWebScript implements ConstantsU
 	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
 
-		NodeService nodeService = serviceRegistry.getNodeService();
-		SearchService searchService = serviceRegistry.getSearchService();
 		HashMap<String, Object> model = new HashMap<String, Object>();
-		List<Object> data = new ArrayList<Object>();
-		HashMap<String, Object> map = new HashMap<String, Object>();
 		String filtro = req.getParameter(FILTRO);
-		Context cx = Context.enter();
-		Scriptable scope = cx.initStandardObjects();
+		String expedients = null;
 	
 		try{
 			UdlProperties props = new UdlProperties();
 			Impersonate.impersonate(props.getProperty(ADMIN_USERNAME));
-			String query = buildQuery(filtro);
-	
-			ResultSet result = searchService.query(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE, SearchService.LANGUAGE_LUCENE, query);
-			Iterator<NodeRef> iter = result.getNodeRefs().iterator();
-	
-			while (iter.hasNext()) {
-				NodeRef nodeRef = (NodeRef) iter.next();
-				ScriptNode exp = new ScriptNode(nodeRef, serviceRegistry, scope);
-				map = new HashMap<String, Object>();
-				
-				map.put("node", exp);
-				 
-				if(exp.hasAspect(ASPECT_AGREGACIO)) {
-					map.put("nomNatural", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "nom_natural_agregacio")));
-					map.put("nomNaturalInstitucio", nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_institucio")));
-					map.put("nomNaturalOrgan", nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_organ")));
-					map.put("numExp", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "secuencial_identificador_agregacio")));
-					map.put("dataInici", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_inici_agregacio")));
-					map.put("dataFi", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_fi_agregacio")));
-					map.put("codiClass", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "codi_classificacio_1_agregacio")));			
-					map.put("localitzacio", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "localitzacio_1_agregacio")));					
-					
- 				}else if(exp.hasAspect(ASPECT_EXPEDIENT)) {
- 					map.put("nomNatural", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "nom_natural_expedient")));
- 					map.put("nomNaturalInstitucio", nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_institucio")));
-					map.put("nomNaturalOrgan", nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_organ")));
-					map.put("numExp", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "secuencial_identificador_expedient")));
-					map.put("dataInici", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_inici_expedient")));
-					map.put("dataFi", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_fi_expedient")));
-					map.put("codiClass", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "codi_classificacio_1_expedient")));
-					map.put("localitzacio", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "localitzacio_1_expedient")));					
-				}
-				
-				data.add(map);
-			}
-	
-			model.put("expedients", data);
-			model.put("size", result.length());
-			model.put("filtro", filtro);
-			
+
+			ResultSet result = executeQuery(filtro);
+			expedients = buildJSON(result);
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error("Error en la cerca d'expedients.", e);
+
+		}finally {
+			model.put("expedients", expedients);
+			model.put("filtro", filtro);
 		}
 		
 		return model;
 	}
 
 	/**
-	 * Construye la parte de la consulta que contiene los metadatos dinámicamente.
+	 * Ejecuta consulta full text buscando expedientes o agregaciones ubicados en el site RM.
 	 * 
-	 * @param metadata
 	 * @param filtro
+	 * @return
 	 */
-	String addMetadata(String metadata, String filtro) {
-		String query = "";
-		String[] filtroSplit= filtro.split(" ");
-		int index = 0;
+	public ResultSet executeQuery(String filtro) {
 		
-		for(int i=0; i<filtroSplit.length; i++) {
-			query = query + metadata + filtroSplit[i] + "*\" OR ";
-			index = i;
+		ResultSet result = null;
+
+		try{
+			long time_start = System.currentTimeMillis();
+			
+			SearchService searchService = serviceRegistry.getSearchService();
+			SearchParameters sp = new SearchParameters();
+			sp.addStore(StoreRef.STORE_REF_WORKSPACE_SPACESSTORE);
+			sp.setLanguage(SearchService.LANGUAGE_FTS_ALFRESCO);
+			sp.setQuery(buildQuery(filtro));
+			sp.setDefaultFTSOperator(SearchParameters.AND);
+			sp.setLimit(1000);
+			result = searchService.query(sp);
+			
+			long time_end = System.currentTimeMillis();
+			System.out.println("La consulta ha tardado "+ ( (time_end - time_start)/1000 ) +" seg");
+
+		}catch(Exception e) {
+			e.printStackTrace();
+			logger.error("Error executeQuery method.", e);
 		}
 		
-		if(index > 0){
-			query = StringUtils.chomp(query, " OR ");	
+		return result;
+	}
+
+	/**
+	 * Monta un JSON a partir del resultset obtenido de la consulta lucene.
+	 * 
+	 * @param result
+	 * @return
+	 */
+	public String buildJSON(ResultSet result) {
+		
+		NodeService nodeService = serviceRegistry.getNodeService();
+		Context cx = Context.enter();
+		Scriptable scope = cx.initStandardObjects();
+		List<Object> data = new ArrayList<Object>();
+		JSONObject json = null;
+		
+		long time_start = System.currentTimeMillis();
+		
+		try{
+			if(result != null) {
+				Iterator<NodeRef> iter = result.getNodeRefs().iterator();
+				
+				while (iter.hasNext()) {
+					NodeRef nodeRef = (NodeRef) iter.next();
+					ScriptNode exp = new ScriptNode(nodeRef, serviceRegistry, scope);
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					
+					if(exp.hasAspect(ASPECT_AGREGACIO)) {
+						map.put("nomNatural", nodeService.getProperty(nodeRef, ContentModel.PROP_NAME));
+						if(nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_institucio")) != null){
+			 				map.put("nomNaturalInstitucio", nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_institucio"))); 						
+						}
+						if(nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_organ")) != null) {
+							map.put("nomNaturalOrgan", nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_organ"))); 						
+						}
+						map.put("numExp", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "secuencial_identificador_agregacio")));
+						map.put("dataInici", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_inici_agregacio")).toString());
+						map.put("dataFi", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_fi_agregacio")).toString());
+						map.put("codiClass", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "codi_classificacio_1_agregacio")));			
+						map.put("localitzacio", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "localitzacio_1_agregacio")));
+						map.put("grupCreador", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "grup_creador_agregacio")));
+						
+					}else if(exp.hasAspect(ASPECT_EXPEDIENT)) {
+						map.put("nomNatural", nodeService.getProperty(nodeRef, ContentModel.PROP_NAME));
+						if(nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_institucio")) != null) {
+							map.put("nomNaturalInstitucio", nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_institucio")));	
+						}
+						if(nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_organ")) != null) {
+							map.put("nomNaturalOrgan", nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_organ"))); 						
+						}
+						map.put("numExp", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "secuencial_identificador_expedient")));
+						map.put("dataInici", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_inici_expedient")).toString());
+						map.put("dataFi", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_fi_expedient")).toString());
+						map.put("codiClass", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "codi_classificacio_1_expedient")));
+						map.put("localitzacio", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "localitzacio_1_expedient")));
+						map.put("grupCreador", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "grup_creador_expedient")));					
+					}
+		
+					json = new JSONObject();
+					json.putAll(map);
+					data.add(json);
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			logger.error("Error executeQuery method.", e);
 		}
 		
-		return query;
+		long time_end = System.currentTimeMillis();
+		System.out.println("Montar el json ha tardado "+ ( (time_end - time_start)/1000 ) +" seg");
 		
+		return data.toString();
 	}
 	
 	/**
@@ -136,162 +188,173 @@ public class CercarExpedients extends DeclarativeWebScript implements ConstantsU
 	 * @throws Exception
 	 */
 	private String buildQuery(String filtro) throws Exception {
-		String query = "";		
-		
-		//String queryFons = "PATH:\"/app:company_home/st:sites/cm:rm/cm:documentLibrary/cm:Fons_x0020_Universitat_x0020_de_x0020_Lleida\"";
+	
 		String queryFons = "PATH:\"/app:company_home/st:sites/cm:rm/cm:documentLibrary/cm:Fons_x0020_Universitat_x0020_de_x0020_Lleida/*/*\"";
-		
 		String queryAspect = "(NOT ASPECT:\"dod:ghosted\" AND (ASPECT:\"udlrm:agregacio\" OR ASPECT:\"udlrm:expedient\"))";
+		String queryAcces = "(@udlrm\\:classificacio_acces_expedient:\"Públic\" OR @udlrm\\:classificacio_acces_agregacio:\"Públic\")";
+		String query = queryAcces + " AND " + queryFons + " AND " +  queryAspect;
 
-		String queryMetadataAgr = "";
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@cm\\:name:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:tipus_entitat_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:categoria_agregacio:\"*", filtro);		
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:descripcio_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:idioma_1_agregacio:\"*", filtro);								
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:idioma_2_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:idioma_3_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:idioma_4_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:secuencial_identificador_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:esquema_identificador_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:nom_natural_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:data_inici_agregacio:\"*", filtro);		
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:data_creacio_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:data_fi_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:classificacio_acces_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:sensibilitat_dades_caracter_personal_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:classificacio_ENS_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:advertencia_seguretat_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:categoria_advertencia_seguretat_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:condicions_acces_1_agregacio:\"*", filtro);		
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:condicions_acces_2_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:tipus_acces_1_agregacio:\"*", filtro);								
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:tipus_acces_2_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:valoracio_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:tipus_dictamen_1_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:accio_dictaminada_1_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:tipus_dictamen_2_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:accio_dictaminada_2_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_origen_agregacio:\"*", filtro);		
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:dimensions_fisiques_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:quantitat_agregacio:\"*", filtro);								
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:unitats_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_1_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_2_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_3_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_4_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_5_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_6_agregacio:\"*", filtro);		
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_7_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_8_agregacio:\"*", filtro);								
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_9_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_10_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_11_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_12_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_13_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_14_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_15_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_16_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_17_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_18_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_19_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_20_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:suport_21_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:localitzacio_1_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:localitzacio_2_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:denominacio_estat_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:codi_classificacio_1_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:denominacio_classe_1_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:codi_classificacio_2_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:denominacio_classe_2_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:grup_creador_agregacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:created:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:modified:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:modifier:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udlrm\\:creator:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udl\\:nom_natural_regulacio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udl\\:nom_natural_institucio:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udl\\:nom_natural_organ:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udl\\:nom_dispositiu:\"*", filtro);
-		queryMetadataAgr = queryMetadataAgr + addMetadata("@udl\\:nom_natural_persona:\"*", filtro);
+		// El filtro por intervalo se aplica a fecha de inicio únicamente
+		if(isRange(filtro)){
+			String stringRange = formatRange(filtro);
+			query = query + " AND (@udlrm\\:data_inici_expedient:" + stringRange + " OR @udlrm\\:data_inici_agregacio:" + stringRange + ")";
 
-		String queryMetadataExp = "";
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:grup_creador_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:tipus_entitat_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:categoria_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:descripcio_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:idioma_1_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:idioma_2_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:idioma_3_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:idioma_4_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:secuencial_identificador_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:esquema_identificador_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:nom_natural_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:data_inici_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:data_fi_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:classificacio_acces_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:sensibilitat_dades_caracter_personal_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:classificacio_ENS_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:advertencia_seguretat_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:categoria_advertencia_seguretat_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:condicions_acces_1_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:condicions_acces_2_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:tipus_acces_1_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:tipus_acces_2_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:valoracio_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:tipus_dictamen_1_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:accio_dictaminada_1_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:tipus_dictamen_2_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:accio_dictaminada_2_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_origen_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:dimensions_fisiques_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:quantitat_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:unitats_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_1_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_2_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_3_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_4_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_5_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_6_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_7_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_8_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_9_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_10_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_11_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_12_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_13_expedient:\"*", filtro);				
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_14_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_15_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_16_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_17_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_18_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_19_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_20_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:suport_21_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:localitzacio_1_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:localitzacio_2_expedient:\"*", filtro);				
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:denominacio_estat_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:codi_classificacio_1_expedient:\"*", filtro);				
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:denominacio_classe_1_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:codi_classificacio_2_expedient:\"*", filtro);				
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:denominacio_classe_2_expedient:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udl\\:nom_natural_regulacio:\"*", filtro);				
-		queryMetadataExp = queryMetadataExp + addMetadata("@udl\\:nom_natural_institucio:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udl\\:nom_natural_organ:\"*", filtro);				
-		queryMetadataExp = queryMetadataExp + addMetadata("@udl\\:nom_dispositiu:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udl\\:nom_natural_persona:\"*", filtro);				
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:created:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:modified:\"*", filtro);				
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:modifier:\"*", filtro);
-		queryMetadataExp = queryMetadataExp + addMetadata("@udlrm\\:creator:\"*", filtro);
-
-		if("*".equals(filtro)) {
-			query = queryFons + " AND " +  queryAspect;
+		// Si la consulta no es vacia o "*" se hace una búsqueda full text para todos los metadatos
+		}else if(!"*".equals(filtro) && !"".equals(filtro)) {
+			String[] subFiltro = filtro.split(" ");
 			
-		}else {
-			query = queryFons + " AND " + queryAspect + " AND (" + StringUtils.chomp(queryMetadataExp, " OR ") + " OR " + StringUtils.chomp(queryMetadataAgr, " OR ") + ")";
+			if(subFiltro.length > 1) {
+				String querySubFiltros = "";
+
+				for (int i = 0; i < subFiltro.length; i++) {
+					querySubFiltros = querySubFiltros + "ALL:\"" + subFiltro[i] + "\" AND ";
+				}
+
+				query = query + " AND " + StringUtils.chomp(querySubFiltros, " AND ");
+				
+			}else {
+				query = query + "AND ALL:\"" + filtro + "\"";				
+			}
+
+		// El filtro por fecha se aplica a fecha de inicio únicamente
+		}else if(isDate(filtro)) {
+			String stringDate = formatDate(filtro);
+			query = query + " AND (@udlrm\\:data_inici_expedient:\"" + stringDate + "\" OR @udlrm\\:data_inici_agregacio:\"" + stringDate + "\")";
 		}
 		
 		return query;
+	}
+	
+	/**
+	 * Retorna true si la cadena recibida como parámetro se puede parsear com una fecha.
+	 * 
+	 * @param filtro
+	 * @return
+	 */
+	public boolean isDate(String filtro) {
+		boolean result = false;
+		DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
+		 
+		try{
+			if(filtro.contains("/")) {
+				df1.parse(filtro);
+				result = true;
+				
+			}else if(filtro.contains("-")) {
+				df2.parse(filtro);
+				result = true;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			logger.error("Error isDate method.", e);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Si el filtro contiene corchetes se interpeta que el usuario quiere hacer una busqueda por rango.
+	 * 
+	 * @param filtro
+	 * @return
+	 */
+	public boolean isRange(String filtro) {
+		boolean result = false;
+		
+		if(filtro.contains("[") && filtro.contains("]")) {
+			result = true;
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Recibe una fecha como string y la transforma en el formato que acepta el buscador
+	 * 
+	 * @param filtro
+	 * @return
+	 */
+	public String formatDate(String filtro) {
+		String result = filtro;
+		Date date = null;
+		DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
+		DateFormat dfAlfresco = new SimpleDateFormat("yyyy-MM-dd");
+		
+		try{
+			if(filtro.contains("/")) {
+				date = df1.parse(filtro);
+				result = dfAlfresco.format(date);
+			
+			}else if(filtro.contains("-")) {
+				date = df2.parse(filtro);
+				result = dfAlfresco.format(date);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			logger.error("Error formatDate method.", e);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * Recibe una fecha como string y la transforma en el formato que acepta el buscador
+	 * 
+	 * @param filtro
+	 * @return
+	 */
+	public String formatRange(String filtro) {
+		String result = "";
+		
+		try{
+			if(filtro.contains("MIN") || filtro.contains("MAX") || filtro.contains("NOW")) {
+				result = filtro;
+
+			}else {
+				result = "[";
+				String[] range = filtro.replace("[", "").replace("]", "").split(" ");
+				
+				for (int i = 0; i < range.length; i++) {
+					if(isDate(range[i])) {
+						result = result + "\"" + formatDate(range[i]) + "\" ";
+	
+					}else if("TO".equalsIgnoreCase(range[i])) {
+						result = result + "TO ";
+					}
+				}
+				result = StringUtils.chomp(result, " " ) + "]";
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			logger.error("Error formatDate method.", e);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Parse given date with ISO8601 format.
+	 * @param sDate
+	 * @return
+	 */
+	public String parse(String sDate){
+		String ret = null;
+		if(sDate != null && !sDate.equals("") && !sDate.equals("null")){
+			sDate = sDate.replaceAll("-", "/");
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			Date date;
+			try {
+				date = df.parse(sDate);
+			} catch (ParseException e) {
+				throw new RuntimeException(e);
+			}		
+			ret = ISO8601DateFormat.format(date);
+		}		
+		return ret;
 	}
 }
