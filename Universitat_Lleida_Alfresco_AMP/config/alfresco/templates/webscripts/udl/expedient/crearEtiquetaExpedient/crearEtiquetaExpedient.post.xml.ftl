@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<#if grupCreador?exists>${grupCreador}</#if>
+<#if descGrupCreador?exists>${descGrupCreador}</#if>&nbsp;(<#if idGrupCreador?exists>${idGrupCreador}</#if>)
 
 <br>
 <br> 
-<span style="margin-left:500px;"> 
-	ANY: <b>2004</b>
+<span style="margin-left:350px;"> 
+	ANY: <b>${any}</b>
 </span>
 <br>
-<span style="margin-left:500px;">
+<span style="margin-left:350px;">
 	VOLUM: <#if quantitat?exists><b>${quantitat}</b></#if>
 </span>
 
@@ -20,49 +20,44 @@
 <br>
 <br>
 <br>
-<span style="margin-left:100px;"> 
-	<#if codiClassificacio1?exists>${codiClassificacio1}</#if>
-	<#if denominacioClasse1?exists>- ${denominacioClasse1}</#if>
-</span>
 
-<br> 
-<span style="margin-left:100px;">
-	<#if nomNaturalAspecte?exists>${nomNaturalAspecte}</#if>
-</span>
+<div style="width:450px;margin-left:25px;">
+	<#if codiClassificacio1?exists && codiClassificacio1 != ''>${codiClassificacio1}</#if>
+	<#if denominacioClasse1?exists && denominacioClasse1 != ''>- ${denominacioClasse1}</#if>
+</div>
 
-<br>
-<span style="margin-left:100px;"> 
+<div style="width:450px;margin-left:25px;">
+	<#if nomNaturalAgent?exists>${nomNaturalAgent}</#if>
+</div>
+
+<div style="width:450px;margin-left:25px;"> 
 	<#if dataInici?exists>${dataInici}</#if>
 	<#if dataFi?exists>	- ${dataFi}</#if>
-</span>
+</div>
 
-<br>
-<span style="margin-left:100px;">
+<div style="width:450px;margin-left:25px;">
 	<#if nomNatural?exists>${nomNatural}</#if>
-</span>
+</div>
+
+<div style="width:450px;margin-left:25px;">
+	<#if codiClassificacio2?exists && codiClassificacio2 != ''>${codiClassificacio2}</#if>
+	<#if denominacioClasse2?exists && denominacioClasse2 != ''>- ${denominacioClasse2}</#if>
+</div>
 
 <br>
 <br> 
-<span style="margin-left:100px;">
-	<#if codiClassificacio2?exists>${codiClassificacio2}</#if>
-	<#if denominacioClasse2?exists>- ${denominacioClasse2}</#if>
-</span>
+<br>
+<br>
 
-<br>
-<br> 
-<br>
-<br>
-<span style="margin-left:150px;">Núm. expedient:  
+<div style="width:425px;margin-left:50px;">Núm. expedient:  
 	<#if id?exists>${id}</#if>
-</span>
+</div>
 
-<br>
-<span style="margin-left:150px;">Unitats instal·lació: 
-	<#if localitzacio1?exists>${localitzacio1}</#if>
-	<#if localitzacio2?exists>, ${localitzacio2}</#if>
-</span>
+<div style="width:425px;margin-left:50px;">Unitats instal·lació: 
+	<#if localitzacio1?exists && localitzacio1 != ''>${localitzacio1}</#if>
+	<#if localitzacio2?exists && localitzacio2 != ''>, ${localitzacio2}</#if>
+</div>
 
-<br>
-<span style="margin-left:150px;">
-	<#if essencial?exists><b>ESSENCIAL</b></#if>
-</span>
+<div style="width:425px;margin-left:50px;">
+	<#if essencial?exists && essencial == true><b>ESSENCIAL</b></#if>
+</div>

@@ -197,7 +197,9 @@ public interface ConstantsUdL {
 	public final static String PARAM_SURNAME1 = "surname1";
 	public final static String PARAM_SURNAME2 = "surname2";
 	
-	public final static String PARAM_GRUP_CREADOR = "grupCreador";
+	public final static String PARAM_GRUP_CREADOR_DESC = "descGrupCreador";
+	public final static String PARAM_GRUP_CREADOR_ID = "idGrupCreador";
+	public final static String PARAM_ANY = "any";
 	public final static String PARAM_CODI_CLASSIFICACIO_1 = "codiClassificacio1";
 	public final static String PARAM_DENOMINACIO_CLASSE_1 = "denominacioClasse1";
 	public final static String PARAM_CODI_CLASSIFICACIO_2 = "codiClassificacio2";
@@ -206,7 +208,7 @@ public interface ConstantsUdL {
 	public final static String PARAM_DATA_FI = "dataFi";
 	public final static String PARAM_DESCRIPCIO = "descripcio";
 	public final static String PARAM_QUANTITAT = "quantitat";
-	public final static String PARAM_NOM_NATURAL_ASPECTE = "nomNaturalAspecte";
+	public final static String PARAM_NOM_NATURAL_AGENT = "nomNaturalAgent";
 	public final static String PARAM_NOM_NATURAL = "nomNatural";
 	public final static String PARAM_ID = "id";
 	public final static String PARAM_LOCALITZACIO_1 = "localitzacio1";

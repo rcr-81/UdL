@@ -487,6 +487,26 @@
 			</form>
 		</forms>
 	</config>
+	<config evaluator="node-type" condition="dl:grupCreador" replace="true">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="dl:identificador_grup" />
+					<show id="dl:descripcio_grup" />
+				</field-visibility>
+			</form>
+		</forms>
+	</config>
+	<config evaluator="model-type" condition="dl:grupCreador" replace="true">
+		<forms>
+			<form>
+				<field-visibility>
+					<show id="dl:identificador_grup" />
+					<show id="dl:descripcio_grup" />
+				</field-visibility>
+			</form>
+		</forms>
+	</config>
 	<config evaluator="node-type" condition="udl:documentSimple" replace="true">
 		<forms>
 			<form>

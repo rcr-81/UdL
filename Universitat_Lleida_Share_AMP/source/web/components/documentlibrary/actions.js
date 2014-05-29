@@ -533,7 +533,7 @@
 	              {
 		        	  fn: function callback_success(response)
 		              {
-		            	  var myWindow = window.open('', '', 'menubar=yes,location=yes,width=700,height=600,left=300,top=300,status=no');
+		        		  var myWindow = window.open("", "Etiqueta", "toolbar=no, status=no, titlebar=no, menubar=no, location=no, resizable=no, width=550, height=600, left=300, top=100");
 		            	  var etiqueta = response.serverResponse.responseText;
 		            	  etiqueta = etiqueta.fontsize('2px');
 		            	  myWindow.document.write(etiqueta);

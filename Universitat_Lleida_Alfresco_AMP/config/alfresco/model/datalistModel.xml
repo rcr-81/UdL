@@ -541,6 +541,20 @@
            		<aspect>dl:dispositiu_aspect</aspect>
          	</mandatory-aspects>
       </type>
+      <type name="dl:grupCreador">
+         	<title>Grup creador</title>
+         	<parent>dl:dataListItem</parent>         	
+         	<properties>
+	         	<property name="dl:identificador_grup">
+	         		<title>Identificador</title>
+	            	<type>d:text</type>
+	            </property>
+	         	<property name="dl:descripcio_grup">
+	         		<title>Descripció</title>
+	            	<type>d:text</type>
+	            </property>
+			</properties>
+      </type>
    </types>
    <aspects>
       <aspect name="dl:gantt">
@@ -819,6 +833,6 @@
                		<type>d:text</type>
             	</property>
          	</properties>
-      	</aspect>    
+      	</aspect>
    </aspects>
 </model>
