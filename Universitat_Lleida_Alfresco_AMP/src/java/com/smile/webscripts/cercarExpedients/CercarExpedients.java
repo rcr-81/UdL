@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.jscript.ScriptNode;
@@ -16,6 +18,7 @@ import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.repository.StoreRef;
+import org.alfresco.service.cmr.search.LimitBy;
 import org.alfresco.service.cmr.search.ResultSet;
 import org.alfresco.service.cmr.search.SearchParameters;
 import org.alfresco.service.cmr.search.SearchService;
@@ -94,7 +97,8 @@ public class CercarExpedients extends DeclarativeWebScript implements ConstantsU
 			sp.setLanguage(SearchService.LANGUAGE_FTS_ALFRESCO);
 			sp.setQuery(buildQuery(filtro));
 			sp.setDefaultFTSOperator(SearchParameters.AND);
-			sp.setLimit(1000);
+			sp.setLimitBy(LimitBy.NUMBER_OF_PERMISSION_EVALUATIONS);
+			sp.setLimit(0);
 			result = searchService.query(sp);
 			
 			long time_end = System.currentTimeMillis();
@@ -116,6 +120,7 @@ public class CercarExpedients extends DeclarativeWebScript implements ConstantsU
 	 */
 	public String buildJSON(ResultSet result) {
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		NodeService nodeService = serviceRegistry.getNodeService();
 		Context cx = Context.enter();
 		Scriptable scope = cx.initStandardObjects();
@@ -132,7 +137,7 @@ public class CercarExpedients extends DeclarativeWebScript implements ConstantsU
 					NodeRef nodeRef = (NodeRef) iter.next();
 					ScriptNode exp = new ScriptNode(nodeRef, serviceRegistry, scope);
 					HashMap<String, Object> map = new HashMap<String, Object>();
-					
+
 					if(exp.hasAspect(ASPECT_AGREGACIO)) {
 						map.put("nomNatural", nodeService.getProperty(nodeRef, ContentModel.PROP_NAME));
 						if(nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_institucio")) != null){
@@ -142,8 +147,12 @@ public class CercarExpedients extends DeclarativeWebScript implements ConstantsU
 							map.put("nomNaturalOrgan", nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_organ"))); 						
 						}
 						map.put("numExp", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "secuencial_identificador_agregacio")));
-						map.put("dataInici", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_inici_agregacio")).toString());
-						map.put("dataFi", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_fi_agregacio")).toString());
+						if(nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_inici_agregacio")) != null) {
+							map.put("dataInici", sdf.format((Date)nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_inici_agregacio"))));							
+						}
+						if(nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_fi_agregacio")) != null) {
+							map.put("dataFi", sdf.format((Date)nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_fi_agregacio"))));							
+						}
 						map.put("codiClass", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "codi_classificacio_1_agregacio")));			
 						map.put("localitzacio", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "localitzacio_1_agregacio")));
 						map.put("grupCreador", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "grup_creador_agregacio")));
@@ -157,8 +166,12 @@ public class CercarExpedients extends DeclarativeWebScript implements ConstantsU
 							map.put("nomNaturalOrgan", nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "nom_natural_organ"))); 						
 						}
 						map.put("numExp", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "secuencial_identificador_expedient")));
-						map.put("dataInici", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_inici_expedient")).toString());
-						map.put("dataFi", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_fi_expedient")).toString());
+						if(nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_inici_expedient")) != null) {
+							map.put("dataInici", sdf.format((Date)nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_inici_expedient"))));
+						}
+						if(nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_fi_expedient")) != null) {
+							map.put("dataFi", sdf.format((Date)nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "data_fi_expedient"))));							
+						}
 						map.put("codiClass", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "codi_classificacio_1_expedient")));
 						map.put("localitzacio", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "localitzacio_1_expedient")));
 						map.put("grupCreador", nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "grup_creador_expedient")));					
@@ -199,6 +212,11 @@ public class CercarExpedients extends DeclarativeWebScript implements ConstantsU
 			String stringRange = formatRange(filtro);
 			query = query + " AND (@udlrm\\:data_inici_expedient:" + stringRange + " OR @udlrm\\:data_inici_agregacio:" + stringRange + ")";
 
+		// El filtro por fecha se aplica a fecha de inicio únicamente
+		}else if(isDate(filtro)) {
+			String stringDate = formatDate(filtro);
+			query = query + " AND (@udlrm\\:data_inici_expedient:" + stringDate + " OR @udlrm\\:data_inici_agregacio:" + stringDate + ")";
+
 		// Si la consulta no es vacia o "*" se hace una búsqueda full text para todos los metadatos
 		}else if(!"*".equals(filtro) && !"".equals(filtro)) {
 			String[] subFiltro = filtro.split(" ");
@@ -215,11 +233,6 @@ public class CercarExpedients extends DeclarativeWebScript implements ConstantsU
 			}else {
 				query = query + "AND ALL:\"" + filtro + "\"";				
 			}
-
-		// El filtro por fecha se aplica a fecha de inicio únicamente
-		}else if(isDate(filtro)) {
-			String stringDate = formatDate(filtro);
-			query = query + " AND (@udlrm\\:data_inici_expedient:\"" + stringDate + "\" OR @udlrm\\:data_inici_agregacio:\"" + stringDate + "\")";
 		}
 		
 		return query;
@@ -279,18 +292,26 @@ public class CercarExpedients extends DeclarativeWebScript implements ConstantsU
 	public String formatDate(String filtro) {
 		String result = filtro;
 		Date date = null;
+		Pattern patronFecha = Pattern.compile("^([0][1-9]|[12][0-9]|3[01])(\\/|-)([0][1-9]|[1][0-2])\\2(\\d{4})$");
+		Matcher matcher = patronFecha.matcher(filtro);
 		DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
 		DateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
 		DateFormat dfAlfresco = new SimpleDateFormat("yyyy-MM-dd");
+
 		
 		try{
-			if(filtro.contains("/")) {
-				date = df1.parse(filtro);
-				result = dfAlfresco.format(date);
-			
-			}else if(filtro.contains("-")) {
-				date = df2.parse(filtro);
-				result = dfAlfresco.format(date);
+			if(matcher.matches()) {
+				if(filtro.contains("/")) {
+					date = df1.parse(filtro);
+					result = "\"" + dfAlfresco.format(date) + "\"";
+				
+				}else if(filtro.contains("-")) {
+					date = df2.parse(filtro);
+					result = "\"" + dfAlfresco.format(date) + "\"";
+				}
+
+			}else {
+				result = filtro.toUpperCase();
 			}
 			
 		}catch(Exception e) {
@@ -309,24 +330,27 @@ public class CercarExpedients extends DeclarativeWebScript implements ConstantsU
 	 */
 	public String formatRange(String filtro) {
 		String result = "";
+		Pattern rangoFechas = Pattern.compile("^\\[([0][1-9]|[12][0-9]|3[01])(\\/|-)([0][1-9]|[1][0-2])\\2(\\d{4})\\s(TO|to)\\s([0][1-9]|[12][0-9]|3[01])(\\/|-)([0][1-9]|[1][0-2])\\2(\\d{4})\\]$");
+		Pattern rangoMinNowFecha = Pattern.compile("^\\[(MIN|NOW)\\s(TO|to)\\s([0][1-9]|[12][0-9]|3[01])(\\/|-)([0][1-9]|[1][0-2])\\4(\\d{4})\\]$");
+		Pattern rangoFechaMaxNow = Pattern.compile("^\\[([0][1-9]|[12][0-9]|3[01])(\\/|-)([0][1-9]|[1][0-2])\\2(\\d{4})\\s(TO|to)\\s(MAX|NOW)\\]$");
+		Pattern rangoMinMaxNow = Pattern.compile("^\\[(MIN|NOW)\\s(TO|to)\\s(MAX|NOW)\\]$");
+		
+
+		Matcher mFechas = rangoFechas.matcher(filtro);
+		Matcher mMinNowFecha = rangoMinNowFecha.matcher(filtro);
+		Matcher mFechaMaxNow = rangoFechaMaxNow.matcher(filtro);
+		Matcher mMinMaxNow = rangoMinMaxNow.matcher(filtro);
 		
 		try{
-			if(filtro.contains("MIN") || filtro.contains("MAX") || filtro.contains("NOW")) {
-				result = filtro;
+			if(mFechas.matches() || mMinNowFecha.matches() || mFechaMaxNow.matches() || mMinMaxNow.matches()) {
+				String[] aux = filtro.replace("[", "").replace("]", "").split(" ");
+				String fecha1 = aux[0];
+				String fecha2 = aux[2];
+
+				result = "[" + formatDate(fecha1) + " TO " + formatDate(fecha2) + "]";
 
 			}else {
-				result = "[";
-				String[] range = filtro.replace("[", "").replace("]", "").split(" ");
-				
-				for (int i = 0; i < range.length; i++) {
-					if(isDate(range[i])) {
-						result = result + "\"" + formatDate(range[i]) + "\" ";
-	
-					}else if("TO".equalsIgnoreCase(range[i])) {
-						result = result + "TO ";
-					}
-				}
-				result = StringUtils.chomp(result, " " ) + "]";
+				result = filtro;
 			}
 			
 		}catch(Exception e) {

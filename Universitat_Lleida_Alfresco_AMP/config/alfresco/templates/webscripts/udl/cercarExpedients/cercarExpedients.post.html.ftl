@@ -7,6 +7,7 @@
 		<script type="text/javascript" charset="utf8" src="/share/js/jquery-1.10.2.min.js"></script>
 		<script type="text/javascript" charset="utf8" src="/share/js/jquery.dataTables.js"></script>
 		<script type="text/javascript" src="/share/js/jquery.simplemodal.js"></script>
+		<script type="text/javascript" src="/share/js/date-eu.js"></script>
 		<script type="text/javascript" src="/share/js/osx.js"></script>		
 	
 		<script type="text/javascript">	
@@ -254,6 +255,7 @@
 			<div id="osx-modal-data">
 				<h2>Ajuda</h2>
 				<p>Introduir els criteris de cerca i prémer sobre el botó "Cercar".</p>
+				<p>El cercador permet utilitzar l'asterisc (*) com a comodí.</p>
 				<p>Per a fer cerques per dates hi ha 2 opcions:
 					<ul>
 						<li>Cerca per data exacta: introduir una data amb el format "dd/mm/aaaa" o bé "dd-mm-aaaa". Exemple: 05/02/2014</li>
@@ -261,13 +263,14 @@
 						(La cerca per dates s'aplica a la data d'inici de l'expedient.)
 					</ul>
 				</p>
-				<p>IMPORTANT: per a que la cerca sugui més ràpida i retorni els expedients desitjats cal intentar sempre acotar el màxim possible i evitar fer cerques molt genèriques.</p>
+				<p>IMPORTANT: per a què la cerca sigui més ràpida i retorni els expedients desitjats cal intentar sempre acotar el màxim possible i evitar fer cerques molt genèriques.</p>
 			</div>
 		</div>
 
 		<script>
 			$(document).ready( function () {
 			    $('#table_id').DataTable( {
+			    	deferRender: true,
 			    	data: ${expedients},
 					columns: [
 						{ data: 'numExp' },
@@ -285,6 +288,10 @@
 					      data: ${expedients},
 					      defaultContent: "",
 					      targets: "_all"
+					    },
+					    {
+					      type: 'date-eu',
+					      targets: [2, 3]
 					    }
 					],
 					language: {
