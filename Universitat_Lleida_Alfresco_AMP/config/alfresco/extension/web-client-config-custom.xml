@@ -1,0 +1,645 @@
+<alfresco-config>
+
+   <!-- Aquest arxiu ha estar recuperat de la instal·lació original d'Alfresco.
+   		En copiar-lo a un nou repository s'ha de validar que no sobreescrigui cap
+   		altra configuració manual introduïda previament. -->
+
+
+
+		<config>
+			<actions>
+				<action id="creaPeticioIArxiu_exp_action">
+					<!--<permissions>
+						<permission allow="true">Read</permission>
+					</permissions>-->
+					<label-id>creaPeticioIArxiu_exp_action</label-id>
+					<image>/images/icons/search_icon.gif</image>
+					<action>wizard:CreaPeticioIArxiuAction</action>
+					<action-listener>#{WizardManager.setupParameters}</action-listener>
+					<params>
+						<param name="id">#{actionContext.id}</param>
+						<param name="isExpedient">true</param>
+					</params>
+				</action>
+				
+				<action id="creaPeticioIArxiu_doc_action">
+					<!--<permissions>
+						<permission allow="true">Read</permission>
+					</permissions>-->
+					<label-id>creaPeticioIArxiu_doc_action</label-id>
+					<image>/images/icons/search_icon.gif</image>
+					<action>wizard:CreaPeticioIArxiuAction</action>
+					<action-listener>#{WizardManager.setupParameters}</action-listener>
+					<params>
+						<param name="id">#{actionContext.id}</param>
+						<param name="isExpedient">false</param>
+					</params>
+				</action>
+			
+				<action id="consultaGeneral_action">
+					<!--<permissions>
+						<permission allow="true">Read</permission>
+					</permissions>-->
+					<label-id>consultaGeneral_action</label-id>
+					<image>/images/icons/search_icon.gif</image>
+					<action>wizard:ConsultaGeneralAction</action>
+					<action-listener>#{WizardManager.setupParameters}</action-listener>
+				</action>
+			
+				<action id="consultaEstatPeticio_action">
+					<!--<permissions>
+						<permission allow="true">Read</permission>
+					</permissions>-->
+					<label-id>consultaEstatPeticio_action</label-id>
+					<image>/images/icons/search_icon.gif</image>
+					<action>wizard:ConsultaEstatPeticioAction</action>
+					<action-listener>#{WizardManager.setupParameters}</action-listener>
+				</action>
+				
+				<action id="recuperaPeticioEmmagatzemada_action">
+					<!--<permissions>
+						<permission allow="true">Read</permission>
+					</permissions>-->
+					<label-id>recuperaPeticioEmmagatzemada_action</label-id>
+					<image>/images/icons/search_icon.gif</image>
+					<action>wizard:RecuperaPeticioEmmagatzemadaAction</action>
+					<action-listener>#{WizardManager.setupParameters}</action-listener>
+					<params>
+						<param name="id">#{actionContext.id}</param>
+					</params>
+				</action>
+				
+				<action id="eliminaPeticio_action">
+					<!--<permissions>
+						<permission allow="true">Read</permission>
+					</permissions>-->
+					<label-id>eliminaPeticio_action</label-id>
+					<image>/images/icons/search_icon.gif</image>
+					<action>wizard:EliminaPeticioAction</action>
+					<action-listener>#{WizardManager.setupParameters}</action-listener>
+					<params>
+						<param name="id">#{actionContext.id}</param>
+					</params>
+				</action>
+				
+				<action id="vocabulari_action">
+					<!--<permissions>
+						<permission allow="true">Read</permission>
+					</permissions>-->
+					<label-id>vocabulari_action</label-id>
+					<image>/images/icons/new_content.gif</image>
+					<action>wizard:VocabulariAction</action>
+					<action-listener>#{WizardManager.setupParameters}</action-listener>
+				</action>
+				
+				<action id="edit_vocabulario_action">
+					<!--<permissions>
+						<permission allow="true">Read</permission>
+					</permissions>-->
+					<label-id>editVocabulario_action</label-id>
+					<image>/images/icons/edit_icon.gif</image>
+					<action>wizard:EditVocabularioAction</action>
+					<action-listener>#{WizardManager.setupParameters}</action-listener>
+					<params>
+						<param name="id">#{actionContext.id}</param>
+					</params>
+				</action>
+				
+				<action id="plantilla_action">
+					<!--<permissions>
+						<permission allow="true">Read</permission>
+					</permissions>-->
+					<label-id>plantilla_action</label-id>
+					<image>/images/icons/new_content.gif</image>
+					<action>wizard:PlantillaAction</action>
+					<action-listener>#{WizardManager.setupParameters}</action-listener>
+				</action>
+				
+				<action id="extraccio_action">
+					<!--<permissions>
+						<permission allow="true">Read</permission>
+					</permissions>-->
+					<label-id>extraccio_action</label-id>
+					<image>/images/icons/new_content.gif</image>
+					<action>wizard:ExtraccioAction</action>
+					<action-listener>#{WizardManager.setupParameters}</action-listener>
+				</action>
+
+				<action-group id="space_details_actions">
+					<action idref="creaPeticioIArxiu_exp_action"/>
+					<action idref="creaPeticioIArxiu_doc_action"/>
+					<action idref="consultaGeneral_action"/>
+					<action idref="consultaEstatPeticio_action" />
+					<action idref="recuperaPeticioEmmagatzemada_action"/>
+					<action idref="eliminaPeticio_action"/>
+				</action-group>
+				<action-group id="browse_actions_menu">
+					<action idref="creaPeticioIArxiu_exp_action"/>
+					<action idref="creaPeticioIArxiu_doc_action"/>
+					<action idref="consultaGeneral_action"/>
+					<action idref="consultaEstatPeticio_action" />
+					<action idref="recuperaPeticioEmmagatzemada_action"/>
+					<action idref="eliminaPeticio_action"/>
+					<action idref="vocabulari_action"/>
+					<action idref="plantilla_action"/>
+					<action idref="extraccio_action"/>
+				</action-group>
+				<action-group id="doc_details_actions">
+					<action idref="creaPeticioIArxiu_exp_action"/>
+					<action idref="creaPeticioIArxiu_doc_action"/>
+				</action-group>
+				<action-group id="document_browse_menu">
+					<action idref="edit_vocabulario_action"/>
+				</action-group>
+			</actions>
+		</config>
+
+
+	<!-- Configuració dels wizards de continguts -->
+		<config evaluator="string-compare" condition="Content Wizards">
+			<content-types>
+				<type name="cesca:CESCA_CONFIGURACIO" />
+				<type name="cesca:CESCA_CFG_EXPEDIENT" />
+				<type name="cesca:CESCA_CFG_DOCUMENT" />
+				<type name="cesca:CESCA_CFG_SIGNATURA" />
+				<type name="cesca:CESCA_PETICIO_IARXIU" />
+				<type name="cesca:CESCA_REBUT_IARXIU" />
+				<type name="cesca:CESCA_PROCES_LOG" />
+			</content-types>
+		</config>
+		
+	<!-- Wizards -->
+	<config>
+		<wizard-container>/jsp/wizard/container.jsp</wizard-container>
+		<plain-wizard-container>/jsp/wizard/plain-container.jsp</plain-wizard-container>
+
+		<wizards>
+			<wizard name="CreaPeticioIArxiuAction"
+				managed-bean="CreaPeticioIArxiuWizard"
+				title-id="CreaPeticioIArxiu_title" 
+				subtitle-id="CreaPeticioIArxiu_subtitle"
+				description-id="CreaPeticioIArxiu_desc"
+				icon="/images/icons/search_icon.gif"
+				error-message-id="error_CreaPeticioIArxiu_wizard"
+				actions-config-id="more_actions_menu">
+
+			   <step name="CreaPeticioIArxiu_step1" 
+				 title-id="CreaPeticioIArxiu_step1" 
+				 description-id="CreaPeticioIArxiu_step1_desc">
+			      <page path="/jsp/extension/creapeticio_step1.jsp" 
+				    title-id="CreaPeticioIArxiu_step1_title"
+				    description-id="CreaPeticioIArxiu_step1_desc"
+				    instruction-id="CreaPeticioIArxiu_instruction" />
+			   </step>
+			   <step name="CreaPeticioIArxiu_summary" 
+				 title-id="CreaPeticioIArxiu_summary" 
+				 description-id="CreaPeticioIArxiu_summary_description">
+			      <page path="/jsp/extension/creapeticio_summary.jsp"
+				    title-id="CreaPeticioIArxiu_summary" 
+				    description-id="CreaPeticioIArxiu_summary_description" 
+				    instruction-id="CreaPeticioIArxiu_summary_instruction" />
+			   </step>
+			</wizard>
+
+			<wizard name="ConsultaGeneralAction" 
+				managed-bean="ConsultaGeneralWizard"
+				title-id="ConsultaGeneral_title" 
+				subtitle-id="ConsultaGeneral_subtitle"
+				description-id="ConsultaGeneral_desc"
+				icon="/images/icons/search_icon.gif"
+				error-message-id="error_ConsultaGeneral_wizard"
+				actions-config-id="more_actions_menu">
+
+			   <step name="ConsultaGeneral_step1" 
+				 title-id="ConsultaGeneral_step1" 
+				 description-id="ConsultaGeneral_step1_desc">
+			      <page path="/jsp/extension/consultageneral_step1.jsp" 
+				    title-id="ConsultaGeneral_step1_title"
+				    description-id="ConsultaGeneral_step1_desc"
+				    instruction-id="ConsultaGeneral_instruction" />
+			   </step>
+			   <step name="ConsultaGeneral_summary" 
+				 title-id="ConsultaGeneral_summary" 
+				 description-id="ConsultaGeneral_summary_description">
+			      <page path="/jsp/extension/consultageneral_summary.jsp"
+				    title-id="ConsultaGeneral_summary" 
+				    description-id="ConsultaGeneral_summary_description" 
+				    instruction-id="ConsultaGeneral_summary_instruction" />
+			   </step>
+			</wizard>
+
+			<wizard name="ConsultaEstatPeticioAction" 
+				managed-bean="ConsultaEstatPeticioWizard"
+				title-id="ConsultaEstatPeticio_title" 
+				subtitle-id="ConsultaEstatPeticio_subtitle"
+				description-id="ConsultaEstatPeticio_desc"
+				icon="/images/icons/search_icon.gif"
+				error-message-id="error_ConsultaEstatPeticio_wizard"
+				actions-config-id="more_actions_menu">
+
+			   <step name="ConsultaEstatPeticio_step1" 
+				 title-id="ConsultaEstatPeticio_step1" 
+				 description-id="ConsultaEstatPeticio_step1_desc">
+			      <page path="/jsp/extension/consultaEstatPeticio_step1.jsp" 
+				    title-id="ConsultaEstatPeticio_step1_title"
+				    description-id="ConsultaEstatPeticio_step1_desc"
+				    instruction-id="ConsultaEstatPeticio_instruction" />
+			   </step>
+			   <step name="ConsultaEstatPeticio_summary" 
+				 title-id="ConsultaEstatPeticio_summary" 
+				 description-id="ConsultaEstatPeticio_summary_description">
+			      <page path="/jsp/extension/consultaEstatPeticio_summary.jsp"
+				    title-id="ConsultaEstatPeticio_summary" 
+				    description-id="ConsultaEstatPeticio_summary_description" 
+				    instruction-id="ConsultaEstatPeticio_summary_instruction" />
+			   </step>
+			</wizard>
+			<wizard name="VocabulariAction" 
+				managed-bean="VocabulariWizard"
+				title-id="Vocabulari_title" 
+				subtitle-id="Vocabulari_subtitle"
+				description-id="Vocabulari_desc"
+				icon="/images/icons/search_icon.gif"
+				error-message-id="error_vocabulari_wizard"
+				actions-config-id="more_actions_menu">
+
+			   <step name="Vocabulari_step1" 
+				 title-id="Vocabulari_step1" 
+				 description-id="Vocabulari_step1_desc">
+			      <page path="/jsp/extension/vocabularios/nouVocabulari.jsp" 
+				    title-id="Vocabulari_step1_title"
+				    description-id="Vocabulari_step1_desc"
+				    instruction-id="Vocabulari_step1_instruction" />
+			   </step>
+			    <step name="Vocabulari_step2" 
+				 title-id="Vocabulari_step2" 
+				 description-id="Vocabulari_step2_desc">
+			      <page path="/jsp/extension/vocabularios/nouAtribut.jsp" 
+				    title-id="Vocabulari_step2_title"
+				    description-id="Vocabulari_step2_desc"
+				    instruction-id="Vocabulari_step2_instruction" />
+			   </step>
+			</wizard>
+			<wizard name="EditVocabularioAction" 
+				managed-bean="EditVocabularioWizard"
+				title-id="EditVocabulario_title" 
+				subtitle-id="EditVocabulario_subtitle"
+				description-id="EditVocabulario_desc"
+				icon="/images/icons/edit_icon.gif"
+				error-message-id="error_edit_vocabulario_wizard"
+				actions-config-id="more_actions_menu">
+
+			   <step name="EditVocabulario_step1" 
+				 title-id="EditVocabulario_step1" 
+				 description-id="EditVocabulario_step1_desc">
+			      <page path="/jsp/extension/atributos/editAtributo.jsp" 
+				    title-id="EditVocabulario_step1_title"
+				    description-id="EditVocabulario_step1_desc"
+				    instruction-id="EditVocabulario_step1_instruction" />
+			   </step>
+			</wizard>
+			<wizard name="PlantillaAction" 
+				managed-bean="PlantillaWizard"
+				title-id="Plantilla_title" 
+				subtitle-id="Plantilla_subtitle"
+				description-id="Plantilla_desc"
+				icon="/images/icons/search_icon.gif"
+				error-message-id="error_plantilla_wizard"
+				actions-config-id="more_actions_menu">
+
+			   <step name="Plantilla_step1" 
+				 title-id="Plantilla_step1" 
+				 description-id="Plantilla_step1_desc">
+			      <page path="/jsp/extension/plantilles/plantilla.jsp" 
+				    title-id="Plantilla_step1_title"
+				    description-id="Plantilla_step1_desc"
+				    instruction-id="Plantilla_step1_instruction" />
+			   </step>
+			</wizard>
+			<wizard name="ExtraccioAction" 
+				managed-bean="ExtraccioWizard"
+				title-id="Extraccio_title" 
+				subtitle-id="Extraccio_subtitle"
+				description-id="Extraccio_desc"
+				icon="/images/icons/search_icon.gif"
+				error-message-id="error_extraccio_wizard"
+				actions-config-id="more_actions_menu">
+
+			   <step name="Extraccio_step1" 
+				 title-id="Extraccio_step1" 
+				 description-id="Extraccio_step1_desc">
+			      <page path="/jsp/extension/extraccions/extraccio.jsp" 
+				    title-id="Extraccio_step1_title"
+				    description-id="Extraccio_step1_desc"
+				    instruction-id="Extraccio_step1_instruction" />
+			   </step>
+			</wizard>
+			<wizard name="RecuperaPeticioEmmagatzemadaAction" 
+				managed-bean="RecuperaPeticioEmmagatzemadaWizard"
+				title-id="RecuperaPeticioEmmagatzemada_title" 
+				subtitle-id="RecuperaPeticioEmmagatzemada_subtitle"
+				description-id="RecuperaPeticioEmmagatzemada_desc"
+				icon="/images/icons/search_icon.gif"
+				error-message-id="error_RecuperaPeticioEmmagatzemada_wizard"
+				actions-config-id="more_actions_menu">
+
+			   <step name="RecuperaPeticioEmmagatzemada_step1" 
+				 title-id="RecuperaPeticioEmmagatzemada_step1" 
+				 description-id="RecuperaPeticioEmmagatzemada_step1_desc">
+			      <page path="/jsp/extension/recuperaPeticioEmmagatzemada_step1.jsp" 
+				    title-id="RecuperaPeticioEmmagatzemada_step1_title"
+				    description-id="RecuperaPeticioEmmagatzemada_step1_desc"
+				    instruction-id="RecuperaPeticioEmmagatzemada_instruction" />
+			   </step>
+			   <step name="RecuperaPeticioEmmagatzemada_summary" 
+				 title-id="RecuperaPeticioEmmagatzemada_summary" 
+				 description-id="RecuperaPeticioEmmagatzemada_summary_description">
+			      <page path="/jsp/extension/recuperaPeticioEmmagatzemada_summary.jsp"
+				    title-id="RecuperaPeticioEmmagatzemada_summary" 
+				    description-id="RecuperaPeticioEmmagatzemada_summary_description" 
+				    instruction-id="RecuperaPeticioEmmagatzemada_summary_instruction" />
+			   </step>
+			</wizard>
+			
+			<wizard name="EliminaPeticioAction" 
+				managed-bean="EliminaPeticioWizard"
+				title-id="EliminaPeticio_title" 
+				subtitle-id="EliminaPeticio_subtitle"
+				description-id="EliminaPeticio_desc"
+				icon="/images/icons/search_icon.gif"
+				error-message-id="error_EliminaPeticio_wizard"
+				actions-config-id="more_actions_menu">
+
+			   <step name="EliminaPeticio_step1" 
+				 title-id="EliminaPeticio_step1" 
+				 description-id="EliminaPeticio_step1_desc">
+			      <page path="/jsp/extension/eliminapeticio_step1.jsp" 
+				    title-id="EliminaPeticio_step1_title"
+				    description-id="EliminaPeticio_step1_desc"
+				    instruction-id="EliminaPeticio_instruction" />
+			   </step>
+			   <step name="EliminaPeticio_summary" 
+				 title-id="EliminaPeticio_summary" 
+				 description-id="EliminaPeticio_summary_description">
+			      <page path="/jsp/extension/eliminapeticio_summary.jsp"
+				    title-id="EliminaPeticio_summary" 
+				    description-id="EliminaPeticio_summary_description" 
+				    instruction-id="EliminaPeticio_summary_instruction" />
+			   </step>
+			</wizard>
+			
+		</wizards>
+	</config>
+	
+<!-- MODELS DE CONFIGURACIÓ -->
+		<!-- Tipus de configuració principal -->
+		<config evaluator="node-type" condition="cesca:CESCA_CONFIGURACIO">
+			<!-- title>Objecte de configuració principal</title -->
+			<property-sheet>
+				<separator name="sepconf" display-label="Objecte de configuració principal" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:criteri_cerca" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:en_suspens" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:peticio_docexp" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:id_configuracio" show-in-edit-mode="true" show-in-view-mode="true" />
+				<!--  <show-property name="cesca:configuracio_per_defecte" show-in-edit-mode="true" show-in-view-mode="true" />-->
+			</property-sheet>
+		</config>
+
+
+		<!-- Tipus de configuració d'expedients -->
+		<config evaluator="node-type" condition="cesca:CESCA_CFG_EXPEDIENT">
+			<property-sheet>
+				<separator name="sepcfgexp" display-label="Objecte de configuració d'expedients" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:tipus_expedient" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:cerca_documents" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:cfg_expedient_en_suspens" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:cfg_expedient_id_configuracio" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:cfg_expedient_configuracio_per_defecte" show-in-edit-mode="true" show-in-view-mode="true" />
+			</property-sheet>
+		</config>
+
+		<!-- Tipus de configuració de documents -->
+		<config evaluator="node-type" condition="cesca:CESCA_CFG_DOCUMENT">
+			<property-sheet>
+				<separator name="sepcfgdoc" display-label="Objecte de configuració de documents dels expedients" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:tipus_document" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:cerca_signatures" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:cfg_document_en_suspens" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:peticio_docind" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:cfg_document_id_configuracio" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:cfg_document_configuracio_per_defecte" show-in-edit-mode="true" show-in-view-mode="true" />
+			</property-sheet>
+		</config>
+
+		<!-- Tipus de configuració de signatures -->
+		<config evaluator="node-type" condition="cesca:CESCA_CFG_SIGNATURA">
+			<property-sheet>
+				<separator name="sepcfgsig" display-label="Objecte de configuració de signatures dels documents" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:tipus_signatura" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:cfg_signatura_en_suspens" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:peticiosign_docind" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:cfg_signatura_id_configuracio" show-in-edit-mode="true" show-in-view-mode="true" />
+			</property-sheet>
+		</config>
+
+<!-- MODEL DE CONTROL D'ESTAT -->
+		<!-- Tipus de configuració principal -->
+		<config evaluator="node-type" condition="cesca:CESCA_PETICIO_IARXIU">
+			<property-sheet>
+				<separator name="seppetia" display-label="Objecte de petició de iarxiu" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:id_peticio" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:id_exp" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:num_doc" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:numexp" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:estat" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:desc_error" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:pia_" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:peticio_id_configuracio" show-in-edit-mode="true" show-in-view-mode="true" />
+			</property-sheet>
+		</config>
+		
+		<config evaluator="node-type" condition="cesca:CESCA_VOCABULARIO">
+			<property-sheet>
+				<separator name="sepvotia" display-label="Objecte de vocabulari" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:id_vocabulario" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:nombreVoc" show-in-edit-mode="true" show-in-view-mode="true" />
+			</property-sheet>
+		</config>
+		
+		<config evaluator="node-type" condition="cesca:CESCA_ATRIBUTO">
+			<property-sheet>
+				<separator name="sepattia" display-label="Objecte de atributo" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:id_atributo" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:nombreAtr" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:valor" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:tipus" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:obligatori" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:vocabulario_ref" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:tipus_documental" show-in-edit-mode="true" show-in-view-mode="true" />
+			</property-sheet>
+		</config>
+		
+		<config evaluator="node-type" condition="cesca:CESCA_PLANTILLA">
+			<property-sheet>
+				<separator name="seppltia" display-label="Objecte de plantilla" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:id_plantilla" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:nombrePlantilla" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:tipoDocumental" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:plantillaRef" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:vocabulariRef" show-in-edit-mode="true" show-in-view-mode="true" />
+			</property-sheet>
+		</config>
+		
+
+<!-- MODEL DE REBUT -->
+		<!-- Tipus de rebut de iarxiu -->
+		<config evaluator="node-type" condition="cesca:CESCA_REBUT_IARXIU">
+			<property-sheet>
+				<separator name="seprebia" display-label="Objecte de rebut de iarxiu" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:id" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:pia" show-in-edit-mode="true" show-in-view-mode="true" />
+			</property-sheet>
+		</config>
+
+<!-- MODEL DE LOG -->
+		<!-- Tipus de log -->
+		<config evaluator="node-type" condition="cesca:CESCA_PROCES_LOG">
+			<property-sheet>
+				<separator name="sepprolog" display-label="Objecte de log" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:usuari" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:data" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:proces" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:is_error" show-in-edit-mode="true" show-in-view-mode="true" />
+			</property-sheet>
+		</config>
+
+<!-- MODEL PLANTILLES MAIL -->
+		<!-- Tipus de configuracio de plantilles de correus -->
+		<config evaluator="node-type" condition="cesca:CESCA_MAIL_TEMPLATE">
+			<property-sheet>
+				<separator name="sepmailtem" display-label="Objecte per a les plantilles dels correus" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:grup_usuaris" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:titol_correu" show-in-edit-mode="true" show-in-view-mode="true" />
+			</property-sheet>
+		</config>
+		
+		<config evaluator="node-type" condition="cesca:CESCA_EXTRACCIO">
+			<property-sheet>
+				<separator name="sepextraccio" display-label="Objecte de extracció" component-generator="HeaderSeparatorGenerator" />
+				<show-property name="cesca:id_extraccio" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:nombreExtraccio" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:tipusDocumentalExp" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:tipusDocumentalDoc" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:tipusDocumentalSign" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:selExp" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:selDoc" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:selSign" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:plantillaExp" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:plantillaDoc" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:plantillaSign" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:ref_file_conf" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:ref_file_exp" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:ref_file_doc" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:ref_file_doc_sense_exp" show-in-edit-mode="true" show-in-view-mode="true" />
+				<show-property name="cesca:ref_file_sign" show-in-edit-mode="true" show-in-view-mode="true" />
+			</property-sheet>
+		</config>
+		
+
+<!-- CERCA AVANÇADA -->
+		<!-- Configuració de la cerca avançada -->
+		<config evaluator="string-compare" condition="Advanced Search">
+		
+			<advanced-search>
+				<content-types>
+					<type name="cesca:CESCA_CONFIGURACIO" />
+					<type name="cesca:CESCA_CFG_EXPEDIENT" />
+					<type name="cesca:CESCA_CFG_DOCUMENT" />
+					<type name="cesca:CESCA_CFG_SIGNATURA" />
+					<type name="cesca:CESCA_PETICIO_IARXIU" />
+					<type name="cesca:CESCA_REBUT_IARXIU" />
+					<type name="cesca:CESCA_PROCES_LOG" />
+				</content-types>
+		
+				<custom-properties>
+					<!-- Tipo CESCA_CONFIGURACIO -->
+					<meta-data type="cesca:CESCA_CONFIGURACIO" property="cesca:criteri_cerca" />
+					<meta-data type="cesca:CESCA_CONFIGURACIO" property="cesca:peticio_docexp" />
+	
+					<!-- Tipo CESCA_CFG_EXPEDIENT -->
+					<meta-data type="cesca:CESCA_CFG_EXPEDIENT" property="cesca:tipus_expedient" />
+					<meta-data type="cesca:CESCA_CFG_EXPEDIENT" property="cesca:cerca_documents" />
+	
+					<!-- Tipo CESCA_CFG_DOCUMENT -->
+					<meta-data type="cesca:CESCA_CFG_DOCUMENT" property="cesca:tipus_document" />
+					<meta-data type="cesca:CESCA_CFG_DOCUMENT" property="cesca:cerca_signatures" />
+					<meta-data type="cesca:CESCA_CFG_DOCUMENT" property="cesca:peticio_docind" />
+	
+					<!-- Tipo CESCA_CFG_SIGNATURA -->
+					<meta-data type="cesca:CESCA_CFG_SIGNATURA" property="cesca:tipus_signatura" />
+					<meta-data type="cesca:CESCA_CFG_SIGNATURA" property="cesca:peticiosign_docind" />
+		
+					<!-- Tipo CESCA_PETICIO_IARXIU -->
+					<meta-data type="cesca:CESCA_PETICIO_IARXIU" property="cesca:id_peticio" />
+					<meta-data type="cesca:CESCA_PETICIO_IARXIU" property="cesca:id_exp" />
+					<meta-data type="cesca:CESCA_PETICIO_IARXIU" property="cesca:doc_ids" />
+					<meta-data type="cesca:CESCA_PETICIO_IARXIU" property="cesca:sign_ids" />
+					<meta-data type="cesca:CESCA_PETICIO_IARXIU" property="cesca:estat" />
+					<meta-data type="cesca:CESCA_PETICIO_IARXIU" property="cesca:id_peticio_intermig" />
+					<meta-data type="cesca:CESCA_PETICIO_IARXIU" property="cesca:pia_" />
+					
+					<!-- Tipo CESCA_VOCABULARIO -->
+					<meta-data type="cesca:CESCA_VOCABULARIO" property="cesca:id_vocabulario" />
+					<meta-data type="cesca:CESCA_VOCABULARIO" property="cesca:nombreVoc" />
+					
+					<!-- Tipo CESCA_ATRIBUTO -->
+					<meta-data type="cesca:CESCA_ATRIBUTO" property="cesca:id_atributo" />
+					<meta-data type="cesca:CESCA_ATRIBUTO" property="cesca:nombreAtr" />
+					<meta-data type="cesca:CESCA_ATRIBUTO" property="cesca:valor" />
+					<meta-data type="cesca:CESCA_ATRIBUTO" property="cesca:tipus" />
+					<meta-data type="cesca:CESCA_ATRIBUTO" property="cesca:obligatori" />
+					<meta-data type="cesca:CESCA_ATRIBUTO" property="cesca:vocabulario_ref" />
+					<meta-data type="cesca:CESCA_ATRIBUTO" property="cesca:tipus_documental" />
+					
+					<!-- Tipo CESCA_REBUT_IARXIU -->
+					<meta-data type="cesca:CESCA_REBUT_IARXIU" property="cesca:id" />
+					<meta-data type="cesca:CESCA_REBUT_IARXIU" property="cesca:pia" />
+					
+					<!-- Tipo CESCA_PROCES_LOG -->
+					<meta-data type="cesca:CESCA_PROCES_LOG" property="cesca:usuari" />
+					<meta-data type="cesca:CESCA_PROCES_LOG" property="cesca:data" />
+					<meta-data type="cesca:CESCA_PROCES_LOG" property="cesca:proces" />
+					<meta-data type="cesca:CESCA_PROCES_LOG" property="cesca:is_error" />
+					
+					<!-- Tipo CESCA_PLANTILLA -->
+					<meta-data type="cesca:CESCA_PLANTILLA" property="cesca:id_plantilla" />
+					<meta-data type="cesca:CESCA_PLANTILLA" property="cesca:nombrePlantilla" />
+					<meta-data type="cesca:CESCA_PLANTILLA" property="cesca:tipoDocumental" />
+					<meta-data type="cesca:CESCA_PLANTILLA" property="cesca:plantillaRef" />
+					<meta-data type="cesca:CESCA_PLANTILLA" property="cesca:vocabulariRef" />
+					
+						<!-- Tipo CESCA_EXTRACCIO -->
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:id_extraccio" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:nombreExtraccio" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:tipusDocumentalExp" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:tipusDocumentalDoc" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:tipusDocumentalSign" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:selExp" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:selDoc" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:selSign" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:plantillaExp" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:plantillaDoc" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:plantillaSign" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:ref_file_conf" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:ref_file_exp" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:ref_file_doc" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:ref_file_doc_sense_exp" />
+					<meta-data type="cesca:CESCA_EXTRACCIO" property="cesca:ref_file_sign" />
+
+				</custom-properties>
+		
+			</advanced-search>
+		
+		</config>
+
+</alfresco-config>

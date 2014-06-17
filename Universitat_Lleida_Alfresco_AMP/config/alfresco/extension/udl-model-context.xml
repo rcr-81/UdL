@@ -7,6 +7,7 @@
         <property name="models">
             <list>
                 <value>alfresco/extension/udlModel.xml</value>
+                <value>alfresco/extension/cescaIArxiuModel.xml</value>
             </list>
         </property>
     </bean>          

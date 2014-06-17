@@ -11,20 +11,30 @@
             <ref bean="ServiceRegistry"/>
         </property>
     </bean>
-       
-    <bean id="recalcular-dates" class="org.alfresco.repo.action.scheduled.SimpleTemplateActionDefinition">
+
+    <!--
+    	La consulta d'aquesta tasca recuperarà tots els objectes del tipus “CESCA:CESCA_CONFIGURACIO”
+    	que existeixin a l'espai “%Company_Home%/CESCA/ADMINISTRACIO/CONFIGURACIO”.
+    -->
+    <bean id="CercaExpedientsIArxiuExecuter" class="es.cesca.alfresco.scheduled.CercaExpedientsIArxiuExecuter" parent="action-executer">
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+	</bean>
+    
+    <bean id="CercaExpedientsIArxiuAction" class="org.alfresco.repo.action.scheduled.SimpleTemplateActionDefinition">
         <property name="actionName">
-            <value>recalcularDates</value>
+            <value>CercaExpedientsIArxiuExecuter</value>
         </property>
         <property name="parameterTemplates">
-            <map>
+            <map/><!--<map>
                 <entry>
                     <key>
-                        <value>a-parameter</value>
+                        <value>Test</value>
                     </key>
-                    <value>a-value</value>
-                </entry>               
-            </map>
+                    <value>Test</value>
+                </entry>
+            </map>-->
         </property>
         <property name="templateActionModelFactory">
             <ref bean="templateActionModelFactory"/>
@@ -37,105 +47,12 @@
         </property>
         <property name="templateService">
             <ref bean="TemplateService"/>
-        </property>
-    </bean>
-     
-    <bean id="recalcularDatesEveryDay" class="org.alfresco.repo.action.scheduled.CronScheduledQueryBasedTemplateActionDefinition">
-        <property name="transactionMode">
-            <value>UNTIL_FIRST_FAILURE</value>
-        </property>
-        <property name="compensatingActionMode">
-            <value>IGNORE</value>
-        </property>
-        <property name="searchService">
-            <ref bean="SearchService"/>
-        </property>
-        <property name="templateService">
-            <ref bean="TemplateService"/>
-        </property>
-        <property name="queryLanguage">
-            <value>lucene</value>
-        </property>
-        <property name="stores">
-            <list>
-                <value>workspace://SpacesStore</value>
-            </list>
-        </property>
-        <property name="queryTemplate">
-            <value>ASPECT:"udlrm:expedient" OR ASPECT:"udlrm:agregacio"</value>
-        </property>
-        <property name="cronExpression">
-        	<!-- a las 2:30am cada dia -->
-        	<value>0 30 2 * * ?</value>
-        	<!-- cada minuto -->
-        	<!-- <value>0 * * * * ?</value> -->
-            <!-- week <value>0 50 * * * ?</value> -->
-            <!-- 10 min <value>0 55 * * * ?</value> -->
-        </property>
-        <property name="jobName">
-            <value>jobA</value>
-        </property>
-        <property name="jobGroup">
-            <value>jobGroup</value>
-        </property>
-        <property name="triggerName">
-            <value>triggerA</value>
-        </property>
-        <property name="triggerGroup">
-            <value>triggerGroup</value>
-        </property>
-        <property name="scheduler">
-            <ref bean="schedulerFactory"/>
-        </property>
-        <property name="actionService">
-            <ref bean="ActionService"/>
-        </property>
-        <property name="templateActionModelFactory">
-            <ref bean="templateActionModelFactory"/>
-        </property>
-        <property name="templateActionDefinition">
-            <ref bean="recalcular-dates"/>
-        </property>
-        <property name="transactionService">
-            <ref bean="TransactionService"/>
-        </property>
-        <property name="runAsUser">
-            <value>admin</value>
         </property>
     </bean>
     
-    <bean id="recalcular-tamany" class="org.alfresco.repo.action.scheduled.SimpleTemplateActionDefinition">
-        <property name="actionName">
-            <value>recalcularTamany</value>
-        </property>
-        <property name="parameterTemplates">
-            <map>
-                <entry>
-                    <key>
-                        <value>a-parameter</value>
-                    </key>
-                    <value>a-value</value>
-                </entry>               
-            </map>
-        </property>
-        <property name="templateActionModelFactory">
-            <ref bean="templateActionModelFactory"/>
-        </property>
-        <property name="dictionaryService">
-            <ref bean="DictionaryService"/>
-        </property>
-        <property name="actionService">
-            <ref bean="ActionService"/>
-        </property>
-        <property name="templateService">
-            <ref bean="TemplateService"/>
-        </property>
-    </bean>
-       
-        
-    <bean id="recalcularTamanyEveryDay" class="org.alfresco.repo.action.scheduled.CronScheduledQueryBasedTemplateActionDefinition">
+    <bean id="CercaExpedientsIArxiu" class="org.alfresco.repo.action.scheduled.CronScheduledQueryBasedTemplateActionDefinition">
         <property name="transactionMode">
-            <value>UNTIL_FIRST_FAILURE</value>
+            <value>ISOLATED_TRANSACTIONS</value><!-- For each node -->
         </property>
         <property name="compensatingActionMode">
             <value>IGNORE</value>
@@ -155,23 +72,21 @@
             </list>
         </property>
         <property name="queryTemplate">
-            <value>ASPECT:"udlrm:fons"</value>
+        	<!-- +PATH:"/app:company_home/cm:CESCA/cm:Administracio/cm:Configuracio/*" +TYPE:"cesca:CESCA_CONFIGURACIO" -->
+        	<!-- +PATH:"/app:company_home/cm:CESCA/cm:Administracio/cm:Configuracio//*" +TYPE:"cesca:CESCA_CONFIGURACIO" -->
+            <value>+PATH:"/app:company_home/cm:CESCA/cm:Administracio/cm:Configuracio//." +TYPE:"cesca:CESCA_CONFIGURACIO" +@cesca\:en_suspens:false</value>
         </property>
         <property name="cronExpression">
-        	<!-- a las 2:00am cada dia -->
-        	<value>0 00 2 * * ?</value> 
-        	<!-- cada minuto <value>0 * * * * ?</value>-->
-            <!-- week <value>0 50 * * * ?</value> -->
-            <!-- 10 min <value>0 55 * * * ?</value> -->
+            <value>0 0/1 * 1/1 * ? *</value>
         </property>
         <property name="jobName">
-            <value>jobB</value>
+            <value>jobCercaExpedients</value>
         </property>
         <property name="jobGroup">
             <value>jobGroup</value>
         </property>
         <property name="triggerName">
-            <value>triggerB</value>
+            <value>triggerCercaExpedient</value>
         </property>
         <property name="triggerGroup">
             <value>triggerGroup</value>
@@ -186,13 +101,214 @@
             <ref bean="templateActionModelFactory"/>
         </property>
         <property name="templateActionDefinition">
-            <ref bean="recalcular-tamany"/>
+            <ref bean="CercaExpedientsIArxiuAction"/>
         </property>
         <property name="transactionService">
             <ref bean="TransactionService"/>
         </property>
         <property name="runAsUser">
-            <value>admin</value>
+            <value>System</value>
         </property>
     </bean>
+    
+	<!-- 
+		L'objectiu d'aquesta tasca serà cercar totes les CESCA:CESCA_PETICIO_IARXIU amb l’estat a Pendent i realitzarà
+		comunicacions via servei web amb el middleware.
+	 -->   
+    <bean id="EnviamentExpedientsIArxiuExecuter" class="es.cesca.alfresco.scheduled.EnviamentExpedientsIArxiuExecuter" parent="action-executer">
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+        <property name="mailService">
+            <ref bean="mailService" />
+        </property>
+	</bean>
+    
+    <bean id="EnviamentExpedientsIArxiuAction" class="org.alfresco.repo.action.scheduled.SimpleTemplateActionDefinition">
+        <property name="actionName">
+            <value>EnviamentExpedientsIArxiuExecuter</value>
+        </property>
+        <property name="parameterTemplates">
+            <map/><!--<map>
+                <entry>
+                    <key>
+                        <value>Test</value>
+                    </key>
+                    <value>Test</value>
+                </entry>
+            </map>-->
+        </property>
+        <property name="templateActionModelFactory">
+            <ref bean="templateActionModelFactory"/>
+        </property>
+        <property name="dictionaryService">
+            <ref bean="DictionaryService"/>
+        </property>
+        <property name="actionService">
+            <ref bean="ActionService"/>
+        </property>
+        <property name="templateService">
+            <ref bean="TemplateService"/>
+        </property>
+    </bean>
+    
+    <bean id="EnviamentExpedientsIArxiu" class="org.alfresco.repo.action.scheduled.CronScheduledQueryBasedTemplateActionDefinition">
+        <property name="transactionMode">
+            <value>ISOLATED_TRANSACTIONS</value><!-- For each node -->
+        </property>
+        <property name="compensatingActionMode">
+            <value>IGNORE</value>
+        </property>
+        <property name="searchService">
+            <ref bean="SearchService"/>
+        </property>
+        <property name="templateService">
+            <ref bean="TemplateService"/>
+        </property>
+        <property name="queryLanguage">
+            <value>lucene</value>
+        </property>
+        <property name="stores">
+            <list>
+                <value>workspace://SpacesStore</value>
+            </list>
+        </property>
+        <property name="queryTemplate">
+            <value>+PATH:"/app:company_home/cm:CESCA/cm:Peticions_iArxiu//." +TYPE:"cesca:CESCA_PETICIO_IARXIU" +@cesca\:estat:"Pendent"</value>
+        </property>
+        <property name="cronExpression">
+			<value>0 0/1 * 1/1 * ? *</value>
+        </property>
+        <property name="jobName">
+            <value>jobEnviamentExpedients</value>
+        </property>
+        <property name="jobGroup">
+            <value>jobGroup</value>
+        </property>
+        <property name="triggerName">
+            <value>triggerEnviamentExpedient</value>
+        </property>
+        <property name="triggerGroup">
+            <value>triggerGroup</value>
+        </property>
+        <property name="scheduler">
+            <ref bean="schedulerFactory"/>
+        </property>
+        <property name="actionService">
+            <ref bean="ActionService"/>
+        </property>
+        <property name="templateActionModelFactory">
+            <ref bean="templateActionModelFactory"/>
+        </property>
+        <property name="templateActionDefinition">
+            <ref bean="EnviamentExpedientsIArxiuAction"/>
+        </property>
+        <property name="transactionService">
+            <ref bean="TransactionService"/>
+        </property>
+        <property name="runAsUser">
+            <value>System</value>
+        </property>
+    </bean>
+    
+    <!-- 
+    	L'objectiu d'aquesta tasca serà fer peticions al middleware per tal de saber si les peticions
+    	 en estat “En tramitació” ja han estat enviades correctament a iArxiu.    	
+    -->
+    <bean id="ActualitzacioPeticionsIArxiuExecuter" class="es.cesca.alfresco.scheduled.ActualitzacioPeticionsIArxiuExecuter" parent="action-executer">
+        <property name="serviceRegistry">
+            <ref bean="ServiceRegistry"/>
+        </property>
+        <property name="mailService">
+            <ref bean="mailService" />
+        </property>
+	</bean>
+    
+    <bean id="ActualitzacioPeticionsIArxiuAction" class="org.alfresco.repo.action.scheduled.SimpleTemplateActionDefinition">
+        <property name="actionName">
+            <value>ActualitzacioPeticionsIArxiuExecuter</value>
+        </property>
+        <property name="parameterTemplates">
+            <map/><!--<map>
+                <entry>
+                    <key>
+                        <value>Test</value>
+                    </key>
+                    <value>Test</value>
+                </entry>
+            </map>-->
+        </property>
+        <property name="templateActionModelFactory">
+            <ref bean="templateActionModelFactory"/>
+        </property>
+        <property name="dictionaryService">
+            <ref bean="DictionaryService"/>
+        </property>
+        <property name="actionService">
+            <ref bean="ActionService"/>
+        </property>
+        <property name="templateService">
+            <ref bean="TemplateService"/>
+        </property>
+    </bean>
+    
+    <bean id="ActualitzacioPeticionsIArxiu" class="org.alfresco.repo.action.scheduled.CronScheduledQueryBasedTemplateActionDefinition">
+        <property name="transactionMode">
+            <value>ISOLATED_TRANSACTIONS</value><!-- For each node -->
+        </property>
+        <property name="compensatingActionMode">
+            <value>IGNORE</value>
+        </property>
+        <property name="searchService">
+            <ref bean="SearchService"/>
+        </property>
+        <property name="templateService">
+            <ref bean="TemplateService"/>
+        </property>
+        <property name="queryLanguage">
+            <value>lucene</value>
+        </property>
+        <property name="stores">
+            <list>
+                <value>workspace://SpacesStore</value>
+            </list>
+        </property>
+        <property name="queryTemplate">
+            <value>+PATH:"/app:company_home/cm:CESCA/cm:Peticions_iArxiu//." +TYPE:"cesca:CESCA_PETICIO_IARXIU" +@cesca\:estat:"En tramitacio"</value>
+        </property>
+        <property name="cronExpression">
+          	<value>0 0/1 * 1/1 * ? *</value>
+        </property>
+        <property name="jobName">
+            <value>jobActualitzacioPeticions</value>
+        </property>
+        <property name="jobGroup">
+            <value>jobGroup</value>
+        </property>
+        <property name="triggerName">
+            <value>triggerActualitzacioPeticions</value>
+        </property>
+        <property name="triggerGroup">
+            <value>triggerGroup</value>
+        </property>
+        <property name="scheduler">
+            <ref bean="schedulerFactory"/>
+        </property>
+        <property name="actionService">
+            <ref bean="ActionService"/>
+        </property>
+        <property name="templateActionModelFactory">
+            <ref bean="templateActionModelFactory"/>
+        </property>
+        <property name="templateActionDefinition">
+            <ref bean="ActualitzacioPeticionsIArxiuAction"/>
+        </property>
+        <property name="transactionService">
+            <ref bean="TransactionService"/>
+        </property>
+        <property name="runAsUser">
+            <value>System</value>
+        </property>
+    </bean>
+    
 </beans>
