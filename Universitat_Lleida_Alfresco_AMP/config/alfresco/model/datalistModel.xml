@@ -553,6 +553,18 @@
 	         		<title>Descripció</title>
 	            	<type>d:text</type>
 	            </property>
+	         	<property name="dl:dataInici_grup">
+	         		<title>Data inici</title>
+	            	<type>d:date</type>
+	            </property>
+	         	<property name="dl:dataFi_grup">
+	         		<title>Data fi</title>
+	            	<type>d:date</type>
+	            </property>
+	         	<property name="dl:observacions_grup">
+	         		<title>Observacions</title>
+	            	<type>d:text</type>
+	            </property>
 			</properties>
       </type>
    </types>

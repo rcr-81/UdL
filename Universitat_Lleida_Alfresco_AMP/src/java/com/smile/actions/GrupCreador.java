@@ -13,6 +13,7 @@ import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.namespace.QName;
 import org.apache.commons.lang.StringUtils;
 
+import com.smile.webscripts.expedient.CrearEtiquetaExpedient;
 import com.smile.webscripts.helper.ConstantsUdL;
 import com.smile.webscripts.helper.UdlProperties;
 
@@ -43,11 +44,13 @@ public class GrupCreador extends ActionExecuterAbstractBase implements Constants
 		java.util.Iterator<String> it = groups.iterator();
 
 		while (it.hasNext()){
+			CrearEtiquetaExpedient etiqueta = new CrearEtiquetaExpedient();
 			String group = StringUtils.upperCase(it.next());
 			if(group.startsWith(UDL_GROUP_PREFIX)){
-				String descGrupCreador = serviceRegistry.getAuthorityService().getAuthorityDisplayName(group);
-				grupsCreador += descGrupCreador;
-				grupsCreador += " (" + group.replace(UDL_GROUP_PREFIX, "") + ")";
+				String idGrupCreador = serviceRegistry.getAuthorityService().getAuthorityDisplayName(group);
+				String numGrupCreador = idGrupCreador.replace(UDL_PREFIX.toUpperCase(), "");
+				String descGrupCreador = etiqueta.getDescripcioGrupCreador(serviceRegistry, idGrupCreador);
+				grupsCreador += numGrupCreador + "-" + descGrupCreador;
 				grupsCreador += ", ";
 			}
 		}

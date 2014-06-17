@@ -70,7 +70,7 @@ public class CrearEtiquetaExpedient extends DeclarativeWebScript implements Cons
 			String tipo = nodeService.getType(expedientNodeRef).getLocalName();
 
 			if (EXPEDIENT.equalsIgnoreCase(tipo)) {
-				idGrupCreador = (String) nodeService.getProperty(expedientNodeRef, QName.createQName(UDL_URI, "grup_creador_expedient"));
+				idGrupCreador = getIdGrupCreador(tipo, expedientNodeRef);
 				codiClassificacio1 = (String) nodeService.getProperty(expedientNodeRef, QName.createQName(UDL_URI, "codi_classificacio_1_expedient"));
 				denominacioClasse1 = (String) nodeService.getProperty(expedientNodeRef,	QName.createQName(UDL_URI, "denominacio_classe_1_expedient"));
 				codiClassificacio2 = (String) nodeService.getProperty(expedientNodeRef,	QName.createQName(UDL_URI, "codi_classificacio_2_expedient"));
@@ -104,7 +104,7 @@ public class CrearEtiquetaExpedient extends DeclarativeWebScript implements Cons
 				localitzacio2 = (String) nodeService.getProperty(expedientNodeRef,	QName.createQName(UDL_URI, "localitzacio_2_expedient"));
 
 			}else if(RECORD_FOLDER.equalsIgnoreCase(tipo)) {
-				idGrupCreador = (String) nodeService.getProperty(expedientNodeRef, QName.createQName(UDLRM_URI, "grup_creador_expedient"));
+				idGrupCreador = getIdGrupCreador(tipo, expedientNodeRef);
 				codiClassificacio1 = (String) nodeService.getProperty(expedientNodeRef, QName.createQName(UDLRM_URI, "codi_classificacio_1_expedient"));
 				denominacioClasse1 = (String) nodeService.getProperty(expedientNodeRef, QName.createQName(UDLRM_URI, "denominacio_classe_1_expedient"));
 				codiClassificacio2 = (String) nodeService.getProperty(expedientNodeRef, QName.createQName(UDLRM_URI, "codi_classificacio_2_expedient"));
@@ -138,9 +138,8 @@ public class CrearEtiquetaExpedient extends DeclarativeWebScript implements Cons
 				localitzacio2 = (String) nodeService.getProperty(expedientNodeRef,	QName.createQName(UDLRM_URI, "localitzacio_2_expedient"));
 				essencial = (Boolean) nodeService.getProperty(expedientNodeRef,	QName.createQName(RM_URI, "vitalRecordIndicator"));
 			}
-			
-			model.put(PARAM_GRUP_CREADOR_DESC, getDescripcioGrupCreador(idGrupCreador));
-			model.put(PARAM_GRUP_CREADOR_ID, idGrupCreador);
+			model.put(PARAM_GRUP_CREADOR_DESC, getDescripcioGrupCreador(serviceRegistry, idGrupCreador));
+			model.put(PARAM_GRUP_CREADOR_ID, idGrupCreador.split("_")[1]);
 			model.put(PARAM_ANY, any);
 			model.put(PARAM_CODI_CLASSIFICACIO_1, codiClassificacio1);
 			model.put(PARAM_DENOMINACIO_CLASSE_1, denominacioClasse1);			
@@ -163,12 +162,37 @@ public class CrearEtiquetaExpedient extends DeclarativeWebScript implements Cons
 	}
 	
 	/**
+	 * Retorna el identificador del grup creador.
+	 * 
+	 * @param nodeRef
+	 * @return
+	 */
+	public String getIdGrupCreador(String tipo, NodeRef nodeRef) {
+		String result = "";
+		String metadadaGrupCreador = "";
+		NodeService nodeService = serviceRegistry.getNodeService();
+		
+		if (EXPEDIENT.equalsIgnoreCase(tipo)) {
+			metadadaGrupCreador = (String) nodeService.getProperty(nodeRef, QName.createQName(UDL_URI, "grup_creador_expedient"));
+
+		}else if(RECORD_FOLDER.equalsIgnoreCase(tipo)) {
+			metadadaGrupCreador = (String) nodeService.getProperty(nodeRef, QName.createQName(UDLRM_URI, "grup_creador_expedient"));
+		}
+		
+		if(metadadaGrupCreador != null && !"".equals(metadadaGrupCreador)) {
+			result = UDL_PREFIX + metadadaGrupCreador.split("-", 2)[0];
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * Retorna la descripció del grup creador consultant la llista de dades GrupCreador
 	 * 
 	 * @param paramId
 	 * @return
 	 */
-	private String getDescripcioGrupCreador(String paramId) {
+	public String getDescripcioGrupCreador(ServiceRegistry serviceRegistry, String paramId) {
 		String result = "";
 		SearchService searchService = serviceRegistry.getSearchService();
 		NodeService nodeService = serviceRegistry.getNodeService();
@@ -202,13 +226,22 @@ public class CrearEtiquetaExpedient extends DeclarativeWebScript implements Cons
 	 */
 	private String getAny(String dataInici, String dataFi) {
 		String result = "";
-		String anyInici = dataInici.split("/")[2];
-		String anyFi = dataFi.split("/")[2];
+		String anyInici = "";
+		String anyFi = "";
+		
+		if(dataInici != null) {
+			anyInici = dataInici.split("/")[2];
+
+		}
+		
+		if(dataFi != null) {
+			anyFi = dataFi.split("/")[2];
+		}
 		
 		if(anyInici.equalsIgnoreCase(anyFi)) {
 			result = anyInici;
 
-		}else {
+		}else if(!"".equals(anyInici) && !"".equals(anyFi)) {
 			result = anyInici + " - " + anyFi;			
 		}
 		

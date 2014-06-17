@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<#if descGrupCreador?exists>${descGrupCreador}</#if>&nbsp;(<#if idGrupCreador?exists>${idGrupCreador}</#if>)
+<#if idGrupCreador?exists>${idGrupCreador}-</#if><#if descGrupCreador?exists>${descGrupCreador}</#if>
 
 <br>
 <br> 
 <span style="margin-left:350px;"> 
-	ANY: <b>${any}</b>
+	ANY: <#if any?exists><b>${any}</b></#if>
 </span>
 <br>
 <span style="margin-left:350px;">
 	VOLUM: <#if quantitat?exists><b>${quantitat}</b></#if>
 </span>
 
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -32,7 +36,7 @@
 
 <div style="width:450px;margin-left:25px;"> 
 	<#if dataInici?exists>${dataInici}</#if>
-	<#if dataFi?exists>	- ${dataFi}</#if>
+	<#if dataInici?exists && dataFi?exists && dataInici != '' && dataFi != ''>	- ${dataFi}</#if>
 </div>
 
 <div style="width:450px;margin-left:25px;">
@@ -40,8 +44,8 @@
 </div>
 
 <div style="width:450px;margin-left:25px;">
-	<#if codiClassificacio2?exists && codiClassificacio2 != ''>${codiClassificacio2}</#if>
-	<#if denominacioClasse2?exists && denominacioClasse2 != ''>- ${denominacioClasse2}</#if>
+	<#if codiClassificacio2?exists && codiClassificacio2 != '-'>${codiClassificacio2}</#if>
+	<#if denominacioClasse2?exists && denominacioClasse2 != '-'>- ${denominacioClasse2}</#if>
 </div>
 
 <br>
