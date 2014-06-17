@@ -40,7 +40,8 @@
 		Feed - supports basic HTTP authentication via the EndPointProxyServlet </description> <connector-id>http</connector-id> <endpoint-url>http://localhost:8080/alfresco/s</endpoint-url> 
 		<basic-auth>true</basic-auth> <identity>user</identity> <external-auth>false</external-auth> </endpoint> </remote> </config>
 	<!-- PROD WITH ADAS -->
-	<!-- <config evaluator="string-compare" condition="Remote">
+	<!-- 
+	<config evaluator="string-compare" condition="Remote">
 		<remote>
 			<connector>
 				<id>alfrescoCookie</id>
@@ -69,7 +70,8 @@
 				<external-auth>true</external-auth>
 			</endpoint>
 		</remote>
-	</config> -->
+	</config>
+	-->
 	<!-- BEGIN SMILE MODIF -->
 	<!-- Pagina de búsqueda -->
 	<config evaluator="string-compare" condition="SitePages">
@@ -493,6 +495,9 @@
 				<field-visibility>
 					<show id="dl:identificador_grup" />
 					<show id="dl:descripcio_grup" />
+					<show id="dl:dataInici_grup" />
+					<show id="dl:dataFi_grup" />
+					<show id="dl:observacions_grup" />
 				</field-visibility>
 			</form>
 		</forms>
@@ -503,6 +508,9 @@
 				<field-visibility>
 					<show id="dl:identificador_grup" />
 					<show id="dl:descripcio_grup" />
+					<show id="dl:dataInici_grup" />
+					<show id="dl:dataFi_grup" />
+					<show id="dl:observacions_grup" />
 				</field-visibility>
 			</form>
 		</forms>
