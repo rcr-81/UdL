@@ -102,14 +102,19 @@ public class AddAlfrescoUserSSO extends DeclarativeWebScript implements Constant
 	 */
 	private void handleUserGroups(Set<String> userGroups, AuthorityService authorityService, String userName, String grup){
 		Iterator<String> ugIt = userGroups.iterator();
-		while(ugIt.hasNext()){
-			String g = ugIt.next();
-			if(g.startsWith("GROUP_") && !g.startsWith("GROUP_site")){						
-				if(!g.equals("GROUP_EVERYONE")){
-					authorityService.removeAuthority(g, userName);
+		
+		// Se crea una excepción para el usuario del Arxivero. A la Pepita no se le eliminan los permisos que tenia previamente.
+		if(!"x7807380".equalsIgnoreCase(userName)) {
+			while(ugIt.hasNext()){
+				String g = ugIt.next();
+				if(g.startsWith("GROUP_") && !g.startsWith("GROUP_site")){						
+					if(!g.equals("GROUP_EVERYONE")){
+						authorityService.removeAuthority(g, userName);
+					}
 				}
 			}
 		}
+		
 		log.debug("Previous groups of user: " + userName + " cleared");
 		//reload user groups
 		userGroups = authorityService.getAuthoritiesForUser(userName);
