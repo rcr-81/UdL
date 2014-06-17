@@ -47,6 +47,9 @@
 		<copy overwrite="true" todir="${alfresco.target}/">
 		    <fileset dir="${projectAmp.dir}/source/web/" />
 		</copy>				
+		<copy overwrite="true" todir="${alfresco.target}/WEB-INF">
+		    <fileset dir="${projectAmp.dir}/WEB-INF" />
+		</copy>				
 		
 		<copy overwrite="true" todir="${alfresco.target}/WEB-INF/lib">
 			<fileset dir="${alfresco.lib.src}">
