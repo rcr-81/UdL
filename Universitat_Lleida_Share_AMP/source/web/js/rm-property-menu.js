@@ -121,7 +121,7 @@
           * @property customFields
           * @type Array
           */
-         customFields: [{ id: "tessssssssssssssssssssssssssst", title: "tesssssssssssssssssssssssssssssssssssst" }]
+         customFields: []
       },
       
       /**
@@ -452,7 +452,7 @@
 					{ text: this.msg("label.codi_classificacio_1_expedient"), value: "udlrm:codi_classificacio_1_expedient" },
 					{ text: this.msg("label.denominacio_classe_1_expedient"), value: "udlrm:denominacio_classe_1_expedient" },
 					{ text: this.msg("label.codi_classificacio_2_expedient"), value: "udlrm:codi_classificacio_2_expedient" },
-					{ text: this.msg("label.denominacio_classe_2_expedient"), value: "udlrm:denominacio_classe_2_expedient" },
+					{ text: this.msg("label.denominacio_classe_2_expedient"), value: "udlrm:denominacio_classe_2_expedient" }
                ]
             }
          };
@@ -570,7 +570,9 @@
                   value: prop.id
                });
             }
-         }SMILE */ 
+         }
+         */
+         
          items.push(docSimpleMenu);
          items.push(expMenu);
          items.push(agrMenu);

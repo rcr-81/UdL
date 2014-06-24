@@ -394,7 +394,10 @@
 			"properties.udlrm_localitzacio_2_serie",
 			"properties.udlrm_codi_classificacio_serie",
 			"properties.udlrm_denominacio_classe_serie",
-			"properties.udlrm_grup_creador_serie"
+			"properties.udlrm_grup_creador_serie",
+			"properties.udl_nom_natural_organ",
+			"properties.udl_nom_natural_institucio",
+			"properties.udl_nom_natural_persona"
          ];
          // add the custom meta fields - 'rmc' namespace
          for (var i=0, j=this.options.customFields.length; i<j; i++)
@@ -571,24 +574,34 @@
          // DataTable column defintions
          var columnDefinitions =
          [
-            { key: "image", label: me._msg("label.type"), sortable: false, field: "type", sortable: true, formatter: renderCellImage, width: "64px" },
-            { key: "identifier", label: me._msg("label.identifier"), sortable: true, sortOptions: {sortFunction: sortCellURI}, resizeable: true, formatter: renderCellURI },
-            
+          	{ key: "image", label: me._msg("label.type"), sortable: false, field: "type", sortable: true, formatter: renderCellImage, width: "64px" },
+			{ key: "secuencial_identificador_expedient", label: me._msg("label.secuencial_identificador_expedient"), field: "properties.udlrm_secuencial_identificador_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML },
+            { key: "grup_creador_expedient", label: me._msg("label.grup_creador_expedient"), field: "properties.udlrm_grup_creador_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML },
+			{ key: "data_inici_expedient", label: me._msg("label.data_inici_expedient"), field: "properties.udlrm_data_inici_expedient", sortable: true, resizeable: true, formatter: renderCellDate },
+			{ key: "data_fi_expedient", label: me._msg("label.data_fi_expedient"), field: "properties.udlrm_data_fi_expedient", sortable: true, resizeable: true, formatter: renderCellDate },
             { key: "name", label: me._msg("label.name"), field: "name", sortable: true, resizeable: true, formatter: renderCellSafeHTML },
-            { key: "title", label: me._msg("label.title"), field: "title", sortable: true, resizeable: true, formatter: renderCellSafeHTML },
+			{ key: "nom_natural_organ", label: me._msg("label.nom_natural_organ"), field: "properties.udl_nom_natural_organ", sortable: true, resizeable: true, formatter: renderCellSafeHTML },
+			{ key: "nom_natural_institucio", label: me._msg("label.nom_natural_institucio"), field: "properties.udl_nom_natural_institucio", sortable: true, resizeable: true, formatter: renderCellSafeHTML },			
+			{ key: "codi_classificacio_1_expedient", label: me._msg("label.codi_classificacio_1_expedient"), field: "properties.udlrm_codi_classificacio_1_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML },
+            { key: "localitzacio_1_expedient", label: me._msg("label.localitzacio_1_expedient"), field: "properties.udlrm_localitzacio_1_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML },
+			{ key: "localitzacio_2_expedient", label: me._msg("label.localitzacio_2_expedient"), field: "properties.udlrm_localitzacio_2_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML },
+			
+			{ key: "identifier", label: me._msg("label.identifier"), sortable: true, sortOptions: {sortFunction: sortCellURI}, resizeable: true, formatter: renderCellURI, hidden: true },
+            
+            { key: "title", label: me._msg("label.title"), field: "title", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
             { key: "description", label: me._msg("label.description"), field: "description", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
-            { key: "parentFolder", label: me._msg("label.parentFolder"), field: "parentFolder", sortable: true, resizeable: true, formatter: renderCellSafeHTML },
+            { key: "parentFolder", label: me._msg("label.parentFolder"), field: "parentFolder", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
             { key: "creator", label: me._msg("label.creator"), field: "createdBy", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
             { key: "created", label: me._msg("label.created"), field: "createdOn", sortable: true, resizeable: true, formatter: renderCellDate, hidden: true },
             { key: "modifier", label: me._msg("label.modifier"), field: "modifiedBy", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
-            { key: "modified", label: me._msg("label.modified"), field: "modifiedOn", sortable: true, resizeable: true, formatter: renderCellDate },
+            { key: "modified", label: me._msg("label.modified"), field: "modifiedOn", sortable: true, resizeable: true, formatter: renderCellDate, hidden: true },
             { key: "author", label: me._msg("label.author"), field: "author", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
             
-            { key: "originator", label: me._msg("label.originator"), field: "properties.rma_originator", sortable: true, resizeable: true, formatter: renderCellSafeHTML },
-            { key: "dateFiled", label: me._msg("label.dateFiled"), field: "properties.rma_dateFiled", sortable: true, resizeable: true, formatter: renderCellDate },
+            { key: "originator", label: me._msg("label.originator"), field: "properties.rma_originator", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
+            { key: "dateFiled", label: me._msg("label.dateFiled"), field: "properties.rma_dateFiled", sortable: true, resizeable: true, formatter: renderCellDate, hidden: true },
             { key: "publicationDate", label: me._msg("label.publicationDate"), field: "properties.rma_publicationDate", sortable: true, resizeable: true, formatter: renderCellDate, hidden: true },
             { key: "reviewDate", label: me._msg("label.reviewDate"), field: "properties.rma_reviewAsOf", sortable: true, resizeable: true, formatter: renderCellDate, hidden: true },
-            { key: "vitalRecord", label: me._msg("label.vitalRecord"), sortable: true, sortOptions: {sortFunction: sortCellVitalRecord}, resizeable: false, formatter: renderCellVitalRecord },
+            { key: "vitalRecord", label: me._msg("label.vitalRecord"), sortable: true, sortOptions: {sortFunction: sortCellVitalRecord}, resizeable: false, formatter: renderCellVitalRecord, hidden: true },
             { key: "originatingOrganization", label: me._msg("label.originatingOrganization"), field: "properties.rma_originatingOrganization", sortable: true, resizeable: true, hidden: true },
             { key: "mediaType", label: me._msg("label.mediaType"), field: "properties.rma_mediaType", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
             { key: "format", label: me._msg("label.format"), field: "properties.rma_format", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
@@ -636,7 +649,6 @@
             { key: "captureDate", label: me._msg("label.dod.captureDate"), field: "properties.dod_captureDate", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
             { key: "contact", label: me._msg("label.dod.contact"), field: "properties.dod_contact", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
             { key: "contentManagementSystem", label: me._msg("label.dod.contentManagementSystem"), field: "properties.dod_contentManagementSystem", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
-            
         	{ key: "tipus_entitat_documentSimple", label: me._msg("label.tipus_entitat_documentSimple"), field: "properties.udlrm_tipus_entitat_documentSimple", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
         	{ key: "tipus_documental_documentSimple", label: me._msg("label.tipus_documental_documentSimple"), field: "properties.udlrm_tipus_documental_documentSimple", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
         	{ key: "categoria_documentSimple", label: me._msg("label.categoria_documentSimple"), field: "properties.udlrm_categoria_documentSimple", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
@@ -679,14 +691,10 @@
         	{ key: "denominacio_classe_2_documentSimple", label: me._msg("label.denominacio_classe_2_documentSimple"), field: "properties.udlrm_denominacio_classe_2_documentSimple", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
         	{ key: "grup_creador_documentSimple", label: me._msg("label.grup_creador_documentSimple"), field: "properties.udlrm_grup_creador_documentSimple", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
         	
-			{ key: "grup_creador_expedient", label: me._msg("label.grup_creador_expedient"), field: "properties.udlrm_grup_creador_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "descripcio_expedient", label: me._msg("label.descripcio_expedient"), field: "properties.udlrm_descripcio_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "tipus_entitat_expedient", label: me._msg("label.tipus_entitat_expedient"), field: "properties.udlrm_tipus_entitat_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "categoria_expedient", label: me._msg("label.categoria_expedient"), field: "properties.udlrm_categoria_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
-			{ key: "secuencial_identificador_expedient", label: me._msg("label.secuencial_identificador_expedient"), field: "properties.udlrm_secuencial_identificador_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "esquema_identificador_expedient", label: me._msg("label.esquema_identificador_expedient"), field: "properties.udlrm_esquema_identificador_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
-			{ key: "data_inici_expedient", label: me._msg("label.data_inici_expedient"), field: "properties.udlrm_data_inici_expedient", sortable: true, resizeable: true, formatter: renderCellDate, hidden: true },
-			{ key: "data_fi_expedient", label: me._msg("label.data_fi_expedient"), field: "properties.udlrm_data_fi_expedient", sortable: true, resizeable: true, formatter: renderCellDate, hidden: true },
 			{ key: "classificacio_acces_expedient", label: me._msg("label.classificacio_acces_expedient"), field: "properties.udlrm_classificacio_acces_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "advertencia_seguretat_expedient", label: me._msg("label.advertencia_seguretat_expedient"), field: "properties.udlrm_advertencia_seguretat_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "categoria_advertencia_seguretat_expedient", label: me._msg("label.categoria_advertencia_seguretat_expedient"), field: "properties.udlrm_categoria_advertencia_seguretat_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
@@ -709,9 +717,6 @@
 			{ key: "quantitat_expedient", label: me._msg("label.quantitat_expedient"), field: "properties.udlrm_quantitat_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "unitats_expedient", label: me._msg("label.unitats_expedient"), field: "properties.udlrm_unitats_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "suport_1_expedient", label: me._msg("label.suport_1_expedient"), field: "properties.udlrm_suport_1_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },			
-			{ key: "localitzacio_1_expedient", label: me._msg("label.localitzacio_1_expedient"), field: "properties.udlrm_localitzacio_1_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
-			{ key: "localitzacio_2_expedient", label: me._msg("label.localitzacio_2_expedient"), field: "properties.udlrm_localitzacio_2_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
-			{ key: "codi_classificacio_1_expedient", label: me._msg("label.codi_classificacio_1_expedient"), field: "properties.udlrm_codi_classificacio_1_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "denominacio_classe_1_expedient", label: me._msg("label.denominacio_classe_1_expedient"), field: "properties.udlrm_denominacio_classe_1_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "codi_classificacio_2_expedient", label: me._msg("label.codi_classificacio_2_expedient"), field: "properties.udlrm_codi_classificacio_2_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "denominacio_classe_2_expedient", label: me._msg("label.denominacio_classe_2_expedient"), field: "properties.udlrm_denominacio_classe_2_expedient", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
@@ -776,7 +781,9 @@
 			{ key: "localitzacio_2_serie", label: me._msg("label.localitzacio_2_serie"), field: "properties.udlrm_localitzacio_2_serie", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "codi_classificacio_serie", label: me._msg("label.codi_classificacio_serie"), field: "properties.udlrm_codi_classificacio_serie", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
 			{ key: "denominacio_classe_serie", label: me._msg("label.denominacio_classe_serie"), field: "properties.udlrm_denominacio_classe_serie", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
-			{ key: "grup_creador_serie", label: me._msg("label.grup_creador_serie"), field: "properties.udlrm_grup_creador_serie", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true }
+			{ key: "grup_creador_serie", label: me._msg("label.grup_creador_serie"), field: "properties.udlrm_grup_creador_serie", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true },
+			
+			{ key: "nom_natural_persona", label: me._msg("label.nom_natural_persona"), field: "properties.udl_nom_natural_persona", sortable: true, resizeable: true, formatter: renderCellSafeHTML, hidden: true }
          ];
          
          // Add the custom metadata columns

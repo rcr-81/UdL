@@ -9,7 +9,7 @@
             <div id="${el}-metadata" class="metadata">
                <ul>
                   <li>
-                     <input type="checkbox" id="${el}-metadata-identifier" checked="checked" />
+                     <input type="checkbox" id="${el}-metadata-identifier"  />
                      <label for="${el}-metadata-identifier">${msg("label.identifier")}</label>
                   </li>
                   <li class="metadata-header">${msg("label.menu.content")}</li>
@@ -18,7 +18,7 @@
                      <label for="${el}-metadata-name">${msg("label.name")}</label>
                   </li>
                   <li>
-                     <input type="checkbox" id="${el}-metadata-title" checked="checked" />
+                     <input type="checkbox" id="${el}-metadata-title"  />
                      <label for="${el}-metadata-title">${msg("label.title")}</label>
                   </li>
                   <li>
@@ -26,7 +26,7 @@
                      <label for="${el}-metadata-description">${msg("label.description")}</label>
                   </li>
                   <li>
-                     <input type="checkbox" id="${el}-metadata-parentFolder" checked="checked" />
+                     <input type="checkbox" id="${el}-metadata-parentFolder" />
                      <label for="${el}-metadata-parentFolder">${msg("label.parentFolder")}</label>
                   </li>
                   <li>
@@ -42,7 +42,7 @@
                      <label for="${el}-metadata-modifier">${msg("label.modifier")}</label>
                   </li>
                   <li>
-                     <input type="checkbox" id="${el}-metadata-modified" checked="checked" />
+                     <input type="checkbox" id="${el}-metadata-modified" />
                      <label for="${el}-metadata-modified">${msg("label.modified")}</label>
                   </li>
                   <li>
@@ -51,11 +51,11 @@
                   </li>
                   <li class="metadata-header">${msg("label.menu.records")}</li>
                   <li>
-                     <input type="checkbox" id="${el}-metadata-originator" checked="checked" />
+                     <input type="checkbox" id="${el}-metadata-originator"  />
                      <label for="${el}-metadata-originator">${msg("label.originator")}</label>
                   </li>
                   <li>
-                     <input type="checkbox" id="${el}-metadata-dateFiled" checked="checked" />
+                     <input type="checkbox" id="${el}-metadata-dateFiled"  />
                      <label for="${el}-metadata-dateFiled">${msg("label.dateFiled")}</label>
                   </li>
                   <li>
@@ -67,7 +67,7 @@
                      <label for="${el}-metadata-reviewDate">${msg("label.reviewDate")}</label>
                   </li>
                   <li>
-                     <input type="checkbox" id="${el}-metadata-vitalRecord" checked="checked" />
+                     <input type="checkbox" id="${el}-metadata-vitalRecord"  />
                      <label for="${el}-metadata-vitalRecord">${msg("label.vitalRecord")}</label>
                   </li>
                   <li>
@@ -423,7 +423,7 @@
 				  
 				  <li class="metadata-header">${msg("label.menu.expedient")}</li>
 				  <li>
-                     <input type="checkbox" id="${el}-metadata-grup_creador_expedient" />
+                     <input type="checkbox" id="${el}-metadata-grup_creador_expedient" checked="checked"/>
                      <label for="${el}-metadata-grup_creador_expedient">${msg("label.grup_creador_expedient")}</label>
                   </li>
 				  <li>
@@ -435,7 +435,7 @@
                      <label for="${el}-metadata-categoria_expedient">${msg("label.categoria_expedient")}</label>
                   </li>
 				  <li>
-                     <input type="checkbox" id="${el}-metadata-secuencial_identificador_expedient" />
+                     <input type="checkbox" id="${el}-metadata-secuencial_identificador_expedient" checked="checked"/>
                      <label for="${el}-metadata-secuencial_identificador_expedient">${msg("label.secuencial_identificador_expedient")}</label>
                   </li>
 				  <li>
@@ -443,11 +443,11 @@
                      <label for="${el}-metadata-esquema_identificador_expedient">${msg("label.esquema_identificador_expedient")}</label>
                   </li>
 				  <li>
-                     <input type="checkbox" id="${el}-metadata-data_inici_expedient" />
+                     <input type="checkbox" id="${el}-metadata-data_inici_expedient" checked="checked"/>
                      <label for="${el}-metadata-data_inici_expedient">${msg("label.data_inici_expedient")}</label>
                   </li>
 				  <li>
-                     <input type="checkbox" id="${el}-metadata-data_fi_expedient" />
+                     <input type="checkbox" id="${el}-metadata-data_fi_expedient" checked="checked"/>
                      <label for="${el}-metadata-data_fi_expedient">${msg("label.data_fi_expedient")}</label>
                   </li>
 				  <li>
@@ -527,15 +527,15 @@
                      <label for="${el}-metadata-suport_1_expedient">${msg("label.suport_1_expedient")}</label>
                   </li>
 				  <li>
-                     <input type="checkbox" id="${el}-metadata-localitzacio_1_expedient" />
+                     <input type="checkbox" id="${el}-metadata-localitzacio_1_expedient" checked="checked"/>
                      <label for="${el}-metadata-localitzacio_1_expedient">${msg("label.localitzacio_1_expedient")}</label>
                   </li>
 				  <li>
-                     <input type="checkbox" id="${el}-metadata-localitzacio_2_expedient" />
+                     <input type="checkbox" id="${el}-metadata-localitzacio_2_expedient" checked="checked"/>
                      <label for="${el}-metadata-localitzacio_2_expedient">${msg("label.localitzacio_2_expedient")}</label>
                   </li>
 				  <li>
-                     <input type="checkbox" id="${el}-metadata-codi_classificacio_1_expedient" />
+                     <input type="checkbox" id="${el}-metadata-codi_classificacio_1_expedient" checked="checked"/>
                      <label for="${el}-metadata-codi_classificacio_1_expedient">${msg("label.codi_classificacio_1_expedient")}</label>
                   </li>
 				  <li>
@@ -788,20 +788,12 @@
 
 				  <li class="metadata-header">${msg("label.menu.agent")}</li>		
 				  <li>
-                     <input type="checkbox" id="${el}-metadata-nom_natural_regulacio" />
-                     <label for="${el}-metadata-nom_natural_regulacio">${msg("label.nom_natural_regulacio")}</label>
-                  </li>
-				  <li>
-                     <input type="checkbox" id="${el}-metadata-nom_natural_institucio" />
-                     <label for="${el}-metadata-nom_natural_institucio">${msg("label.nom_natural_institucio")}</label>
-                  </li>
-				  <li>
-                     <input type="checkbox" id="${el}-metadata-nom_natural_organ" />
+                     <input type="checkbox" id="${el}-metadata-nom_natural_organ" checked="checked"/>
                      <label for="${el}-metadata-nom_natural_organ">${msg("label.nom_natural_organ")}</label>
                   </li>
 				  <li>
-                     <input type="checkbox" id="${el}-metadata-nom_dispositiu" />
-                     <label for="${el}-metadata-nom_dispositiu">${msg("label.nom_dispositiu")}</label>
+                     <input type="checkbox" id="${el}-metadata-nom_natural_institucio" checked="checked"/>
+                     <label for="${el}-metadata-nom_natural_institucio">${msg("label.nom_natural_institucio")}</label>
                   </li>
 				  <li>
                      <input type="checkbox" id="${el}-metadata-nom_natural_persona" />
@@ -869,7 +861,7 @@
             <div class="components">
                <span class="header">${msg("label.components")}</span>
                <div>
-                  <input type="checkbox" id="${el}-records" checked="checked" />
+                  <input type="checkbox" id="${el}-records"  />
                   <label for="${el}-records">${msg("label.records")}</label>
                </div>
                <div class="indented">
