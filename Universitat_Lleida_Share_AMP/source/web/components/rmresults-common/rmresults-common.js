@@ -448,6 +448,9 @@
             Dom.setStyle(elCell.parentNode, "height", oColumn.height + "px");
             Dom.setStyle(elCell.parentNode, "text-align", "center");
             
+            var record = oRecord.getData(),
+            tags = record.tags;
+            
             var url = me._getBrowseUrlForRecord(oRecord);
             var imageUrl = Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/record-32.png';
             switch (oRecord.getData("type"))
@@ -459,7 +462,7 @@
                   imageUrl = Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/record-category-32.png';
                   break;
                case "rma:recordFolder":
-                  imageUrl = Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/record-folder-32.png';
+           		  imageUrl = Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/record-folder-32.png';
                   break;
             }
             

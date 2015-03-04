@@ -42,6 +42,24 @@
       $userProfile = Alfresco.util.userProfileLink,
       $date = function $date(date, format) { return Alfresco.util.formatDate(Alfresco.util.fromISO8601(date), format) };
 
+      /**
+       * Mirar si contiene el tag especificado
+       * elTag -- El tag a buscar
+       * arrTags -- Array de tags
+       */
+      
+      Alfresco.DocumentList.contieneTag = function contieneTag(elTag, arrTags){
+   	   var contieneTag = false;
+   	   var i = 0;
+   	   while(i<arrTags.length && !contieneTag){
+   		   if(arrTags[i] == elTag){
+   			   contieneTag = true;
+   		   }
+   		   i++;
+   	   }
+   	   return contieneTag;
+      }
+
    /**
     * RecordsDocumentList constructor.
     * 
@@ -97,6 +115,7 @@
                name = record.fileName,
                title = record.title,
                type = record.type,
+               tags = record.tags,
                isLink = record.isLink,
                locn = record.location,
                extn = name.substring(name.lastIndexOf(".")),
@@ -119,7 +138,11 @@
                   case "metadata-stub-folder":
                   case "transfer-container":
                   case "hold-container":
-                     elCell.innerHTML = '<span class="folder-small">' + (isLink ? '<span class="link"></span>' : '') + '<a href="#" class="filter-change" rel="' + Alfresco.DocumentList.generatePathMarkup(locn) + '"><img src="' + Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/' + type + '-32.png" /></a>';
+                 	  if(Alfresco.DocumentList.contieneTag("agregació", tags)){
+                 		  elCell.innerHTML = '<span class="folder-small">' + (isLink ? '<span class="link"></span>' : '') + '<a href="#" class="filter-change" rel="' + Alfresco.DocumentList.generatePathMarkup(locn) + '"><img src="' + Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/' + type + 'Agr-32.png" /></a>';
+                 	  }else {
+                 		 elCell.innerHTML = '<span class="folder-small">' + (isLink ? '<span class="link"></span>' : '') + '<a href="#" class="filter-change" rel="' + Alfresco.DocumentList.generatePathMarkup(locn) + '"><img src="' + Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/' + type + '-32.png" /></a>';                 		  
+                 	  }
                      break;
 
                   case "record-nonelec":
@@ -134,7 +157,7 @@
                      break;
 
                   case "folder":
-                     elCell.innerHTML = '<span class="folder-small">' + (isLink ? '<span class="link"></span>' : '') + '<a href="#" class="filter-change" rel="' + Alfresco.DocumentList.generatePathMarkup(locn) + '"><img src="' + Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/folder-32.png" /></a>';
+               		 elCell.innerHTML = '<span class="folder-small">' + (isLink ? '<span class="link"></span>' : '') + '<a href="#" class="filter-change" rel="' + Alfresco.DocumentList.generatePathMarkup(locn) + '"><img src="' + Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/folder-32.png" /></a>';
                      break;
 
                   default:
@@ -164,7 +187,11 @@
                   case "metadata-stub-folder":
                   case "transfer-container":
                   case "hold-container":
-                     elCell.innerHTML = '<span class="folder">' + (isLink ? '<span class="link"></span>' : '') + '<a href="#" class="filter-change" rel="' + Alfresco.DocumentList.generatePathMarkup(locn) + '"><img src="' + Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/' + type + '-48.png" /></a>';
+                	 if(Alfresco.DocumentList.contieneTag("agregació", tags)){
+                		 elCell.innerHTML = '<span class="folder">' + (isLink ? '<span class="link"></span>' : '') + '<a href="#" class="filter-change" rel="' + Alfresco.DocumentList.generatePathMarkup(locn) + '"><img src="' + Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/' + type + 'Agr-48.png" /></a>';
+                	 }else {
+                		 elCell.innerHTML = '<span class="folder">' + (isLink ? '<span class="link"></span>' : '') + '<a href="#" class="filter-change" rel="' + Alfresco.DocumentList.generatePathMarkup(locn) + '"><img src="' + Alfresco.constants.URL_RESCONTEXT + 'components/documentlibrary/images/' + type + '-48.png" /></a>';                		 
+                	 }
                      break;
 
                   case "record-nonelec":
