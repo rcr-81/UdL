@@ -10,6 +10,7 @@ import org.alfresco.service.ServiceRegistry;
 import org.alfresco.util.ISO8601DateFormat;
 
 import com.smile.actions.RecalcularDatesAction;
+import com.smile.actions.RecalcularTotesDatesAction;
 
 public class DateHelper extends BaseScopableProcessorExtension {
 	
@@ -52,5 +53,10 @@ public class DateHelper extends BaseScopableProcessorExtension {
 	public void runRecalcularDates(String sNodeRef){
 		RecalcularDatesAction recalculator = new RecalcularDatesAction();
 		recalculator.runRecalcularDates(sNodeRef, serviceRegistry);		
+	}
+	
+	public void runRecalcularTotesDates(){
+		RecalcularTotesDatesAction recalculator = new RecalcularTotesDatesAction();
+		recalculator.runRecalcularTotesDates(serviceRegistry);		
 	}	
 }

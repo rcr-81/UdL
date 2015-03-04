@@ -2,6 +2,8 @@ package com.smile.webscripts.expedient;
 
 import java.io.InputStream;
 import java.io.Serializable;
+import java.net.URL;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +16,7 @@ import java.util.Set;
 
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import javax.xml.rpc.ParameterMode;
 
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.audit.AuditComponent;
@@ -40,6 +43,9 @@ import org.alfresco.service.cmr.security.OwnableService;
 import org.alfresco.service.cmr.security.PermissionService;
 import org.alfresco.service.namespace.InvalidQNameException;
 import org.alfresco.service.namespace.QName;
+import org.apache.axis.client.Call;
+import org.apache.axis.client.Service;
+import org.apache.axis.encoding.XMLType;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
@@ -168,7 +174,7 @@ public class TransferirExpedient extends DeclarativeWebScript implements Constan
 		return model;
 	}
 
-	public NodeRef transferNodes(String username, NodeRef expedient) throws InvalidQNameException, InvalidNodeRefException,
+	public NodeRef transferNodes(String username, NodeRef expedient) throws Exception, InvalidQNameException, InvalidNodeRefException,
 			NoSuchAlgorithmException {
 		InfoTransferencia infoTransferencia = transferirNode(expedient, null, true, username, null, null);
 		Map<NodeRef, List<NodeRef>> infoSignatures = infoTransferencia.getInfoSignatures();
@@ -195,7 +201,7 @@ public class TransferirExpedient extends DeclarativeWebScript implements Constan
 	}
 
 	private InfoTransferencia transferirNode(NodeRef nodeCm, NodeRef rmParent, boolean root, String username, NodeRef indexParent,
-			InfoTransferencia infoTransferencia) throws InvalidQNameException, InvalidNodeRefException, NoSuchAlgorithmException {
+			InfoTransferencia infoTransferencia) throws Exception, InvalidQNameException, InvalidNodeRefException, NoSuchAlgorithmException {
 		Date now = Calendar.getInstance().getTime();
 		NodeRef newNodeRma = null;
 		NodeService nodeService = serviceRegistry.getNodeService();
@@ -373,6 +379,8 @@ public class TransferirExpedient extends DeclarativeWebScript implements Constan
 						// QName.createQName(RM_URI,
 						// "recordFolder"))).getChildRef();
 						nodeService.addAspect(newNodeRma, QName.createQName(UDLRM_URI, "agregacio"), null);
+						nodeService.addAspect(newNodeRma, QName.createQName(CM_URI, "taggable"), null);
+						serviceRegistry.getTaggingService().addTag(newNodeRma, "Agregació");
 						Map<QName, Serializable> props = new HashMap<QName, Serializable>();
 
 						props.put(QName.createQName(RM_URI, "identifier"), newNodeRma.getId());
@@ -699,6 +707,7 @@ public class TransferirExpedient extends DeclarativeWebScript implements Constan
 								nodeService.getProperty(nodeCm, QName.createQName(UDL_URI, "tipus_signatura")));
 						props1.put(QName.createQName(UDLRM_URI, "id_document_signat"),
 								nodeService.getProperty(nodeCm, QName.createQName(UDL_URI, "id_document_signat")));
+						System.out.println("-------------------------------> id_document_signat: " + nodeService.getProperty(nodeCm, QName.createQName(UDL_URI, "id_document_signat")));
 						props1.put(QName.createQName(UDLRM_URI, "data_signatura"),
 								nodeService.getProperty(nodeCm, QName.createQName(UDL_URI, "data_signatura")));
 						props1.put(QName.createQName(UDLRM_URI, "data_ini_validacio_signatura"),
@@ -759,7 +768,7 @@ public class TransferirExpedient extends DeclarativeWebScript implements Constan
 		}
 
 		if (root == true) {
-			infoTransferencia.setFoliacio(infoTransferencia.getFoliacio() + "</indexTransferencia>");
+			infoTransferencia.setFoliacio("<indexTransferencia>" + infoTransferencia.getFoliacio() + "</indexTransferencia>");
 			String filename = "index.xml";
 			NodeRef index = fileFolderService.create(indexParent, filename, ContentModel.TYPE_CONTENT).getNodeRef();
 			// NodeRef index = (nodeService.createNode(indexParent,
@@ -778,6 +787,57 @@ public class TransferirExpedient extends DeclarativeWebScript implements Constan
 			props.put(QName.createQName(RM_URI, "identifier"), index.getId());
 			props.put(QName.createQName(RM_URI, "dateFiled"), now);
 			nodeService.addProperties(index, props);
+			
+			props = new HashMap<QName, Serializable>();
+			props.put(QName.createQName(CM_URI, "name"), filename);
+			props.put(ContentModel.PROP_CREATOR, "System");
+			props.put(ContentModel.PROP_CREATED, new Date());
+			props.put(ContentModel.PROP_MODIFIER, "System");
+			props.put(ContentModel.PROP_MODIFIED, new Date());
+			props.put(QName.createQName(UDLRM_URI, "grup_creador_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "tipus_documental_documentSimple"), "U01 INFORME");
+			props.put(QName.createQName(UDLRM_URI, "tipus_entitat_documentSimple"), "Document");
+			props.put(QName.createQName(UDLRM_URI, "categoria_documentSimple"), "Document simple");
+			props.put(QName.createQName(UDLRM_URI, "secuencial_identificador_documentSimple"), callWS(DOCUMENT_SIMPLE));
+			//props.put(QName.createQName(UDLRM_URI, "secuencial_identificador_documentSimple"), "id de test");
+			props.put(QName.createQName(UDLRM_URI, "esquema_identificador_documentSimple"), MASCARA_DOCUMENT_SIMPLE);
+			props.put(QName.createQName(UDLRM_URI, "data_inici_documentSimple"), new Date());
+			props.put(QName.createQName(UDLRM_URI, "data_fi_documentSimple"), new Date());
+			props.put(QName.createQName(UDLRM_URI, "data_registre_entrada_documentSimple"), new Date());
+			props.put(QName.createQName(UDLRM_URI, "data_registre_sortida_documentSimple"), new Date());
+			props.put(QName.createQName(UDLRM_URI, "classificacio_acces_documentSimple"), "Públic");
+			props.put(QName.createQName(UDLRM_URI, "advertencia_seguretat_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "categoria_advertencia_seguretat_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "sensibilitat_dades_caracter_personal_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "verificacio_integritat_algorisme_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "verificacio_integritat_valor_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "idioma_1_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "idioma_2_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "valoracio_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "tipus_dictamen_1_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "tipus_dictamen_2_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "accio_dictaminada_1_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "accio_dictaminada_2_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "suport_origen_documentSimple"), "Electrònic");
+			props.put(QName.createQName(UDLRM_URI, "versio_format_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "nom_aplicacio_creacio_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "versio_aplicacio_creacio_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "registre_formats_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "resolucio_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "dimensions_fisiques_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "unitats_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "suport_1_documentSimple"), "Electrònic");
+			props.put(QName.createQName(UDLRM_URI, "localitzacio_1_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "localitzacio_2_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "denominacio_estat_documentSimple"), "Original");
+			props.put(QName.createQName(UDLRM_URI, "tipus_copia_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "motiu_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "codi_classificacio_1_documentSimple"), "-");
+			props.put(QName.createQName(UDLRM_URI, "codi_classificacio_2_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "denominacio_classe_1_documentSimple"), "");
+			props.put(QName.createQName(UDLRM_URI, "denominacio_classe_2_documentSimple"), "");
+			nodeService.addAspect(index, QName.createQName(UdlProperties.UDLRM_URI, "documentSimple"), props);
+			
 			PermissionService permissionService = serviceRegistry.getPermissionService();
 			permissionService.setInheritParentPermissions(index, false);
 			permissionService.setPermission(index, permissionService.getAllAuthorities(), PermissionService.CONSUMER, true);
@@ -1255,5 +1315,68 @@ public class TransferirExpedient extends DeclarativeWebScript implements Constan
 				nodeService.addAspect(nodeRef, aspect, nodeProps);
 			}
 		}
+	}
+	
+	/**
+	 * Crida un webservice de la UdL que genera un identificador en funció del
+	 * tipus documental rebut com a paràmetre.
+	 * 
+	 * @param tipus
+	 * @return
+	 */
+	private String callWS(String type) throws Exception {
+		String id = "";
+		Service service = new Service();
+		Call call = (Call) service.createCall();
+
+		// Call to first service (IniciaGeneraCodi)
+		call.setProperty(Call.SOAPACTION_USE_PROPERTY, new Boolean(true));
+		call.setProperty(Call.SOAPACTION_URI_PROPERTY, "http://tempuri.org/IniciaGeneraCodi");
+		call.setTargetEndpointAddress(new URL(WS_URL));
+		call.setOperationName(new javax.xml.namespace.QName("http://tempuri.org/", WS_INICI_GENERA_CODI));
+		call.addParameter(new javax.xml.namespace.QName("http://tempuri.org/", "AppId"), XMLType.XSD_STRING, ParameterMode.IN);
+		call.addParameter(new javax.xml.namespace.QName("http://tempuri.org/", "ObjectId"), XMLType.XSD_STRING, ParameterMode.IN);
+		call.setReturnType(XMLType.XSD_STRING);
+
+		id = (String) call.invoke(new Object[] { WS_APP_ID, type });
+
+		// Call to second service (GeneraCodi)
+		call = (Call) service.createCall();
+		call.setProperty(Call.SOAPACTION_URI_PROPERTY, "http://tempuri.org/GeneraCodi");
+		call.setTargetEndpointAddress(new URL(WS_URL));
+		call.setOperationName(new javax.xml.namespace.QName("http://tempuri.org/", WS_GENERA_CODI));
+		call.addParameter(new javax.xml.namespace.QName("http://tempuri.org/", "Key"), XMLType.XSD_STRING, ParameterMode.IN);
+		call.setReturnType(XMLType.XSD_STRING);
+
+		id = (String) call.invoke(new Object[] { encodeKey(id) });
+		
+		return id;
+	}
+	
+	/**
+	 * Built encoded key with SHA2 algorithm.
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	private String encodeKey(String id) throws Exception {
+		String cadenaConfianza = "kax9fejew2wzA89BSDFG.JAe9edg9";
+		MessageDigest digest = MessageDigest.getInstance("SHA-256");
+		StringBuffer hexString = new StringBuffer();
+
+		String key = id + cadenaConfianza;
+		byte[] hash = digest.digest(key.getBytes("UTF-8"));
+
+		for (int i = 0; i < hash.length; i++) {
+			String hex = Integer.toHexString(0xff & hash[i]);
+			if (hex.length() == 1) {
+				hexString.append('0');
+			}
+
+			hexString.append(hex);
+		}
+
+		return hexString.toString();
 	}
 }

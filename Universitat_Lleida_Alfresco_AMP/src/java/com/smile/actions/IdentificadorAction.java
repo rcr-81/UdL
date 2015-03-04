@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.xml.rpc.ParameterMode;
 
+import org.alfresco.model.ContentModel;
 import org.alfresco.repo.action.ParameterDefinitionImpl;
 import org.alfresco.repo.action.executer.ActionExecuterAbstractBase;
 import org.alfresco.service.ServiceRegistry;
@@ -75,6 +76,8 @@ public class IdentificadorAction extends ActionExecuterAbstractBase implements C
 			QName esquemaExpedientRm = QName.createQName("http://www.smile.com/model/udlrm/1.0", "esquema_identificador_expedient");
 			QName esquemaSerieRm = QName.createQName("http://www.smile.com/model/udlrm/1.0", "esquema_identificador_serie");
 			QName esquemaFonsRm = QName.createQName("http://www.smile.com/model/udlrm/1.0", "esquema_identificador_fons");
+			
+			QName name = QName.createQName(CM_URI, "name");
 						
 			logger.debug("NodeRef: " + nodeRef.getId());
 			
@@ -90,7 +93,6 @@ public class IdentificadorAction extends ActionExecuterAbstractBase implements C
 				nodeService.setProperty(nodeRef, idDocSimpleRm, identificador);
 				nodeService.setProperty(nodeRef, esquemaDocumentSimpleRm, MASCARA_DOCUMENT_SIMPLE);
 				logger.debug("Document simple properties set!");
-
 			}
 			else if (AGREGACIO.equalsIgnoreCase(type) && isNewNode(nodeRef, AGREGACIO)) {
 				identificador = callWS(AGREGACIO);

@@ -173,7 +173,8 @@ public class SignaturesList extends AbstractWebScript implements ConstantsUdL {
 						reader.setEncoding(ConstantsUdL.UTF8);			
 						is = reader.getContentInputStream();
 						signatures = loadSignatura(is, mimeType, signatures, nodeRef, serviceRegistry, encoding);
-						serviceRegistry.getNodeService().setProperty(signaturaRef, QName.createQName(UDLRM_URI, "id_document_signat"), assoc.getSourceRef().toString());
+						//serviceRegistry.getNodeService().setProperty(signaturaRef, QName.createQName(UDLRM_URI, "id_document_signat"), assoc.getSourceRef().toString());
+						//serviceRegistry.getNodeService().setProperty(signaturaRef, QName.createQName(UDLRM_URI, "id_document_signat"), serviceRegistry.getNodeService().getProperty(nodeRef, QName.createQName(UDLRM_URI, "secuencial_identificador_documentSimple")));
 						dettachedSignaturesList.addAll(signatures);
 					}
 				}
@@ -221,7 +222,8 @@ public class SignaturesList extends AbstractWebScript implements ConstantsUdL {
 						reader.setEncoding(ConstantsUdL.UTF8);			
 						is = reader.getContentInputStream();						
 						signatures = loadSignatura(is, mimeType, signatures, nodeRef, serviceRegistry, encoding);
-						serviceRegistry.getNodeService().setProperty(signaturaRef, QName.createQName(UDL_URI, "id_document_signat"), assoc.getSourceRef().toString());
+						//serviceRegistry.getNodeService().setProperty(signaturaRef, QName.createQName(UDL_URI, "id_document_signat"), assoc.getSourceRef().toString());
+						serviceRegistry.getNodeService().setProperty(signaturaRef, QName.createQName(UDL_URI, "id_document_signat"), serviceRegistry.getNodeService().getProperty(nodeRef, QName.createQName(UDL_URI, "secuencial_identificador_documentSimple")));
 						dettachedSignaturesList.addAll(signatures);
 					}
 				}							

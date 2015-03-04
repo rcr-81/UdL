@@ -2,6 +2,7 @@ package com.smile.webscripts.sso;
 
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -75,10 +76,13 @@ public class AddAlfrescoUserSSO extends DeclarativeWebScript implements Constant
 			properties.put(ContentModel.PROP_FIRSTNAME, firstName);
 			properties.put(ContentModel.PROP_LASTNAME, lastName);
 			properties.put(ContentModel.PROP_EMAIL, email);
-
+			properties.put(ContentModel.PROP_LOCALE, "es_");
+			Set<String> zones = new HashSet<String>();
+			zones.add(authorityService.ZONE_AUTH_EXT_PREFIX);
+			
 			if (!personService.personExists(userName)) {		
 				log.debug("User " + userName + " don't exists, creating user...");				
-				personService.createPerson(properties);					
+				personService.createPerson(properties, zones);
 				log.debug("Created user: " + userName);				
 			}
 			else {

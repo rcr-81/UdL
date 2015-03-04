@@ -182,8 +182,16 @@ public class CescaiArxiuWSClient {
 		if (StringUtils.isEmpty(metadata))
 			throw new ParameterException("signatura", "peticioSignatura");
 		
+		System.out.println("---------------------> idMexMid: " + idMexMid);
+		System.out.println("---------------------> idDoc: " + idDoc);
+		System.out.println("---------------------> metadata: " + metadata);
+		System.out.println("---------------------> signatura: " + signatura);
+		System.out.println("---------------------> nomSignatura: " + nomSignatura);
+		
 		String result = ws.peticioSignatura(idMexMid, idDoc, metadata, signatura, nomSignatura);
-				
+		
+		System.out.println("---------------------> result: " + result);
+		
 		if (logger.isDebugEnabled())
 			logger.debug("Petició sig: result > "+result);
 			

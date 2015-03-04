@@ -1048,7 +1048,6 @@ public class VocabulariWizard extends BaseWizardBean{
 		  
 		try
         {
-			System.out.println("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 			Properties props = new Properties();
 	        FileInputStream fis = null;
 	        try {
@@ -1080,7 +1079,9 @@ public class VocabulariWizard extends BaseWizardBean{
                 Statement s = con.createStatement(java.sql.ResultSet.TYPE_SCROLL_SENSITIVE,
                 		java.sql.ResultSet.CONCUR_READ_ONLY);
                 
-                String sql = "SELECT local_name from alf_qname where ns_id = 6";
+                //String sql = "SELECT local_name from alf_qname where ns_id = 17";
+                // UdL personalización
+                String sql = "SELECT * from alf_qname where ns_id = 41 and (local_name = 'id_document_signat' or local_name like '%signatura' or local_name like '%expedient' or local_name like '%documentSimple' or local_name like '%agregacio')";
                 java.sql.ResultSet rs= s.executeQuery(sql);
                 
                 while (rs.next()){

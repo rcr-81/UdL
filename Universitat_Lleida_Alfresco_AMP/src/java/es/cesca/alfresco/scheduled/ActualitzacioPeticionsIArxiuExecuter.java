@@ -16,10 +16,18 @@ import org.alfresco.service.cmr.action.ParameterDefinition;
 import org.alfresco.service.cmr.model.FileInfo;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
+import org.alfresco.service.cmr.repository.StoreRef;
+import org.alfresco.service.cmr.search.LimitBy;
+import org.alfresco.service.cmr.search.ResultSet;
+import org.alfresco.service.cmr.search.SearchParameters;
+import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.namespace.QName;
+import org.alfresco.web.bean.repository.Repository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.FileAppender;
+
+import com.smile.webscripts.helper.UdlProperties;
 
 import es.cesca.alfresco.util.CescaUtil;
 import es.cesca.ws.client.CescaiArxiuWSClient;
@@ -172,6 +180,21 @@ public class ActualitzacioPeticionsIArxiuExecuter extends ExecuterAbstractBase {
 		nodeService.setProperty(node, CescaUtil.PETICIO_PROP_ESTAT, CescaUtil.STATUS_TRANSFERIT);
 		nodeService.setProperty(node, CescaUtil.PETICIO_PROP_PIA, pia);
 		setTracerMessage("Node transferit correctament amb pia > "+pia +" (actualitzat al repositori)");
+		
+		// Se marca el expediente como enviado a iArxiu
+		addIArxiuAspect(node, pia);
+	}
+
+	private void addIArxiuAspect(NodeRef node, String pia) {
+		// Se obtiene el campo id_peticion que coincide con el nodeRef
+		NodeService nodeService = getServiceRegistry().getNodeService();
+		String idPeticion = (String)nodeService.getProperty(node, CescaUtil.PETICIO_PROP_ID);
+		
+		// Se añade el aspecto iArxiu al expediente
+		Map<QName, Serializable> props = new HashMap<QName, Serializable>();
+		props.put(QName.createQName(UdlProperties.UDL_URI, "id_ref_PIA"), pia);
+		props.put(QName.createQName(UdlProperties.UDL_URI, "id_peticio"), idPeticion);
+		nodeService.addAspect(new NodeRef(Repository.getStoreRef(), idPeticion), QName.createQName(UdlProperties.UDL_URI, "iarxiu"), props);
 	}
 	
 	protected void createRebutIArxiu(String peticio, NodeRef peticioRef, String idExpMid, String pia) {

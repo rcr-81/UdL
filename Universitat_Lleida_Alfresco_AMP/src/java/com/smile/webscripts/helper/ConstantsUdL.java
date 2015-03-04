@@ -135,6 +135,7 @@ public interface ConstantsUdL {
 	public final static String SIGNATURES = "signatures";
 	
 	public final static String NOM_INDEX = "Índex.txt";
+	public final static String INDEX = "index.xml";
 	
 	public final static String TYPE_AGREGACIO = "agregacio";
 	public final static String TYPE_EXPEDIENT = "expedient";

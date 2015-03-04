@@ -3,7 +3,9 @@ package es.cesca.alfresco.scheduled;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +16,8 @@ import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.model.ContentModel;
 import org.alfresco.service.cmr.action.Action;
 import org.alfresco.service.cmr.action.ParameterDefinition;
+import org.alfresco.service.cmr.repository.AssociationRef;
+import org.alfresco.service.cmr.repository.ChildAssociationRef;
 import org.alfresco.service.cmr.repository.ContentReader;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
@@ -23,6 +27,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.FileAppender;
 
 import es.cesca.alfresco.util.CescaUtil;
+import es.cesca.alfresco.util.UDLHelper;
 import es.cesca.alfresco.util.XMLHelper;
 import es.cesca.alfresco.util.XMLHelper.MandatoryFieldException;
 import es.cesca.ws.client.CescaiArxiuWSClient;
@@ -103,6 +108,8 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 				
 				idexp = client.obrirConnexio(numExp);
 
+				setTracerMessage(idexp);
+				
 				if (!this.isPeticioOK(idexp)) {
 					//Error and send message
 					setTracerErrorMessage("No s'ha pogut obrir connexio amb iArxiu. "+idexp);
@@ -112,7 +119,9 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 				}
 				setTracerMessage("Connexio establerta per l'expedient: "+numExp+ " amb identificador d'expedient d'iArxiu: "+idexp);
 				// Peticions expedient (una per cada expedient)
-				this.peticioExpedient(idexp, numExp, node, idConfiguracio);
+				//this.peticioExpedient(idexp, numExp, node, idConfiguracio);
+				// Adaptación UdL 
+				this.peticioExpedient(idexp, idNode, node, idConfiguracio);
 
 				setTracerMessage("S'han enviat tots els documents i signatures associades" + idexp);
 				result = client.tancarConnexio(idexp,EXPEDIENT);
@@ -216,6 +225,12 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 		Map<String, Serializable> toBind = this.getProperties(props);
 		
 		XMLHelper helper = new XMLHelper(xmlbase);
+		
+		// Inicio personalización UDL: adaptar metadatos al modelo iArxiu
+		UDLHelper UDLHelper = new es.cesca.alfresco.util.UDLHelper(serviceRegistry, toBind, expNode, null);
+		toBind = UDLHelper.bindPropsToUDL("expedient");
+		// Fin 
+
 		String metadata = helper.xmlToIArxiu(toBind, this.serviceRegistry, true);
 		
 		logger.debug("valor xml expedient per enviar a WS " + metadata);
@@ -236,6 +251,7 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 		// ---
 		
 		String result = client.peticioExpedient(idMexMid, metadata);
+		System.out.println("Response exp: " + result);
 
 		if (result != null && this.isPeticioOK(result)) {
 			
@@ -253,7 +269,8 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 			} else{
 				setTracerMessage("L'expedient "+numExp+" te "+documents.size()+" documents associats");
 				for (NodeRef docNode: documents) {
-					this.peticioDocumentConExp(idMexMid, docNode, null, idConfiguracio);
+					String resultDoc = this.peticioDocumentConExp(idMexMid, docNode, null, idConfiguracio);
+					System.out.println("Response doc: " + resultDoc);
 				}
 			}
 		} else {
@@ -284,6 +301,12 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 		Map<QName, Serializable> props = this.getServiceRegistry().getNodeService().getProperties(docNode);
 		Map<String, Serializable> propsToBind = this.getProperties(props);
 		XMLHelper helper = new XMLHelper(xmlbase);
+		
+		// Inicio personalización UDL: adaptar metadatos al modelo iArxiu
+		UDLHelper UDLHelper = new es.cesca.alfresco.util.UDLHelper(serviceRegistry, propsToBind, null, docNode);
+		propsToBind = UDLHelper.bindPropsToUDL("");
+		// Fin 
+
 		String metadata = helper.xmlToIArxiu(propsToBind, this.serviceRegistry, true);
 		
 		System.out.println("valor xml a enviar " + metadata);
@@ -294,8 +317,12 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 		}
 		//recuperar num de document - nomes els documents independents el passaran com a paramatre
 		String numDoc_Temp = helper.getNumDoc();
+		String idDocSignat = "";
 		try{
+			String RM_URI = "http://www.alfresco.org/model/recordsmanagement/1.0";
 			numDoc = (String)this.getServiceRegistry().getNodeService().getProperty(docNode, ContentModel.PROP_NAME);
+			idDocSignat = (String)this.getServiceRegistry().getNodeService().getProperty(docNode, QName.createQName(RM_URI, "id_document_signat"));
+			System.out.println("idDocSignat: " + idDocSignat);
 			
 		}catch (Exception e) {
 			numDoc = numDoc_Temp;
@@ -334,7 +361,11 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 				//throw exception > not a valid query or empty
 				//throw new ExecuterException("El document de tipus "+type.toString()+" no disposen de consulta per cercar les signatures associades");
 				System.out.println("reemplanzando " + numDoc);
-				query4Sig = query4Sig.replace(CescaUtil.REPLACE_NUMDOC, numDoc);
+				//query4Sig = query4Sig.replace(CescaUtil.REPLACE_NUMDOC, numDoc);
+				// Personalización UdL
+				if(!"".equalsIgnoreCase(idDocSignat) && idDocSignat != null) {
+					query4Sig = query4Sig.replace(CescaUtil.REPLACE_NUMDOC, idDocSignat);					
+				}
 				List<NodeRef> signas = this.searchForNodes(query4Sig);
 				if(signas == null){
 					setTracerMessage("El document "+numDoc+" no te o no s'han tobat signatures associades");
@@ -376,6 +407,12 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 		Map<QName, Serializable> props = this.getServiceRegistry().getNodeService().getProperties(docNode);
 		Map<String, Serializable> propsToBind = this.getProperties(props);
 		XMLHelper helper = new XMLHelper(xmlbase);
+
+		// Inicio personalización UDL: adaptar metadatos al modelo iArxiu
+		UDLHelper UDLHelper = new es.cesca.alfresco.util.UDLHelper(serviceRegistry, propsToBind, null, docNode);
+		propsToBind = UDLHelper.bindPropsToUDL("document");
+		// Fin 
+
 		String metadata = helper.xmlToIArxiu(propsToBind, this.serviceRegistry, true);
 		
 		System.out.println("valor xml a enviar " + metadata);
@@ -386,8 +423,16 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 		}
 		//recuperar num de document - nomes els documents independents el passaran com a paramatre
 		String numDoc_Temp = helper.getNumDoc();
+		String idDocSignat = "";
+		List<AssociationRef> assocs = new ArrayList<AssociationRef>();
 		try{
+			//String RM_URI = "http://www.alfresco.org/model/recordsmanagement/1.0";
+			String CM_URI = "http://www.alfresco.org/model/content/1.0";
 			numDoc = (String)this.getServiceRegistry().getNodeService().getProperty(docNode, ContentModel.PROP_NAME);
+			assocs = serviceRegistry.getNodeService().getTargetAssocs(docNode, QName.createQName(CM_URI, "signaturesDocumentRm"));
+			//idDocSignat = (String)this.getServiceRegistry().getNodeService().getProperty(docNode, QName.createQName(RM_URI, "secuencial_identificador_documentSimple"));
+			//idDocSignat = (String)this.getServiceRegistry().getNodeService().getProperty(docNode, QName.createQName(RM_URI, "id_document_signat"));			
+			System.out.println("idDocSignat: " + idDocSignat);
 			
 		}catch (Exception e) {
 			numDoc = numDoc_Temp;
@@ -426,8 +471,20 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 				//throw exception > not a valid query or empty
 				//throw new ExecuterException("El document de tipus "+type.toString()+" no disposen de consulta per cercar les signatures associades");
 				System.out.println("reemplanzando " + numDoc);
-				query4Sig = query4Sig.replace(CescaUtil.REPLACE_NUMDOC, numDoc);
-				List<NodeRef> signas = this.searchForNodes(query4Sig);
+				//query4Sig = query4Sig.replace(CescaUtil.REPLACE_NUMDOC, numDoc);
+				//Personalización UdL
+				if(!"".equalsIgnoreCase(idDocSignat) && idDocSignat != null) {
+					query4Sig = query4Sig.replace(CescaUtil.REPLACE_NUMDOC, idDocSignat);
+				}
+				//List<NodeRef> signas = this.searchForNodes(query4Sig);
+				List<NodeRef> signas = new ArrayList<NodeRef>();
+				Iterator<AssociationRef> it = assocs.iterator();
+				while(it.hasNext()) {
+					AssociationRef assoc = (AssociationRef)it.next();
+					NodeRef signaturaRef = assoc.getTargetRef();
+					signas.add(signaturaRef);
+				}
+				
 				if(signas == null){
 					setTracerMessage("El document "+numDoc+" no te o no s'han tobat signatures associades");
 				} else {
@@ -464,6 +521,12 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 		Map<QName, Serializable> props = this.getServiceRegistry().getNodeService().getProperties(signNode);
 		Map<String, Serializable> propsToBind = this.getProperties(props);
 		XMLHelper helper = new XMLHelper(xmlbase);
+		
+		// Inicio personalización UDL: adaptar metadatos al modelo iArxiu
+		//UDLHelper UDLHelper = new es.cesca.alfresco.util.UDLHelper(serviceRegistry, propsToBind, null, null);
+		//propsToBind = UDLHelper.bindPropsToUDL("signatura");
+		// Fin 
+
 		String metadata = helper.xmlToIArxiu(propsToBind, this.serviceRegistry, true);
 		logger.debug("valor xml signatura per enviar a WS " + metadata);
 		if (!helper.isSignature()) {
@@ -511,6 +574,12 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 		Map<QName, Serializable> props = this.getServiceRegistry().getNodeService().getProperties(signNode);
 		Map<String, Serializable> propsToBind = this.getProperties(props);
 		XMLHelper helper = new XMLHelper(xmlbase);
+
+		// Inicio personalización UDL: adaptar metadatos al modelo iArxiu
+		UDLHelper UDLHelper = new es.cesca.alfresco.util.UDLHelper(serviceRegistry, propsToBind, null, null);
+		propsToBind = UDLHelper.bindPropsToUDL("");
+		// Fin 
+		
 		String metadata = helper.xmlToIArxiu(propsToBind, this.serviceRegistry, true);
 		
 		logger.debug("valor xml signatura per enviar a WS " + metadata);

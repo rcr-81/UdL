@@ -187,7 +187,8 @@ public class CescaiArxiuWSSoapBindingStub extends org.apache.axis.client.Stub im
     }
 
     public java.lang.String obrirConnexio(java.lang.String numexp, java.lang.String acronim) throws java.rmi.RemoteException {
-        if (super.cachedEndpoint == null) {
+		System.out.println("obrirConnexio");
+    	if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
@@ -200,7 +201,7 @@ public class CescaiArxiuWSSoapBindingStub extends org.apache.axis.client.Stub im
         setRequestHeaders(_call);
         setAttachments(_call);
  try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {numexp, acronim});
-
+ System.out.println("Post invoke obrirConnexio");
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
         }

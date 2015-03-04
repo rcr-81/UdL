@@ -865,6 +865,11 @@
 	<bean id="recalcularDates" class="com.smile.actions.RecalcularDatesAction" parent="action-executer"> 
 		<property name="serviceRegistry" ref="ServiceRegistry"/>   	
 	</bean>
+
+	<!-- Recalcular totes dates action -->
+	<bean id="recalcularTotesDates" class="com.smile.actions.RecalcularTotesDatesAction" parent="action-executer"> 
+		<property name="serviceRegistry" ref="ServiceRegistry"/>   	
+	</bean>
 	
 	<!-- Calcular verificacio action -->
 	<bean id="calcularVerificacio" class="com.smile.actions.CalcularVerificacioAction" parent="action-executer"> 

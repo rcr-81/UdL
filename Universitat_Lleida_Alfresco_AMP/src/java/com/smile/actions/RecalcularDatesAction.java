@@ -19,6 +19,8 @@ import com.smile.webscripts.helper.UdlProperties;
 
 public class RecalcularDatesAction extends ActionExecuterAbstractBase implements ConstantsUdL{
 
+	private QName nom = QName.createQName(CM_URI, "name");
+	
 	private QName dataIniDocumentRM = QName.createQName("http://www.smile.com/model/udlrm/1.0", "data_inici_documentSimple");
 	private QName dataFiDocumentRM = QName.createQName("http://www.smile.com/model/udlrm/1.0", "data_fi_documentSimple");
 	private QName dataIniExpedientRM = QName.createQName("http://www.smile.com/model/udlrm/1.0", "data_inici_expedient");
@@ -32,7 +34,6 @@ public class RecalcularDatesAction extends ActionExecuterAbstractBase implements
 	private QName documentSimple = QName.createQName("http://www.smile.com/model/udlrm/1.0", "documentSimple");
 	private QName expedient = QName.createQName("http://www.smile.com/model/udlrm/1.0", "expedient");
 	private QName agregacio = QName.createQName("http://www.smile.com/model/udlrm/1.0", "agregacio");
-	private QName serie = QName.createQName("http://www.smile.com/model/udlrm/1.0", "serie");
 
 	private ServiceRegistry serviceRegistry;
 		
@@ -44,42 +45,24 @@ public class RecalcularDatesAction extends ActionExecuterAbstractBase implements
 	protected void executeImpl(Action action, NodeRef nodeRef) {
 		String usernameAuth = authenticate();
 		NodeService nodeService = serviceRegistry.getNodeService();
-		Date now = new Date();
-		NodeRef parentNodeRef = nodeService.getPrimaryParent(nodeRef).getParentRef();
+		String nomDocSimple = (String)nodeService.getProperty(nodeRef, nom);
 		
-		if(nodeService.hasAspect(nodeRef, documentSimple)) {			
-			if(nodeService.hasAspect(parentNodeRef, expedient)) {
-				System.out.println(DateFormat.getInstance().format(now) + " START: Recalcular dates action.");
-				updateExpedient(nodeService, nodeRef, parentNodeRef);
-				now = new Date();
-				System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular dates action.");
+		if(nodeService.hasAspect(nodeRef, documentSimple) && !nomDocSimple.equalsIgnoreCase(INDEX)) {			
+			NodeRef expAgrNodeRef = nodeService.getPrimaryParent(nodeRef).getParentRef();
+			NodeRef serieNodeRef = nodeService.getPrimaryParent(expAgrNodeRef).getParentRef();
+			NodeRef fonsNodeRef = nodeService.getPrimaryParent(serieNodeRef).getParentRef();
+			
+			if(nodeService.hasAspect(expAgrNodeRef, expedient)) {
+				updateExpedient(nodeService, nodeRef, expAgrNodeRef, nomDocSimple);
 				
-			}else if(nodeService.hasAspect(parentNodeRef, agregacio)) {
-				System.out.println(DateFormat.getInstance().format(now) + " START: Recalcular dates action.");
-				updateAgregacio(nodeService, nodeRef, parentNodeRef);
-				now = new Date();
-				System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular dates action.");
+			}else if(nodeService.hasAspect(expAgrNodeRef, agregacio)) {
+				updateAgregacio(nodeService, nodeRef, expAgrNodeRef, nomDocSimple);
 			}
 			
-		}else if(nodeService.hasAspect(nodeRef, expedient)) {
-			System.out.println(DateFormat.getInstance().format(now) + " START: Recalcular dates action.");
-			updateSerie(nodeService, nodeRef, parentNodeRef);
-			now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular dates action.");
-			
-		}else if(nodeService.hasAspect(nodeRef, agregacio)) {
-			System.out.println(DateFormat.getInstance().format(now) + " START: Recalcular dates action.");
-			updateSerie(nodeService, nodeRef, parentNodeRef);
-			now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular dates action.");
-			
-		}else if(nodeService.hasAspect(nodeRef, serie)) {
-			System.out.println(DateFormat.getInstance().format(now) + " START: Recalcular dates action.");
-			updateFons(nodeService, nodeRef, parentNodeRef);
-			now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular dates action.");			
+			updateSerie(nodeService, expAgrNodeRef, serieNodeRef, nomDocSimple);
+			updateFons(nodeService, serieNodeRef, fonsNodeRef, nomDocSimple);
 		}
-		
+
 		AuthenticationUtil.setRunAsUser(usernameAuth);
 		AuthenticationUtil.setFullyAuthenticatedUser(usernameAuth);
 	}
@@ -108,39 +91,57 @@ public class RecalcularDatesAction extends ActionExecuterAbstractBase implements
 	 * @param nodeRef
 	 * @param parentNodeRef
 	 */
-	private void updateExpedient(NodeService nodeService, NodeRef docNodeRef, NodeRef expNodeRef) {
+	private void updateExpedient(NodeService nodeService, NodeRef docNodeRef, NodeRef expNodeRef, String nomDocSimple) {
+		//System.out.println(DateFormat.getInstance().format(new Date()) + " START: Recalcular dates expedient.");
 		Date docDataInici = (Date)nodeService.getProperties(docNodeRef).get(dataIniDocumentRM);
 		Date docDataFi = (Date)nodeService.getProperties(docNodeRef).get(dataFiDocumentRM);
 		Date expDataInici = (Date)nodeService.getProperties(expNodeRef).get(dataIniExpedientRM);
 		Date expDataFi = (Date)nodeService.getProperties(expNodeRef).get(dataFiExpedientRM);
 
-		// Si la data inici del document és anterior a la de l'expedient => s'actualitza la data inici de l'expedient 
-		if(docDataInici != null && docDataInici.before(expDataInici)) {
-			nodeService.setProperty(expNodeRef, dataIniExpedientRM, docDataInici);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data inici expedient: " + expNodeRef);
+		if(expDataInici == null || "".equals(expDataInici) || expDataFi == null || "".equals(expDataFi)) {
+			if(expDataInici == null || "".equals(expDataInici)) {
+				nodeService.setProperty(expNodeRef, dataIniExpedientRM, docDataInici);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data inici expedient: " + expNodeRef);
+			}
+	
+			if(expDataFi == null || "".equals(expDataFi)) {
+				nodeService.setProperty(expNodeRef, dataFiExpedientRM, docDataFi);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data fi expedient: " + expNodeRef);
+			}
+
+		}else {
+			// Si la data inici del document és anterior a la de l'expedient => s'actualitza la data inici de l'expedient 
+			if(docDataInici != null && docDataInici.before(expDataInici)) {
+				nodeService.setProperty(expNodeRef, dataIniExpedientRM, docDataInici);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data inici expedient: " + expNodeRef);
+				
+				// Si la data d'inici del document és posterior a la de l'expedient => cal revisar tots els documents de l'expedient
+			}else if(docDataInici != null && docDataInici.after(expDataInici)) {
+				Date firstData = getDataFirstDoc(nodeService, expNodeRef);
+				nodeService.setProperty(expNodeRef, dataIniExpedientRM, firstData);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data inici expedient: " + expNodeRef);
+			}
 			
-			// Si la data d'inici del document és posterior a la de l'expedient => cal revisar tots els documents de l'expedient
-		}else if(docDataInici != null && docDataInici.after(expDataInici)) {
-			Date firstData = getDataFirstDoc(nodeService, expNodeRef);
-			nodeService.setProperty(expNodeRef, dataIniExpedientRM, firstData);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data inici expedient: " + expNodeRef);
+			// Si la data fi del document és posterior a la de l'expedient => s'actualitza la data fi de l'expedient
+			if(docDataFi != null && docDataFi.after(expDataFi)) {
+				nodeService.setProperty(expNodeRef, dataFiExpedientRM, docDataFi);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data fi expedient: " + expNodeRef);
+	
+				// Si la data fi del document és anterior a la de l'expedient => cal revisar tots els documents de l'expedient
+			}else if(docDataFi != null && docDataFi.before(expDataFi)) {
+				Date lastData = getDataLastDoc(nodeService, expNodeRef);
+				nodeService.setProperty(expNodeRef, dataFiExpedientRM, lastData);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data fi expedient: " + expNodeRef);
+			}
 		}
 		
-		// Si la data fi del document és posterior a la de l'expedient => s'actualitza la data fi de l'expedient
-		if(docDataFi != null && docDataFi.after(expDataFi)) {
-			nodeService.setProperty(expNodeRef, dataFiExpedientRM, docDataFi);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data fi expedient: " + expNodeRef);
-
-			// Si la data fi del document és anterior a la de l'expedient => cal revisar tots els documents de l'expedient
-		}else if(docDataFi != null && docDataFi.before(expDataFi)) {
-			Date lastData = getDataLastDoc(nodeService, expNodeRef);
-			nodeService.setProperty(expNodeRef, dataFiExpedientRM, lastData);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data fi expedient: " + expNodeRef);
-		}
+		//System.out.println(DateFormat.getInstance().format(new Date()) + " END: Recalcular dates expedient.");
 	}
 	
 	/**
@@ -149,35 +150,53 @@ public class RecalcularDatesAction extends ActionExecuterAbstractBase implements
 	 * @param nodeRef
 	 * @param parentNodeRef
 	 */
-	private void updateAgregacio(NodeService nodeService, NodeRef docNodeRef, NodeRef agrNodeRef) {
+	private void updateAgregacio(NodeService nodeService, NodeRef docNodeRef, NodeRef agrNodeRef, String nomDocSimple) {
+		//System.out.println(DateFormat.getInstance().format(new Date()) + " START: Recalcular dates agregació.");
 		Date docDataInici = (Date)nodeService.getProperties(docNodeRef).get(dataIniDocumentRM);
 		Date docDataFi = (Date)nodeService.getProperties(docNodeRef).get(dataFiDocumentRM);
 		Date agrDataInici = (Date)nodeService.getProperties(agrNodeRef).get(dataIniAgregacioRM);
 		Date agrDataFi = (Date)nodeService.getProperties(agrNodeRef).get(dataFiAgregacioRM);
 
-		if(docDataInici.before(agrDataInici)) {
-			nodeService.setProperty(agrNodeRef, dataIniAgregacioRM, docDataInici);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data inici agregació: " + agrNodeRef);
+		if(agrDataInici == null || "".equals(agrDataInici) || agrDataFi == null || "".equals(agrDataFi)) {
+			if(agrDataInici == null || "".equals(agrDataInici)) {
+				nodeService.setProperty(agrNodeRef, dataIniAgregacioRM, docDataInici);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data inici agregació: " + agrNodeRef);
+			}
+	
+			if(agrDataFi == null || "".equals(agrDataFi)) {
+				nodeService.setProperty(agrNodeRef, dataFiAgregacioRM, docDataFi);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data fi agregació: " + agrNodeRef);
+			}
 
-		}else if(docDataInici.after(agrDataInici)) {
-			Date firstData = getDataFirstDoc(nodeService, agrNodeRef);
-			nodeService.setProperty(agrNodeRef, dataIniAgregacioRM, firstData);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data inici agregació: " + agrNodeRef);
+		}else {
+			if(docDataInici != null && docDataInici.before(agrDataInici)) {
+				nodeService.setProperty(agrNodeRef, dataIniAgregacioRM, docDataInici);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data inici agregació: " + agrNodeRef);
+	
+			}else if(docDataInici != null && docDataInici.after(agrDataInici)) {
+				Date firstData = getDataFirstDoc(nodeService, agrNodeRef);
+				nodeService.setProperty(agrNodeRef, dataIniAgregacioRM, firstData);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data inici agregació: " + agrNodeRef);
+			}
+			
+			if(docDataFi != null && docDataFi.after(agrDataFi)) {
+				nodeService.setProperty(agrNodeRef, dataFiAgregacioRM, docDataFi);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data fi agregació: " + agrNodeRef);
+	
+			}else if(docDataFi != null && docDataFi.before(agrDataFi)) {
+				Date lastData = getDataLastDoc(nodeService, agrNodeRef);
+				nodeService.setProperty(agrNodeRef, dataFiAgregacioRM, lastData);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data fi agregació: " + agrNodeRef);
+			}
 		}
 		
-		if(docDataFi.after(agrDataFi)) {
-			nodeService.setProperty(agrNodeRef, dataFiAgregacioRM, docDataFi);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data fi agregació: " + agrNodeRef);
-
-		}else if(docDataFi.before(agrDataFi)) {
-			Date lastData = getDataLastDoc(nodeService, agrNodeRef);
-			nodeService.setProperty(agrNodeRef, dataFiAgregacioRM, lastData);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data fi agregació: " + agrNodeRef);
-		}
+		//System.out.println(DateFormat.getInstance().format(new Date()) + " END: Recalcular dates agregació.");
 	}
 	
 	/**
@@ -186,7 +205,8 @@ public class RecalcularDatesAction extends ActionExecuterAbstractBase implements
 	 * @param nodeRef
 	 * @param parentNodeRef
 	 */
-	private void updateSerie(NodeService nodeService, NodeRef nodeRef, NodeRef serieNodeRef) {
+	private void updateSerie(NodeService nodeService, NodeRef nodeRef, NodeRef serieNodeRef, String nomDocSimple) {
+		//System.out.println(DateFormat.getInstance().format(new Date()) + " START: Recalcular dates sèrie.");
 		Date serieDataInici = (Date)nodeService.getProperties(serieNodeRef).get(dataIniSerieRM);
 		Date serieDataFi = (Date)nodeService.getProperties(serieNodeRef).get(dataFiSerieRM);
 		Date dataInici = null;
@@ -201,29 +221,49 @@ public class RecalcularDatesAction extends ActionExecuterAbstractBase implements
 			dataFi = (Date)nodeService.getProperties(nodeRef).get(dataFiAgregacioRM);
 		}
 		
-		if(dataInici.before(serieDataInici)) {
-			nodeService.setProperty(serieNodeRef, dataIniSerieRM, dataInici);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data inici sèrie: " + serieNodeRef);
-
-		}else if(dataInici.after(serieDataInici)){
-			Date firstData = getDataFirstExp(nodeService, serieNodeRef);
-			nodeService.setProperty(serieNodeRef, dataIniSerieRM, firstData);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data inici sèrie: " + serieNodeRef);
+		if(dataInici != null && !"".equals(dataInici)) {
+			if(serieDataInici == null || "".equals(serieDataInici)) {
+				nodeService.setProperty(serieNodeRef, dataIniSerieRM, dataInici);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data inici sèrie: " + serieNodeRef);
+				
+			}else {
+				if(dataInici.before(serieDataInici)) {
+					nodeService.setProperty(serieNodeRef, dataIniSerieRM, dataInici);
+					Date now = new Date();
+					System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data inici sèrie: " + serieNodeRef);
+		
+				}else if(dataInici.after(serieDataInici)){
+					Date firstData = getDataFirstExp(nodeService, serieNodeRef);
+					nodeService.setProperty(serieNodeRef, dataIniSerieRM, firstData);
+					Date now = new Date();
+					System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data inici sèrie: " + serieNodeRef);
+				}
+			}
 		}
 		
-		if(dataFi.after(serieDataFi)) {
-			nodeService.setProperty(serieNodeRef, dataFiSerieRM, dataFi);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data fi sèrie: " + serieNodeRef);
-
-		}else if(dataFi.before(serieDataFi)) {
-			Date lastData =  getDataLastExp(nodeService, serieNodeRef);
-			nodeService.setProperty(serieNodeRef, dataFiSerieRM, lastData);
-			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data fi sèrie: " + serieNodeRef);
+		if(dataFi != null && !"".equals(dataFi)) {
+			if(serieDataFi == null || "".equals(serieDataFi)) {
+				nodeService.setProperty(serieNodeRef, dataFiSerieRM, dataFi);
+				Date now = new Date();
+				System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data fi sèrie: " + serieNodeRef);
+				
+			}else {
+				if(dataFi.after(serieDataFi)) {
+					nodeService.setProperty(serieNodeRef, dataFiSerieRM, dataFi);
+					Date now = new Date();
+					System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data fi sèrie: " + serieNodeRef);
+		
+				}else if(dataFi.before(serieDataFi)) {
+					Date lastData =  getDataLastExp(nodeService, serieNodeRef);
+					nodeService.setProperty(serieNodeRef, dataFiSerieRM, lastData);
+					Date now = new Date();
+					System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data fi sèrie: " + serieNodeRef);
+				}
+			}
 		}
+		
+		//System.out.println(DateFormat.getInstance().format(new Date()) + " END: Recalcular dates sèrie.");
 	}
 	
 	/**
@@ -232,7 +272,8 @@ public class RecalcularDatesAction extends ActionExecuterAbstractBase implements
 	 * @param nodeRef
 	 * @param parentNodeRef
 	 */
-	private void updateFons(NodeService nodeService, NodeRef serieNodeRef, NodeRef fonsNodeRef) {
+	private void updateFons(NodeService nodeService, NodeRef serieNodeRef, NodeRef fonsNodeRef, String nomDocSimple) {
+		//System.out.println(DateFormat.getInstance().format(new Date()) + " START: Recalcular dates fons.");
 		Date serieDataInici = (Date)nodeService.getProperties(serieNodeRef).get(dataIniSerieRM);
 		Date serieDataFi = (Date)nodeService.getProperties(serieNodeRef).get(dataFiSerieRM);
 		Date fonsDataInici = (Date)nodeService.getProperties(fonsNodeRef).get(dataIniFonsRM);
@@ -241,26 +282,28 @@ public class RecalcularDatesAction extends ActionExecuterAbstractBase implements
 		if(serieDataInici.before(fonsDataInici)) {
 			nodeService.setProperty(fonsNodeRef, dataIniFonsRM, serieDataInici);
 			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data inici fons: " + fonsNodeRef);
+			System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data inici fons: " + fonsNodeRef);
 
 		}else if(serieDataInici.after(fonsDataInici)) {
 			Date firstData = getDataFirstSerie(nodeService, fonsNodeRef);
 			nodeService.setProperty(fonsNodeRef, dataIniFonsRM, firstData);
 			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data inici fons: " + fonsNodeRef);
+			System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data inici fons: " + fonsNodeRef);
 		}
 		
 		if(serieDataFi.after(fonsDataFi)) {
 			nodeService.setProperty(fonsNodeRef, dataFiFonsRM, serieDataFi);
 			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data fi fons: " + fonsNodeRef);
+			System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data fi fons: " + fonsNodeRef);
 
 		}else if(serieDataFi.before(fonsDataFi)) {
 			Date lastData = getDataLastSerie(nodeService, fonsNodeRef);
 			nodeService.setProperty(fonsNodeRef, dataFiFonsRM, lastData);
 			Date now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " Update data fi fons: " + fonsNodeRef);
+			System.out.println(DateFormat.getInstance().format(now) + " Doc. Simple: " + nomDocSimple + " Update data fi fons: " + fonsNodeRef);
 		}
+		
+		//System.out.println(DateFormat.getInstance().format(new Date()) + " END: Recalcular dates fons.");
 	}
 
 	/**
@@ -276,13 +319,16 @@ public class RecalcularDatesAction extends ActionExecuterAbstractBase implements
 		
 		for (ChildAssociationRef childAssoc : children) {
 			NodeRef childNodeRef = childAssoc.getChildRef();
-			aux = (Date)nodeService.getProperty(childNodeRef, dataIniDocumentRM);
 			
-			if(result == null) {
-				result = aux;
-
-			}else if(aux != null && aux.before(result)) {
-				result = aux;
+			if(nodeService.hasAspect(childNodeRef, documentSimple)) {
+				aux = (Date)nodeService.getProperty(childNodeRef, dataIniDocumentRM);
+				
+				if(result == null) {
+					result = aux;
+	
+				}else if(aux != null && aux.before(result)) {
+					result = aux;
+				}
 			}
 		}
 		
@@ -302,13 +348,16 @@ public class RecalcularDatesAction extends ActionExecuterAbstractBase implements
 		
 		for (ChildAssociationRef childAssoc : children) {
 			NodeRef childNodeRef = childAssoc.getChildRef();
-			aux = (Date)nodeService.getProperty(childNodeRef, dataFiDocumentRM);
-			
-			if(result == null) {
-				result = aux;
 
-			}else if(aux != null && aux.after(result)) {
-				result = aux;
+			if(nodeService.hasAspect(childNodeRef, documentSimple)) {
+				aux = (Date)nodeService.getProperty(childNodeRef, dataFiDocumentRM);
+				
+				if(result == null) {
+					result = aux;
+	
+				}else if(aux != null && aux.after(result)) {
+					result = aux;
+				}
 			}
 		}
 		

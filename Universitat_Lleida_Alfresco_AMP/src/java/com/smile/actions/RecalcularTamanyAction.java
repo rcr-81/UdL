@@ -43,40 +43,24 @@ public class RecalcularTamanyAction extends ActionExecuterAbstractBase implement
 	protected void executeImpl(Action action, NodeRef nodeRef) {
 		String usernameAuth = authenticate();
 		NodeService nodeService = serviceRegistry.getNodeService();
-		Date now = new Date();
 		NodeRef parentNodeRef = nodeService.getPrimaryParent(nodeRef).getParentRef();
 		
 		if(nodeService.hasAspect(nodeRef, documentSimpleRM)) {			
 			if(nodeService.hasAspect(parentNodeRef, expedientRM)) {
-				System.out.println(DateFormat.getInstance().format(now) + " START: Recalcular tamany action.");
 				updateExpedient(nodeService, nodeRef, parentNodeRef);
-				now = new Date();
-				System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular tamany action.");
 				
 			}else if(nodeService.hasAspect(parentNodeRef, agregacioRM)) {
-				System.out.println(DateFormat.getInstance().format(now) + " START: Recalcular tamany action.");
 				updateAgregacio(nodeService, nodeRef, parentNodeRef);
-				now = new Date();
-				System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular tamany action.");
 			}
 			
 		}else if(nodeService.hasAspect(nodeRef, expedientRM)) {
-			System.out.println(DateFormat.getInstance().format(now) + " START: Recalcular tamany action.");
 			updateSerie(nodeService, nodeRef, parentNodeRef);
-			now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular tamany action.");
 			
 		}else if(nodeService.hasAspect(nodeRef, agregacioRM)) {
-			System.out.println(DateFormat.getInstance().format(now) + " START: Recalcular tamany action.");
 			updateSerie(nodeService, nodeRef, parentNodeRef);
-			now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular tamany action.");
 			
 		}else if(nodeService.hasAspect(nodeRef, serieRM)) {
-			System.out.println(DateFormat.getInstance().format(now) + " START: Recalcular tamany action.");
 			updateFons(nodeService, nodeRef, parentNodeRef);
-			now = new Date();
-			System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular tamany action.");			
 		}
 
 		AuthenticationUtil.setRunAsUser(usernameAuth);
@@ -90,6 +74,7 @@ public class RecalcularTamanyAction extends ActionExecuterAbstractBase implement
 	 * @param parentNodeRef
 	 */
 	private void updateExpedient(NodeService nodeService, NodeRef docNodeRef, NodeRef expNodeRef) {
+		System.out.println(DateFormat.getInstance().format(new Date()) + " START: Recalcular tamany expedient.");
 		int tamany = 0;
 		List<ChildAssociationRef> children = nodeService.getChildAssocs(expNodeRef);
 		
@@ -97,7 +82,7 @@ public class RecalcularTamanyAction extends ActionExecuterAbstractBase implement
 			NodeRef childNodeRef = childAssoc.getChildRef();
 			Serializable tamanySerial = nodeService.getProperty(childNodeRef, tamanyDocumentSimpleRM);
 			
-			if(tamanySerial != null) {
+			if(tamanySerial != null && !"".equals(tamanySerial)) {
 				tamany = tamany + (Integer.parseInt((String)tamanySerial));
 			}
 		}
@@ -105,6 +90,7 @@ public class RecalcularTamanyAction extends ActionExecuterAbstractBase implement
 		nodeService.setProperty(expNodeRef, tamanyExpedientRM, String.valueOf(tamany));
 		Date now = new Date();
 		System.out.println(DateFormat.getInstance().format(now) + " Update tamany expedient: " + expNodeRef);
+		System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular tamany expedient.");
 	}
 	
 	/**
@@ -114,6 +100,7 @@ public class RecalcularTamanyAction extends ActionExecuterAbstractBase implement
 	 * @param parentNodeRef
 	 */
 	private void updateAgregacio(NodeService nodeService, NodeRef docNodeRef, NodeRef agrNodeRef) {
+		System.out.println(DateFormat.getInstance().format(new Date()) + " START: Recalcular tamany agregació.");
 		int tamany = 0;
 		List<ChildAssociationRef> children = nodeService.getChildAssocs(agrNodeRef);
 		
@@ -129,6 +116,7 @@ public class RecalcularTamanyAction extends ActionExecuterAbstractBase implement
 		nodeService.setProperty(agrNodeRef, tamanyAgregacioRM, String.valueOf(tamany));
 		Date now = new Date();
 		System.out.println(DateFormat.getInstance().format(now) + " Update tamany agregació: " + agrNodeRef);
+		System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular tamany agregació.");
 	}
 	
 	/**
@@ -138,6 +126,7 @@ public class RecalcularTamanyAction extends ActionExecuterAbstractBase implement
 	 * @param parentNodeRef
 	 */
 	private void updateSerie(NodeService nodeService, NodeRef nodeRef, NodeRef serieNodeRef) {
+		System.out.println(DateFormat.getInstance().format(new Date()) + " START: Recalcular tamany sèrie.");
 		int tamany = 0;
 		List<ChildAssociationRef> children = nodeService.getChildAssocs(serieNodeRef);
 		
@@ -163,6 +152,7 @@ public class RecalcularTamanyAction extends ActionExecuterAbstractBase implement
 		nodeService.setProperty(serieNodeRef, tamanySerieRM, String.valueOf(tamany));
 		Date now = new Date();
 		System.out.println(DateFormat.getInstance().format(now) + " Update tamany sèrie: " + serieNodeRef);
+		System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular tamany sèrie.");
 	}
 	
 	/**
@@ -172,6 +162,7 @@ public class RecalcularTamanyAction extends ActionExecuterAbstractBase implement
 	 * @param parentNodeRef
 	 */
 	private void updateFons(NodeService nodeService, NodeRef serieNodeRef, NodeRef fonsNodeRef) {
+		System.out.println(DateFormat.getInstance().format(new Date()) + " START: Recalcular tamany fons.");
 		int tamany = 0;
 		List<ChildAssociationRef> children = nodeService.getChildAssocs(fonsNodeRef);
 		
@@ -187,6 +178,7 @@ public class RecalcularTamanyAction extends ActionExecuterAbstractBase implement
 		nodeService.setProperty(fonsNodeRef, tamanyFonsRM, String.valueOf(tamany));
 		Date now = new Date();
 		System.out.println(DateFormat.getInstance().format(now) + " Update tamany fons: " + fonsNodeRef);
+		System.out.println(DateFormat.getInstance().format(now) + " END: Recalcular tamany fons.");
 	}
 	
 	/**

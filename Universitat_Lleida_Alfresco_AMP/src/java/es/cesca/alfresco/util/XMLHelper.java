@@ -257,9 +257,11 @@ public class XMLHelper {
 							splitKeyToBind[i] = splitKeyToBind[i].substring(splitKeyToBind[i].indexOf(":") +1);
 						}
 						Serializable serial = propsToBind.get(splitKeyToBind[i]);
+						
 						if (pair.getSecond() && serial == null){
-							throw new MandatoryFieldException(keyAtr+"/"+splitKeyToBind[i]);
+							throw new MandatoryFieldException(keyAtr+"/"+splitKeyToBind[i]);								
 						}
+						
 						String val = toString(serial);
 						
 						if(logger.isDebugEnabled())
