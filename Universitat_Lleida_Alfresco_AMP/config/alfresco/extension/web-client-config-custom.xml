@@ -158,16 +158,11 @@
 	<!-- Configuració dels wizards de continguts -->
 		<config evaluator="string-compare" condition="Content Wizards">
 			<content-types>
-				<type name="cesca:CESCA_CONFIGURACIO" />
-				<type name="cesca:CESCA_CFG_EXPEDIENT" />
-				<type name="cesca:CESCA_CFG_DOCUMENT" />
-				<type name="cesca:CESCA_CFG_SIGNATURA" />
-				<type name="cesca:CESCA_PETICIO_IARXIU" />
-				<type name="cesca:CESCA_REBUT_IARXIU" />
-				<type name="cesca:CESCA_PROCES_LOG" />
+				<type name="rma:recordFolder" />
+				<type name="rma:record" />
 			</content-types>
 		</config>
-		
+
 	<!-- Wizards -->
 	<config>
 		<wizard-container>/jsp/wizard/container.jsp</wizard-container>
@@ -392,6 +387,7 @@
 	</config>
 	
 <!-- MODELS DE CONFIGURACIÓ -->
+
 		<!-- Tipus de configuració principal -->
 		<config evaluator="node-type" condition="cesca:CESCA_CONFIGURACIO">
 			<!-- title>Objecte de configuració principal</title -->
@@ -404,7 +400,6 @@
 				<!--  <show-property name="cesca:configuracio_per_defecte" show-in-edit-mode="true" show-in-view-mode="true" />-->
 			</property-sheet>
 		</config>
-
 
 		<!-- Tipus de configuració d'expedients -->
 		<config evaluator="node-type" condition="cesca:CESCA_CFG_EXPEDIENT">
