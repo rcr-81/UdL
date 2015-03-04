@@ -4,6 +4,6 @@
   <url>/slingshot/doclib/action/transferirExpedient?arguments={arguments}</url>
   <url>/udl/expedient/transferirExpedient</url>    
   <format default="xml">argument</format>
-  <authentication>admin</authentication>
+  <authentication>user</authentication>
   <transaction>requiresnew</transaction>
 </webscript>
