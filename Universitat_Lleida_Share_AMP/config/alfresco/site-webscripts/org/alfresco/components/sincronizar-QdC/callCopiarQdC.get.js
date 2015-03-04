@@ -15,7 +15,7 @@ function main()
 			model.successMsg = result;
 
 		}else if (result.status == 408) {
-			model.successMsg = 'Temps d\'espera superat, el procés continuará executant-se en un segon pla.';
+			model.successMsg = 'Temps d\'espera superat, el procés continuarà executant-se en un segon pla.';
 
 		}else {
 			model.errorMsg = 'ERROR a l\'intentar sincronitzar els quadres de classificació.';

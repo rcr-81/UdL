@@ -13,9 +13,12 @@ function main()
 		
 		if (result.status == 200) {
 			model.successMsg = "Dates recalculades correctament.";		
-		}
-		else {
-			model.errorMsg = "ERROR al recalcular les dates.";	
+
+		}else if (result.status == 408) {
+			model.errorMsg = "Temps d\'espera superat, el procés continuarà executant-se en un segon pla.";
+
+		}else {
+			model.errorMsg = "ERROR al recalcular les dates.";
 		}
 	}
 }

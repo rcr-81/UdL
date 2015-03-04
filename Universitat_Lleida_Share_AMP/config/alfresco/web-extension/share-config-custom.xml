@@ -104,6 +104,7 @@
 				<aspect name="udlrm:serie" />
 				<aspect name="udlrm:fons" />
 				<aspect name="udlrm:grupDeFons" />
+				<aspect name="udlrm:signaturaDettached" />				
 				<aspect name="udl:regulacio" />
 				<aspect name="udl:institucio" />
 				<aspect name="udl:organ" />
@@ -119,12 +120,13 @@
 				<aspect name="udlrm:serie" />
 				<aspect name="udlrm:fons" />
 				<aspect name="udlrm:grupDeFons" />
+				<aspect name="udlrm:signaturaDettached" />
 				<aspect name="udl:regulacio" />
 				<aspect name="udl:institucio" />
 				<aspect name="udl:organ" />
 				<aspect name="udl:dispositiu" />
 				<aspect name="udl:persona" />
-				<aspect name="udl:iarxiu" />
+
 			</addable>
 			<!-- Aspects that a user can remove. Same as "visible" if left empty -->
 			<removeable>
@@ -134,6 +136,7 @@
 				<aspect name="udlrm:serie" />
 				<aspect name="udlrm:fons" />
 				<aspect name="udlrm:grupDeFons" />
+				<aspect name="udlrm:signaturaDettached" />				
 				<aspect name="udl:regulacio" />
 				<aspect name="udl:institucio" />
 				<aspect name="udl:organ" />
@@ -4652,6 +4655,8 @@
 					<!--<show id="udl:secuencial_identificador_persona" /> -->
 					<!--<show id="udl:esquema_identificador_persona" /> -->
 					<show id="udl:nom_natural_persona" />
+					<show id="udl:id_ref_PIA" />
+					<show id="udl:id_peticio" />
 					<!--<show id="udl:esquema_nom_persona" /> -->
 					<!--<show id="udl:data_inici_persona" /> -->
 					<!--<show id="udl:data_fi_persona" /> -->
@@ -4741,6 +4746,7 @@
 					<set id="organ" appearance="bordered-panel" label="Agent. Òrgan" />
 					<set id="dispositiu" appearance="bordered-panel" label="Agent. Dispositiu" />
 					<set id="persona" appearance="bordered-panel" label="Persona" />
+					<set id="iarxiu" appearance="bordered-panel" label="iArxiu" />
 					<field id="udlrm:grup_creador_expedient" set="creacio" read-only="true" />
 					<field id="udlrm:tipus_entitat_agregacio" set="agre" read-only="true" />
 					<field id="udlrm:categoria_agregacio" set="agre" read-only="true" />
@@ -4808,6 +4814,8 @@
 					<!--<field id="udl:secuencial_identificador_persona" set="persona" read-only="true" /> -->
 					<!--<field id="udl:esquema_identificador_persona" set="persona" read-only="true" /> -->
 					<field id="udl:nom_natural_persona" set="persona" />
+					<field id="udl:id_ref_PIA" set="iarxiu" />
+					<field id="udl:id_peticio" set="iarxiu" />
 					<!--<field id="udl:esquema_nom_persona" set="persona" /> -->
 					<!--<field id="udl:data_inici_persona" set="persona" /> -->
 					<!--<field id="udl:data_fi_persona" set="persona" /> -->
@@ -4944,6 +4952,8 @@
 					<!--<show id="udl:secuencial_identificador_persona" /> -->
 					<!--<show id="udl:esquema_identificador_persona" /> -->
 					<show id="udl:nom_natural_persona" />
+					<show id="udl:id_ref_PIA" />
+					<show id="udl:id_peticio" />
 					<!--<show id="udl:esquema_nom_persona" /> -->
 					<!--<show id="udl:data_inici_persona" /> -->
 					<!--<show id="udl:data_fi_persona" /> -->
@@ -5032,6 +5042,7 @@
 					<set id="organ" appearance="bordered-panel" label="Agent. Òrgan" />
 					<set id="dispositiu" appearance="bordered-panel" label="Agent. Dispositiu" />
 					<set id="persona" appearance="bordered-panel" label="Persona" />
+					<set id="iarxiu" appearance="bordered-panel" label="iArxiu" />
 					<field id="udlrm:grup_creador_expedient" set="creacio" read-only="true" />
 					<field id="udlrm:tipus_entitat_agregacio" set="agre" read-only="true" />
 					<field id="udlrm:categoria_agregacio" set="agre" read-only="true" />
@@ -5099,6 +5110,8 @@
 					<!--<field id="udl:secuencial_identificador_persona" set="persona" read-only="true" /> -->
 					<!--<field id="udl:esquema_identificador_persona" set="persona" read-only="true" /> -->
 					<field id="udl:nom_natural_persona" set="persona" />
+					<field id="udl:id_ref_PIA" set="iarxiu" />
+					<field id="udl:id_peticio" set="iarxiu" />
 					<!--<field id="udl:esquema_nom_persona" set="persona" /> -->
 					<!--<field id="udl:data_inici_persona" set="persona" /> -->
 					<!--<field id="udl:data_fi_persona" set="persona" /> -->
@@ -5239,6 +5252,8 @@
 					<!--<show id="udl:secuencial_identificador_persona" /> -->
 					<!--<show id="udl:esquema_identificador_persona" /> -->
 					<show id="udl:nom_natural_persona" />
+					<show id="udl:id_ref_PIA" />
+					<show id="udl:id_peticio" />
 					<!--<show id="udl:esquema_nom_persona" /> -->
 					<!--<show id="udl:data_inici_persona" /> -->
 					<!--<show id="udl:data_fi_persona" /> -->
@@ -5327,6 +5342,7 @@
 					<set id="organ" appearance="bordered-panel" label="Agent. Òrgan" />
 					<set id="dispositiu" appearance="bordered-panel" label="Agent. Dispositiu" />
 					<set id="persona" appearance="bordered-panel" label="Persona" />
+					<set id="iarxiu" appearance="bordered-panel" label="iArxiu" />
 					<field id="udlrm:grup_creador_expedient" set="creacio" read-only="true" />
 					<field id="udlrm:tipus_entitat_agregacio" set="agre" read-only="true" />
 					<field id="udlrm:categoria_agregacio" set="agre" read-only="true" />
@@ -5394,6 +5410,8 @@
 					<!--<field id="udl:secuencial_identificador_persona" set="persona" read-only="true" /> -->
 					<!--<field id="udl:esquema_identificador_persona" set="persona" read-only="true" /> -->
 					<field id="udl:nom_natural_persona" set="persona" />
+					<field id="udl:id_ref_PIA" set="iarxiu" />
+					<field id="udl:id_peticio" set="iarxiu" />
 					<!--<field id="udl:esquema_nom_persona" set="persona" /> -->
 					<!--<field id="udl:data_inici_persona" set="persona" /> -->
 					<!--<field id="udl:data_fi_persona" set="persona" /> -->
