@@ -22,5 +22,9 @@
 	<classpathentry kind="lib" path="lib/bctsp-jdk16-146.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SDK AlfrescoEmbedded"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SDK AlfrescoRemote"/>
+	<classpathentry kind="lib" path="lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="lib/XAdES4j.jar"/>
+	<classpathentry kind="lib" path="lib/xtrim-api.jar"/>
+	<classpathentry kind="lib" path="lib/xtrim-server.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

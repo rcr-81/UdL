@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Cesca Model -->
+
+<!-- Note: This model is pre-configured to load at startup of the Repository.  So, all custom -->
+<!--       types and aspects added here will automatically be registered -->
+
+<model name="cesca:cescaModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <!-- Optional meta-data about the model -->   
+   <description>Cesca Model</description>
+   <author>Cesca</author>
+   <version>1.0</version>
+
+   <imports>
+   	  <!-- Import Alfresco Dictionary Definitions -->
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <!-- Import Alfresco Content Domain Model Definitions -->
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+   </imports>
+
+   <!-- Introduction of new namespaces defined by this model -->
+   <namespaces>
+      <namespace uri="http://www.cesca.es/model" prefix="cesca"/>
+   </namespaces>
+
+
+	<types>
+
+<!-- MODELS DE CONFIGURACIÓ -->
+
+		<!-- Tipus de configuració principal -->
+		<type name="cesca:CESCA_CONFIGURACIO">
+			<title>Objecte de configuració principal</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:criteri_cerca">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:en_suspens">
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+					<default>false</default>
+				</property>
+				<property name="cesca:peticio_docexp">
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:id_configuracio">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+
+
+		<!-- Tipus de configuració d'expedients -->
+		<type name="cesca:CESCA_CFG_EXPEDIENT">
+			<title>Objecte de configuració d'expedients</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:tipus_expedient">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:cerca_documents">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:cfg_expedient_en_suspens"><!-- * -->
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+					<default>false</default>
+				</property>
+				<property name="cesca:cfg_expedient_id_configuracio">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:cfg_expedient_configuracio_per_defecte">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+
+		<!-- Tipus de configuració de documents -->
+		<type name="cesca:CESCA_CFG_DOCUMENT">
+			<title>Objecte de configuració de documents dels expedients</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:tipus_document">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:cerca_signatures">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:cfg_document_en_suspens"><!-- * -->
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+					<default>false</default>
+				</property>
+				<property name="cesca:peticio_docind"><!-- * -->
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:cfg_document_id_configuracio">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:cfg_document_configuracio_per_defecte">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+
+		<!-- Tipus de configuració de signatures -->
+		<type name="cesca:CESCA_CFG_SIGNATURA">
+			<title>Objecte de configuració de signatures dels documents</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:tipus_signatura">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:cfg_signatura_en_suspens"><!-- * -->
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+					<default>false</default>
+				</property>
+				<property name="cesca:peticiosign_docind">
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:cfg_signatura_id_configuracio">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+
+<!-- MODEL DE CONTROL D'ESTAT -->
+		<!-- Tipus de configuració principal -->
+		<type name="cesca:CESCA_PETICIO_IARXIU">
+			<title>Objecte de petició de iarxiu</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:id_peticio">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:id_exp">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:num_doc">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:numexp"><!-- id al rebut -->
+					<type>d:text</type>
+					<mandatory>true</mandatory><!-- En espera de resposta de Jordi: 20 Maig 11:10 -->
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:estat">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:desc_error">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:pia_"><!-- * -->
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:peticio_id_configuracio">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+		
+		<type name="cesca:CESCA_VOCABULARIO">
+			<title>Objecte de vocabulari</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:id_vocabulario">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:nombreVoc">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+		
+		<type name="cesca:CESCA_PLANTILLA">
+			<title>Objecte de plantilla</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:id_plantilla">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:nombrePlantilla">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:tipoDocumental">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:plantillaRef">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:vocabulariRef">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+		
+		<type name="cesca:CESCA_EXTRACCIO">
+			<title>Objecte de extraccio</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:id_extraccio">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:nombreExtraccio">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:tipusDocumentalExp">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:tipusDocumentalDoc">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:tipusDocumentalSign">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:selExp">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:selDoc">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:selSign">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:plantillaExp">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:plantillaDoc">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:plantillaSign">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:ref_file_conf">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:ref_file_exp">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:ref_file_doc">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:ref_file_doc_sense_exp">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:ref_file_sign">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+		
+		<type name="cesca:CESCA_ATRIBUTO">
+			<title>Objecte de atributo</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:id_atributo">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:nombreAtr">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:valor">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:tipus">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:obligatori">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:vocabulario_ref">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:tipus_documental">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+
+<!-- MODEL DE REBUT -->
+		<!-- Tipus de rebut de iarxiu -->
+		<type name="cesca:CESCA_REBUT_IARXIU">
+			<title>Objecte de rebut de iarxiu</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:id">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:pia">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+
+<!-- MODEL DE LOG -->
+		<!-- Tipus de log -->
+		<type name="cesca:CESCA_PROCES_LOG">
+			<title>Objecte de log</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:usuari">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:data">
+					<type>d:datetime</type><!-- * -->
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:proces">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:is_error">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+
+<!-- MODEL PLANTILLES MAIL -->
+		<!-- Tipus de configuracio de plantilles de correus -->
+		<type name="cesca:CESCA_MAIL_TEMPLATE">
+			<title>Objecte per a les plantilles dels correus</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="cesca:grup_usuaris">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="cesca:titol_correu">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+
+
+	</types>
+      
+</model>

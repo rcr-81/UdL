@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>updateExpedient</shortname>
+  <description>Universitat de Lleida. Actualitzar expedient RM</description>
+  <url>/udl/expedient/updateExpedientRM</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+</webscript>

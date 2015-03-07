@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+                              "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config>
+
+	<managed-bean>
+      <description>
+         The bean that backs up the CreaPeticioIArxiu Wizard
+      </description>
+      <managed-bean-name>CreaPeticioIArxiuWizard</managed-bean-name>
+      <managed-bean-class>es.cesca.alfresco.wizard.CreaPeticioIArxiuWizard</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+      <managed-property>
+         <property-name>serviceRegistry</property-name>
+         <value>#{ServiceRegistry}</value>
+      </managed-property>
+   </managed-bean>
+   
+	<managed-bean>
+      <description>
+         The bean that backs up the CreaPeticioIArxiu Wizard
+      </description>
+      <managed-bean-name>ConsultaGeneralWizard</managed-bean-name>
+      <managed-bean-class>es.cesca.alfresco.wizard.ConsultaGeneralWizard</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+      <managed-property>
+         <property-name>serviceRegistry</property-name>
+         <value>#{ServiceRegistry}</value>
+      </managed-property>
+   </managed-bean>
+
+   <managed-bean>
+      <description>
+         The bean that backs up the ConsultaEstatPeticio Wizard
+      </description>
+      <managed-bean-name>ConsultaEstatPeticioWizard</managed-bean-name>
+      <managed-bean-class>es.cesca.alfresco.wizard.ConsultaEstatPeticioWizard</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+      <managed-property>
+         <property-name>serviceRegistry</property-name>
+         <value>#{ServiceRegistry}</value>
+      </managed-property>
+   </managed-bean>
+   
+   
+	<managed-bean>
+      <description>
+         The bean that backs up the RecuperaPeticioEmmagatzemada Wizard
+      </description>
+      <managed-bean-name>RecuperaPeticioEmmagatzemadaWizard</managed-bean-name>
+      <managed-bean-class>es.cesca.alfresco.wizard.RecuperaPeticioEmmagatzemadaWizard</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+      <managed-property>
+         <property-name>serviceRegistry</property-name>
+         <value>#{ServiceRegistry}</value>
+      </managed-property>
+      <managed-property>
+         <property-name>navigator</property-name>
+         <value>#{NavigationBean}</value>
+      </managed-property>
+   </managed-bean>
+   
+	<managed-bean>
+      <description>
+         The bean that backs up the EliminaPeticio Wizard
+      </description>
+      <managed-bean-name>EliminaPeticioWizard</managed-bean-name>
+      <managed-bean-class>es.cesca.alfresco.wizard.EliminaPeticioWizard</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+      <managed-property>
+         <property-name>serviceRegistry</property-name>
+         <value>#{ServiceRegistry}</value>
+      </managed-property>
+   </managed-bean>
+   
+   <managed-bean>
+      <description>
+         The bean that backs up the Vocabulari Wizard
+      </description>
+      <managed-bean-name>VocabulariWizard</managed-bean-name>
+      <managed-bean-class>es.cesca.alfresco.wizard.VocabulariWizard</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+      <managed-property>
+         <property-name>serviceRegistry</property-name>
+         <value>#{ServiceRegistry}</value>
+      </managed-property>
+   </managed-bean>
+   
+   <managed-bean>
+      <description>
+         The bean that backs up the Edit Vocabulario Wizard
+      </description>
+      <managed-bean-name>EditVocabularioWizard</managed-bean-name>
+      <managed-bean-class>es.cesca.alfresco.wizard.EditVocabularioWizard</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+      <managed-property>
+         <property-name>serviceRegistry</property-name>
+         <value>#{ServiceRegistry}</value>
+      </managed-property>
+   </managed-bean>
+   
+   <managed-bean>
+      <description>
+         The bean that backs up the Plantilla Wizard
+      </description>
+      <managed-bean-name>PlantillaWizard</managed-bean-name>
+      <managed-bean-class>es.cesca.alfresco.wizard.PlantillaWizard</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+      <managed-property>
+         <property-name>serviceRegistry</property-name>
+         <value>#{ServiceRegistry}</value>
+      </managed-property>
+   </managed-bean>
+   
+   <managed-bean>
+      <description>
+         The bean that backs up the Extraccio Wizard
+      </description>
+      <managed-bean-name>ExtraccioWizard</managed-bean-name>
+      <managed-bean-class>es.cesca.alfresco.wizard.ExtraccioWizard</managed-bean-class>
+      <managed-bean-scope>session</managed-bean-scope>
+      <managed-property>
+         <property-name>serviceRegistry</property-name>
+         <value>#{ServiceRegistry}</value>
+      </managed-property>
+   </managed-bean>
+</faces-config>
