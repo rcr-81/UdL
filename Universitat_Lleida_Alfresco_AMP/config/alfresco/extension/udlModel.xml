@@ -3239,6 +3239,16 @@
 				</property>
 			</properties>
 		</aspect>
+		<aspect name="udl:transferibleIarxiu">
+			<title>Transferible a iArxiu</title>
+			<properties>
+				<property name="udl:transferible">
+					<title>Transferible a iArxiu</title>
+					<type>d:boolean</type>
+					<mandatory>true</mandatory>
+				</property>
+			</properties>
+		</aspect>
 		<aspect name="udl:signatura">
 			<title>Signatura</title>
 			<properties>

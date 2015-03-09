@@ -39,6 +39,10 @@
 	   <property name="serviceRegistry" ref="ServiceRegistry" />
 	</bean>
 
+	<bean id="webscript.udl.expedient.transferibleIarxiu.transferibleIarxiu.post" class="com.smile.webscripts.expedient.TransferibleIarxiu" parent="webscript">
+	   <property name="serviceRegistry" ref="ServiceRegistry" />
+	</bean>
+
 	<bean id="webscript.udl.cercarExpedients.cercarExpedients.post" class="com.smile.webscripts.cercarExpedients.CercarExpedients" parent="webscript">
 	   <property name="serviceRegistry" ref="ServiceRegistry" />
 	</bean>
