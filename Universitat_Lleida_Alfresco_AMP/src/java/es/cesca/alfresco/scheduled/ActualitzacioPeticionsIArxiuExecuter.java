@@ -16,11 +16,6 @@ import org.alfresco.service.cmr.action.ParameterDefinition;
 import org.alfresco.service.cmr.model.FileInfo;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
-import org.alfresco.service.cmr.repository.StoreRef;
-import org.alfresco.service.cmr.search.LimitBy;
-import org.alfresco.service.cmr.search.ResultSet;
-import org.alfresco.service.cmr.search.SearchParameters;
-import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.web.bean.repository.Repository;
 import org.apache.commons.logging.Log;
@@ -195,6 +190,9 @@ public class ActualitzacioPeticionsIArxiuExecuter extends ExecuterAbstractBase {
 		props.put(QName.createQName(UdlProperties.UDL_URI, "id_ref_PIA"), pia);
 		props.put(QName.createQName(UdlProperties.UDL_URI, "id_peticio"), idPeticion);
 		nodeService.addAspect(new NodeRef(Repository.getStoreRef(), idPeticion), QName.createQName(UdlProperties.UDL_URI, "iarxiu"), props);
+		
+		// Se añade el aspecto rma:transferred al expediente para que Alfresco muestre la flecha verde de transferido
+		//nodeService.addAspect(new NodeRef(Repository.getStoreRef(), idPeticion), QName.createQName(UdlProperties.RM_URI, "transferred"), null);
 	}
 	
 	protected void createRebutIArxiu(String peticio, NodeRef peticioRef, String idExpMid, String pia) {
