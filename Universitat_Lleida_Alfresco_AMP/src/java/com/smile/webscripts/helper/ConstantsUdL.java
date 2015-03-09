@@ -27,6 +27,7 @@ public interface ConstantsUdL {
 	public final static String FORM_PARAM_EXP_ID = "expID";
 	public final static String FORM_PARAM_EXP_NAME = "expName";	
 	public final static String FORM_PARAM_EXP_PATH = "expPath";
+	public final static String FORM_PARAM_EXP_TRANSFERIBLE = "transferible";
 		
 	public final static String FORM_PARAM_SIG_CONTENT = "sigContent";
 	public final static String FORM_PARAM_SIG_NAME = "sigName";	
@@ -145,13 +146,15 @@ public interface ConstantsUdL {
 		
 	public final static String CM_URI = "http://www.alfresco.org/model/content/1.0";
 	public final static String RM_URI = "http://www.alfresco.org/model/recordsmanagement/1.0";
+	public final static String UDL_URI = "http://www.smile.com/model/udl/1.0";
+	public final static String UDLRM_URI = "http://www.smile.com/model/udlrm/1.0";
+	
+	public static QName ASPECT_TRANSFERIBLE_IARXIU = QName.createQName(UDL_URI, "transferibleIarxiu");
+	public static QName PROP_TRANSFERIBLE = QName.createQName(UDL_URI, "transferible");
 	
 	public static QName ASPECT_RECORD_COMPONENT_ID = QName.createQName(RM_URI, "recordComponentIdentifier");
 	public static QName PROP_IDENTIFIER = QName.createQName(RM_URI, "identifier");
 
-	public final static String UDL_URI = "http://www.smile.com/model/udl/1.0";
-	public final static String UDLRM_URI = "http://www.smile.com/model/udlrm/1.0";
-	
 	public final static String AUDIT_APLICATION_PATH = "/udl/audit";	
 	public final static String AUDIT_ACTION_CREATE_DOCUMENT_SIMPLE = "crear_document_simple";
 	public final static String AUDIT_ACTION_UPDATE_DOCUMENT_SIMPLE = "modificar_document_simple";
@@ -216,6 +219,10 @@ public interface ConstantsUdL {
 	public final static String PARAM_LOCALITZACIO_1 = "localitzacio1";
 	public final static String PARAM_LOCALITZACIO_2 = "localitzacio2";
 	public final static String PARAM_ESSENCIAL = "essencial";
+
+	public final static String PARAM_MESSAGE = "message";
+	public final static String PARAM_MESSAGE_TRANSFERIBLE_IARXIU = "message.transferible.iarxiu.success";
+	public final static String PARAM_MESSAGE_NO_TRANSFERIBLE_IARXIU = "message.no.transferible.iarxiu.success";
 	
 	public final static int MAX_LENGTH = 199;
 	
