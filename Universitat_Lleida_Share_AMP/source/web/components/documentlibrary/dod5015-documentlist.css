@@ -31,6 +31,16 @@
    background-image: url(images/tag-16.png);
 }
 
+.doclist .onActionTransferibleIarxiu a
+{
+   background-image: url(images/iarxiu-16.png);
+}
+
+.doclist .onActionNoTransferibleIarxiu a
+{
+   background-image: url(images/iarxiu-16.png);
+}
+
 /**
  * Actions: Records
  */

@@ -564,6 +564,116 @@
       },
       
       /**
+       * Macar expedient com a transferible.
+       *
+       * @method onActionTransferibleIarxiu
+       * @param asset {object} Object literal representing the file or folder to be actioned
+       */
+      onActionTransferibleIarxiu: function onActionTransferibleIarxiu(asset)
+      {
+    	  var path = asset.location.path,
+          fileName = asset.fileName,
+          filePath = $combine(path, fileName),
+          displayName = asset.displayName,
+          nodeRef = new Alfresco.util.NodeRef(asset.nodeRef);
+
+	      this.modules.actions.genericAction(
+		  {
+			  success:
+		      {
+				  message: "L'expedient s'ha marcat com a transferible a iArxiu.",
+		          callback:
+	              {
+		        	  fn: function callback_success(response)
+		              {
+		        		  YAHOO.Bubbling.fire("metadataRefresh");
+		              }
+	             }
+		      },
+		      
+		      failure:
+		      {
+		    	  message: "No s'ha pogut marcar l'expedient com a transferible a iArxiu."
+		      },
+		      
+		      webscript:
+		      {
+		    	  name: "transferibleIarxiu?arguments={arguments}", 
+	         	  method: Alfresco.util.Ajax.POST,
+	              params:
+	              {
+	            	  arguments: "<arguments><expID>" + nodeRef.id + "</expID><transferible>true</transferible></arguments>"
+	              }
+		      },
+		      
+		      config:
+		      {
+	        	 requestContentType: Alfresco.util.Ajax.JSON,
+	        	 dataObj:
+				 {
+	        		 expID: nodeRef.id,
+	        		 transferible: "true"
+				 }
+		      }
+		  });
+      },
+
+      /**
+       * Macar expedient com a NO transferible.
+       *
+       * @method onActionNoTransferibleIarxiu
+       * @param asset {object} Object literal representing the file or folder to be actioned
+       */
+      onActionNoTransferibleIarxiu: function onActionNoTransferibleIarxiu(asset)
+      {
+    	  var path = asset.location.path,
+          fileName = asset.fileName,
+          filePath = $combine(path, fileName),
+          displayName = asset.displayName,
+          nodeRef = new Alfresco.util.NodeRef(asset.nodeRef);
+
+	      this.modules.actions.genericAction(
+		  {
+			  success:
+		      {
+				  message: "L'expedient s'ha marcat com a NO transferible a iArxiu.",
+		          callback:
+	              {
+		        	  fn: function callback_success(response)
+		              {
+		        		  YAHOO.Bubbling.fire("metadataRefresh");
+		              }
+	             }
+		      },
+		      
+		      failure:
+		      {
+		    	  message: "No s'ha pogut marcar l'expedient com a NO transferible a iArxiu."
+		      },
+		      
+		      webscript:
+		      {
+		    	  name: "noTransferibleIarxiu?arguments={arguments}", 
+	         	  method: Alfresco.util.Ajax.POST,
+	              params:
+	              {
+	            	  arguments: "<arguments><expID>" + nodeRef.id + "</expID><transferible>false</transferible></arguments>"
+	              }
+		      },
+		      
+		      config:
+		      {
+	        	 requestContentType: Alfresco.util.Ajax.JSON,
+	        	 dataObj:
+				 {
+	        		 expID: nodeRef.id,
+	        		 transferible: "false"
+				 }
+		      }
+		  });
+      },
+
+      /**
        * Delete asset.
        *
        * @method onActionDelete
