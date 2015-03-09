@@ -98,6 +98,7 @@
 		<aspects>
 			<!-- Aspects that a user can see -->
 			<visible>
+				<aspect name="rma:transferred" />
 				<aspect name="udlrm:documentSimple" />
 				<aspect name="udlrm:expedient" />
 				<aspect name="udlrm:agregacio" />
@@ -114,6 +115,7 @@
 			</visible>
 			<!-- Aspects that a user can add. Same as "visible" if left empty -->
 			<addable>
+				<aspect name="rma:transferred" />			
 				<aspect name="udlrm:documentSimple" />
 				<aspect name="udlrm:expedient" />
 				<aspect name="udlrm:agregacio" />
@@ -130,6 +132,7 @@
 			</addable>
 			<!-- Aspects that a user can remove. Same as "visible" if left empty -->
 			<removeable>
+				<aspect name="rma:transferred" />			
 				<aspect name="udlrm:documentSimple" />
 				<aspect name="udlrm:expedient" />
 				<aspect name="udlrm:agregacio" />
@@ -4655,6 +4658,7 @@
 					<!--<show id="udl:secuencial_identificador_persona" /> -->
 					<!--<show id="udl:esquema_identificador_persona" /> -->
 					<show id="udl:nom_natural_persona" />
+					<show id="udl:transferible" />
 					<show id="udl:id_ref_PIA" />
 					<show id="udl:id_peticio" />
 					<!--<show id="udl:esquema_nom_persona" /> -->
@@ -4814,6 +4818,7 @@
 					<!--<field id="udl:secuencial_identificador_persona" set="persona" read-only="true" /> -->
 					<!--<field id="udl:esquema_identificador_persona" set="persona" read-only="true" /> -->
 					<field id="udl:nom_natural_persona" set="persona" />
+					<field id="udl:transferible" set="iarxiu" />
 					<field id="udl:id_ref_PIA" set="iarxiu" />
 					<field id="udl:id_peticio" set="iarxiu" />
 					<!--<field id="udl:esquema_nom_persona" set="persona" /> -->
@@ -4952,6 +4957,7 @@
 					<!--<show id="udl:secuencial_identificador_persona" /> -->
 					<!--<show id="udl:esquema_identificador_persona" /> -->
 					<show id="udl:nom_natural_persona" />
+					<show id="udl:transferible" />
 					<show id="udl:id_ref_PIA" />
 					<show id="udl:id_peticio" />
 					<!--<show id="udl:esquema_nom_persona" /> -->
@@ -5110,6 +5116,7 @@
 					<!--<field id="udl:secuencial_identificador_persona" set="persona" read-only="true" /> -->
 					<!--<field id="udl:esquema_identificador_persona" set="persona" read-only="true" /> -->
 					<field id="udl:nom_natural_persona" set="persona" />
+					<field id="udl:transferible" set="iarxiu" />
 					<field id="udl:id_ref_PIA" set="iarxiu" />
 					<field id="udl:id_peticio" set="iarxiu" />
 					<!--<field id="udl:esquema_nom_persona" set="persona" /> -->

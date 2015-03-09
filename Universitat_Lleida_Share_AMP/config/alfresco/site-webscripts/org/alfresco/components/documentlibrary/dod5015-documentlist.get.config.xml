@@ -42,6 +42,8 @@
          <action type="action-link" id="onActionDelete" permission="Delete" label="actions.delete" />
          <action type="action-link" id="onActionViewAuditLog" permission="AccessAudit" label="actions.view-audit-log" />
          <action type="action-link" id="onActionCrearEtiqueta" permission="UpdateProperties" label="actions.expedient.crearEtiqueta" />
+         <action type="action-link" id="onActionTransferibleIarxiu" permission="ManageAccessRights" label="actions.expedient.transferibleIarxiu" />
+         <action type="action-link" id="onActionNoTransferibleIarxiu" permission="ManageAccessRights" label="actions.expedient.noTransferibleIarxiu" />
       </actionSet>
 
       <actionSet id="record">
