@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>Universitat de Lleida. Afegir Identificadors</shortname>
+  <description>Universitat de Lleida. Afegir Identificadors</description>
+  <url>/udl/afegirIdentificadors</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+  <family>Universiat de Lleida (UdL)</family>  
+</webscript>

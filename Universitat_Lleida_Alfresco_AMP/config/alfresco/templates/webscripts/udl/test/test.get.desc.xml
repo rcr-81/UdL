@@ -1,0 +1,8 @@
+<webscript>
+  <shortname>Universitat de Lleida. Webscript de test</shortname>
+  <description>Universitat de Lleida. Webscript de test</description>
+  <url>/udl/test</url>
+  <format default="xml">argument</format>
+  <authentication>admin</authentication>
+  <family>Universiat de Lleida (UdL)</family>  
+</webscript>
