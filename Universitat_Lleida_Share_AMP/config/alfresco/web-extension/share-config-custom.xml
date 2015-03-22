@@ -112,10 +112,10 @@
 				<aspect name="udl:dispositiu" />
 				<aspect name="udl:persona" />
 				<aspect name="udl:iarxiu" />
+				<aspect name="udl:transferibleIarxiu" />				
 			</visible>
 			<!-- Aspects that a user can add. Same as "visible" if left empty -->
 			<addable>
-				<aspect name="rma:transferred" />			
 				<aspect name="udlrm:documentSimple" />
 				<aspect name="udlrm:expedient" />
 				<aspect name="udlrm:agregacio" />
@@ -128,7 +128,8 @@
 				<aspect name="udl:organ" />
 				<aspect name="udl:dispositiu" />
 				<aspect name="udl:persona" />
-
+				<aspect name="udl:iarxiu" />				
+				<aspect name="udl:transferibleIarxiu" />
 			</addable>
 			<!-- Aspects that a user can remove. Same as "visible" if left empty -->
 			<removeable>
@@ -146,6 +147,7 @@
 				<aspect name="udl:dispositiu" />
 				<aspect name="udl:persona" />
 				<aspect name="udl:iarxiu" />
+				<aspect name="udl:transferibleIarxiu" />
 			</removeable>
 		</aspects>
 		<types>

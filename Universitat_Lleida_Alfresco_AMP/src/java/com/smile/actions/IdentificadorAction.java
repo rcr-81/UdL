@@ -6,11 +6,12 @@ import java.util.List;
 
 import javax.xml.rpc.ParameterMode;
 
-import org.alfresco.model.ContentModel;
 import org.alfresco.repo.action.ParameterDefinitionImpl;
 import org.alfresco.repo.action.executer.ActionExecuterAbstractBase;
+import org.alfresco.repo.action.executer.MailActionExecuter;
 import org.alfresco.service.ServiceRegistry;
 import org.alfresco.service.cmr.action.Action;
+import org.alfresco.service.cmr.action.ActionService;
 import org.alfresco.service.cmr.action.ParameterDefinition;
 import org.alfresco.service.cmr.dictionary.DataTypeDefinition;
 import org.alfresco.service.cmr.repository.NodeRef;
@@ -77,8 +78,6 @@ public class IdentificadorAction extends ActionExecuterAbstractBase implements C
 			QName esquemaSerieRm = QName.createQName("http://www.smile.com/model/udlrm/1.0", "esquema_identificador_serie");
 			QName esquemaFonsRm = QName.createQName("http://www.smile.com/model/udlrm/1.0", "esquema_identificador_fons");
 			
-			QName name = QName.createQName(CM_URI, "name");
-						
 			logger.debug("NodeRef: " + nodeRef.getId());
 			
 			if (DOCUMENT_SIMPLE.equalsIgnoreCase(type) && isNewNode(nodeRef, DOCUMENT_SIMPLE)) {
@@ -276,30 +275,37 @@ public class IdentificadorAction extends ActionExecuterAbstractBase implements C
 	private String callWS(String type) throws Exception {
 		logger.debug("CALL WS identificador action!");
 		String id = "";
-		Service service = new Service();
-		Call call = (Call) service.createCall();
+		
+		try {
+			Service service = new Service();
+			Call call = (Call) service.createCall();
+	
+			// Call to first service (IniciaGeneraCodi)
+			call.setProperty(Call.SOAPACTION_USE_PROPERTY, new Boolean(true));
+			call.setProperty(Call.SOAPACTION_URI_PROPERTY, "http://tempuri.org/IniciaGeneraCodi");
+			call.setTargetEndpointAddress(new URL(WS_URL));
+			call.setOperationName(new javax.xml.namespace.QName("http://tempuri.org/", WS_INICI_GENERA_CODI));
+			call.addParameter(new javax.xml.namespace.QName("http://tempuri.org/", "AppId"), XMLType.XSD_STRING, ParameterMode.IN);
+			call.addParameter(new javax.xml.namespace.QName("http://tempuri.org/", "ObjectId"), XMLType.XSD_STRING, ParameterMode.IN);
+			call.setReturnType(XMLType.XSD_STRING);
+	
+			id = (String) call.invoke(new Object[] { WS_APP_ID, type });
+	
+			// Call to second service (GeneraCodi)
+			call = (Call) service.createCall();
+			call.setProperty(Call.SOAPACTION_URI_PROPERTY, "http://tempuri.org/GeneraCodi");
+			call.setTargetEndpointAddress(new URL(WS_URL));
+			call.setOperationName(new javax.xml.namespace.QName("http://tempuri.org/", WS_GENERA_CODI));
+			call.addParameter(new javax.xml.namespace.QName("http://tempuri.org/", "Key"), XMLType.XSD_STRING, ParameterMode.IN);
+			call.setReturnType(XMLType.XSD_STRING);
+	
+			id = (String) call.invoke(new Object[] { encodeKey(id) });
+			logger.debug("WS identificador: " + id);
 
-		// Call to first service (IniciaGeneraCodi)
-		call.setProperty(Call.SOAPACTION_USE_PROPERTY, new Boolean(true));
-		call.setProperty(Call.SOAPACTION_URI_PROPERTY, "http://tempuri.org/IniciaGeneraCodi");
-		call.setTargetEndpointAddress(new URL(WS_URL));
-		call.setOperationName(new javax.xml.namespace.QName("http://tempuri.org/", WS_INICI_GENERA_CODI));
-		call.addParameter(new javax.xml.namespace.QName("http://tempuri.org/", "AppId"), XMLType.XSD_STRING, ParameterMode.IN);
-		call.addParameter(new javax.xml.namespace.QName("http://tempuri.org/", "ObjectId"), XMLType.XSD_STRING, ParameterMode.IN);
-		call.setReturnType(XMLType.XSD_STRING);
-
-		id = (String) call.invoke(new Object[] { WS_APP_ID, type });
-
-		// Call to second service (GeneraCodi)
-		call = (Call) service.createCall();
-		call.setProperty(Call.SOAPACTION_URI_PROPERTY, "http://tempuri.org/GeneraCodi");
-		call.setTargetEndpointAddress(new URL(WS_URL));
-		call.setOperationName(new javax.xml.namespace.QName("http://tempuri.org/", WS_GENERA_CODI));
-		call.addParameter(new javax.xml.namespace.QName("http://tempuri.org/", "Key"), XMLType.XSD_STRING, ParameterMode.IN);
-		call.setReturnType(XMLType.XSD_STRING);
-
-		id = (String) call.invoke(new Object[] { encodeKey(id) });
-		logger.debug("WS identificador: " + id);
+		}catch(Exception e) {
+			sendAlertEmail();
+			e.printStackTrace();
+		}
 		
 		return id;
 	}
@@ -331,6 +337,53 @@ public class IdentificadorAction extends ActionExecuterAbstractBase implements C
 		return hexString.toString();
 	}
 
+	/**
+	 * Send an email
+	 * 
+	 */
+	private void sendAlertEmail() {
+		ActionService actionService = serviceRegistry.getActionService();
+        Action emailAction = serviceRegistry.getActionService().createAction("mail");
+        String to = "isaac.munoz@udl.cat";
+        String emailFrom = "admin@alfresco.com";
+        String subject = "ALERTA: WS identificador fora de servei (entorn pre-producció)";
+        String body = "El web service generador d'identificadors per a les diferents entitats documentals està fora de servei. Contactar amb el departament de sistemes per a solucionar el problema amb la major brevetat possible.";
+        
+		emailAction.setParameterValue(MailActionExecuter.PARAM_TO, to);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_FROM, emailFrom);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_SUBJECT, subject);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body);
+        emailAction.setExecuteAsynchronously(true);
+        actionService.executeAction(emailAction, null);
+        
+        to = "jaume.esteban@udl.cat";
+        emailAction = serviceRegistry.getActionService().createAction("mail");
+		emailAction.setParameterValue(MailActionExecuter.PARAM_TO, to);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_FROM, emailFrom);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_SUBJECT, subject);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body);
+        emailAction.setExecuteAsynchronously(true);
+        actionService.executeAction(emailAction, null);
+        
+        to = "pepita.raventos@udl.cat";
+        emailAction = serviceRegistry.getActionService().createAction("mail");
+		emailAction.setParameterValue(MailActionExecuter.PARAM_TO, to);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_FROM, emailFrom);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_SUBJECT, subject);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body);
+        emailAction.setExecuteAsynchronously(true);
+        actionService.executeAction(emailAction, null);
+
+        to = "raulcortesr@gmail.com";
+        emailAction = serviceRegistry.getActionService().createAction("mail");
+		emailAction.setParameterValue(MailActionExecuter.PARAM_TO, to);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_FROM, emailFrom);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_SUBJECT, subject);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body);
+        emailAction.setExecuteAsynchronously(true);
+        actionService.executeAction(emailAction, null);
+	}
+	
 	@Override
 	protected void addParameterDefinitions(List<ParameterDefinition> paramList) {
 		paramList.add(new ParameterDefinitionImpl("a-parameter", DataTypeDefinition.TEXT, false, getParamDisplayLabel("a-parameter")));

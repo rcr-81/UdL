@@ -175,7 +175,7 @@ public interface ConstantsUdL {
 	public final static String UDL_GROUP_PREFIX = PermissionService.GROUP_PREFIX + "UDL_";
 	public final static String UDL_PREFIX = "UdL_";
 	
-	public final static String WS_URL = "https://ercd.udl.cat:4443/SOA.asmx";
+	public final static String WS_URL = "https://ercd.udl.cat:4442/SOA.asmx";
 	public final static String WS_INICI_GENERA_CODI = "IniciaGeneraCodi";
 	public final static String WS_GENERA_CODI = "GeneraCodi";
 	public final static String WS_APP_ID = "AlFresco";

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN 2.0//EN' 'http://www.springframework.org/dtd/spring-beans-2.0.dtd'>
 
-<beans>	
+<beans>
 	<bean id="webscript.udl.document.crearDocument.crearDocument.post" class="com.smile.webscripts.document.CrearDocument" parent="webscript">
 	   <property name="serviceRegistry" ref="ServiceRegistry" />
 	   <property name="auditComponent" ref="auditComponent" />
@@ -40,6 +40,14 @@
 	</bean>
 
 	<bean id="webscript.udl.expedient.transferibleIarxiu.transferibleIarxiu.post" class="com.smile.webscripts.expedient.TransferibleIarxiu" parent="webscript">
+	   <property name="serviceRegistry" ref="ServiceRegistry" />
+	</bean>
+
+	<bean id="webscript.udl.afegirIdentificadors.afegirIdentificadors.get" class="com.smile.webscripts.AfegirIdentificadors" parent="webscript">
+	   <property name="serviceRegistry" ref="ServiceRegistry" />
+	</bean>
+
+	<bean id="webscript.udl.test.test.get" class="com.smile.webscripts.Test" parent="webscript">
 	   <property name="serviceRegistry" ref="ServiceRegistry" />
 	</bean>
 
