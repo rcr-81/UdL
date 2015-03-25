@@ -362,6 +362,9 @@ public class UDLHelper implements ConstantsUdL {
 				
 				}else if("U86 TELEGRAMA".equalsIgnoreCase(value)) {
 					e.setValue("Telegrama");
+
+				}else {
+					e.setValue("Document Administratiu");
 				}
 			
 			}else if(METADATA_TITOL_DOCUMENT_SIMPLE.equalsIgnoreCase(key)) {
