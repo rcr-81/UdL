@@ -1,5 +1,7 @@
 package com.smile.actions;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.util.List;
@@ -303,7 +305,7 @@ public class IdentificadorAction extends ActionExecuterAbstractBase implements C
 			logger.debug("WS identificador: " + id);
 
 		}catch(Exception e) {
-			sendAlertEmail();
+			sendAlertEmail(e);
 			e.printStackTrace();
 		}
 		
@@ -341,18 +343,21 @@ public class IdentificadorAction extends ActionExecuterAbstractBase implements C
 	 * Send an email
 	 * 
 	 */
-	private void sendAlertEmail() {
+	private void sendAlertEmail(Exception e) {
+		StringWriter errors = new StringWriter();
 		ActionService actionService = serviceRegistry.getActionService();
         Action emailAction = serviceRegistry.getActionService().createAction("mail");
         String to = "isaac.munoz@udl.cat";
         String emailFrom = "admin@alfresco.com";
-        String subject = "ALERTA: WS identificador fora de servei (entorn pre-producció)";
+        String subject = "ALERTA: WS identificador fora de servei (entorn producció)";
         String body = "El web service generador d'identificadors per a les diferents entitats documentals està fora de servei. Contactar amb el departament de sistemes per a solucionar el problema amb la major brevetat possible.";
+        e.printStackTrace(new PrintWriter(errors));
+        String exception = "\n\n\nL'excepció que ha provocat l'error és la següent:\n\n " + errors.toString();
         
 		emailAction.setParameterValue(MailActionExecuter.PARAM_TO, to);
         emailAction.setParameterValue(MailActionExecuter.PARAM_FROM, emailFrom);
         emailAction.setParameterValue(MailActionExecuter.PARAM_SUBJECT, subject);
-        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body + exception);
         emailAction.setExecuteAsynchronously(true);
         actionService.executeAction(emailAction, null);
         
@@ -361,7 +366,7 @@ public class IdentificadorAction extends ActionExecuterAbstractBase implements C
 		emailAction.setParameterValue(MailActionExecuter.PARAM_TO, to);
         emailAction.setParameterValue(MailActionExecuter.PARAM_FROM, emailFrom);
         emailAction.setParameterValue(MailActionExecuter.PARAM_SUBJECT, subject);
-        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body + exception);
         emailAction.setExecuteAsynchronously(true);
         actionService.executeAction(emailAction, null);
         
@@ -370,7 +375,7 @@ public class IdentificadorAction extends ActionExecuterAbstractBase implements C
 		emailAction.setParameterValue(MailActionExecuter.PARAM_TO, to);
         emailAction.setParameterValue(MailActionExecuter.PARAM_FROM, emailFrom);
         emailAction.setParameterValue(MailActionExecuter.PARAM_SUBJECT, subject);
-        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body + exception);
         emailAction.setExecuteAsynchronously(true);
         actionService.executeAction(emailAction, null);
 
@@ -379,7 +384,7 @@ public class IdentificadorAction extends ActionExecuterAbstractBase implements C
 		emailAction.setParameterValue(MailActionExecuter.PARAM_TO, to);
         emailAction.setParameterValue(MailActionExecuter.PARAM_FROM, emailFrom);
         emailAction.setParameterValue(MailActionExecuter.PARAM_SUBJECT, subject);
-        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body);
+        emailAction.setParameterValue(MailActionExecuter.PARAM_TEXT, body + exception);
         emailAction.setExecuteAsynchronously(true);
         actionService.executeAction(emailAction, null);
 	}
