@@ -1,0 +1,7 @@
+<webscript>
+  <shortname>Universitat de Lleida. Uncutoff expedient</shortname>
+  <description>Universitat de Lleida. Uncutoff expedient</description>
+  <url>/udl/helper/uncutoff</url>
+  <format default="text">argument</format>
+  <authentication>admin</authentication>
+</webscript>
