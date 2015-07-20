@@ -194,7 +194,7 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 			if (containsError())
 				try {
 					//complete + move to abstract
-					this.sendErrorMail(CescaUtil.PROCESS_ENVIAMENT, filename);
+					//this.sendErrorMail(CescaUtil.PROCESS_ENVIAMENT, filename);
 				} catch (Exception e) {
 					logger.error("No s'ha pogut enviar el mail: ", e);
 				}
