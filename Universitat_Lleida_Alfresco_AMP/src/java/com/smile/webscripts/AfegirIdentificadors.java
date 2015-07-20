@@ -52,6 +52,11 @@ public class AfegirIdentificadors extends DeclarativeWebScript implements Consta
 	private QName idExpedient = QName.createQName("http://www.smile.com/model/udl/1.0", "secuencial_identificador_expedient");
 	private QName idAgregacio = QName.createQName("http://www.smile.com/model/udl/1.0", "secuencial_identificador_agregacio");
 	private QName idDocumentSimple = QName.createQName("http://www.smile.com/model/udl/1.0", "secuencial_identificador_documentSimple");
+	
+	private QName denominacioClasseSerie = QName.createQName("http://www.smile.com/model/udlrm/1.0", "denominacio_classe_serie");
+	private QName denominacioClasseExp = QName.createQName("http://www.smile.com/model/udlrm/1.0", "denominacio_classe_1_expedient");
+	
+	private QName nomSerie = QName.createQName("http://www.alfresco.org/model/content/1.0", "name");
 
 	@Override
 	protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
@@ -61,11 +66,14 @@ public class AfegirIdentificadors extends DeclarativeWebScript implements Consta
 		try {
 			Impersonate.impersonate(props.getProperty(ADMIN_USERNAME));
 			
-			model.put("successFons", afegirIdFons());
-			model.put("successSerie", afegirIdSerie());
-			model.put("successExpedient", afegirIdExpedient());
-			model.put("successAgregacio", afegirIdAgregacio());
-			model.put("successDocumentSimple", afegirIdDocumentSimple());
+//			model.put("successFons", afegirIdFons());
+//			model.put("successSerie", afegirIdSerie());
+//			model.put("successExpedient", afegirIdExpedient());
+//			model.put("successAgregacio", afegirIdAgregacio());
+//			model.put("successDocumentSimple", afegirIdDocumentSimple());
+
+//			updateDenominacioClasse();
+			removePeticionsIArxiu();
 			
 		}catch(Exception e) {
 			model.put("error", e.getMessage().toString());
@@ -75,6 +83,59 @@ public class AfegirIdentificadors extends DeclarativeWebScript implements Consta
 		return model;
 	}
 
+	private void removePeticionsIArxiu() {
+		NodeService nodeService = serviceRegistry.getNodeService();
+		SearchService searchService = serviceRegistry.getSearchService();
+
+		String query = "PATH:\"/app:company_home/cm:CESCA/cm:Peticions_iArxiu/*\"";
+		System.out.println(query);
+		
+		ResultSet resultSet = searchService.query(storeRef, SearchService.LANGUAGE_LUCENE, query);
+		
+		System.out.println(resultSet.length());
+		
+		Iterator<NodeRef> it = resultSet.getNodeRefs().iterator();
+		
+		while (it.hasNext()) {
+			NodeRef nodeRef = (NodeRef) it.next();
+			
+			nodeService.deleteNode(nodeRef);
+		}
+	}
+	
+	/**
+	 * Actualitzar la metadada "22.2 Denominació classe" dels expedients amb el valor de la sèrie
+	 * 
+	 */
+	private void updateDenominacioClasse() {
+		NodeService nodeService = serviceRegistry.getNodeService();
+		SearchService searchService = serviceRegistry.getSearchService();
+		int i = 0;
+		
+		//String query = "PARENT:\"workspace://SpacesStore/37e0ad71-f26a-43cc-9a43-9db3fbb2899c\" AND TYPE:\"rma:recordFolder\" AND ASPECT:\"udlrm:expedient\"";
+		String query = "TYPE:\"rma:recordFolder\" AND ASPECT:\"udlrm:expedient\"";
+		System.out.println(query);
+		
+		ResultSet resultSet = searchService.query(storeRef, SearchService.LANGUAGE_LUCENE, query);
+		
+		System.out.println(resultSet.length());
+		
+		Iterator<NodeRef> it = resultSet.getNodeRefs().iterator();
+		
+		while (it.hasNext()) {
+			NodeRef expNodeRef = (NodeRef) it.next();
+			NodeRef parentNodeRef = nodeService.getPrimaryParent(expNodeRef).getParentRef();
+			nodeService.setProperty(expNodeRef, denominacioClasseExp, nodeService.getProperty(parentNodeRef, denominacioClasseSerie));
+
+//			System.out.println("Deonominacio classe serie: " + nodeService.getProperty(parentNodeRef, denominacioClasseSerie));
+			
+			System.out.println("Expediente: " + i++);
+			System.out.println("Nombre serie: " + nodeService.getProperty(parentNodeRef, nomSerie));
+			System.out.println("Deonominacio classe exp: " + nodeService.getProperty(expNodeRef, denominacioClasseExp));
+			System.out.println("");
+		}
+	}
+	
 	/**
 	 * Afegir id Fons
 	 * 
