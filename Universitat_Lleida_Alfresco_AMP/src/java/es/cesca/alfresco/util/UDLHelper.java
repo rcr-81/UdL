@@ -133,7 +133,7 @@ public class UDLHelper implements ConstantsUdL {
 					e.setValue("Accés restringit");					
 				
 				}else if("Confidencial".equalsIgnoreCase(value)) {
-					e.setValue("Accés confidencial");
+					e.setValue("Accés restringit");
 				}
 			
 			}else if(METADATA_SENSIBILITAT_DADES_LOPD_EXPEDIENT.equalsIgnoreCase(key)) {
