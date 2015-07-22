@@ -4663,6 +4663,8 @@
 					<show id="udl:transferible" />
 					<show id="udl:id_ref_PIA" />
 					<show id="udl:id_peticio" />
+					<show id="udl:estat" />
+					<show id="udl:data_transferencia" />
 					<!--<show id="udl:esquema_nom_persona" /> -->
 					<!--<show id="udl:data_inici_persona" /> -->
 					<!--<show id="udl:data_fi_persona" /> -->
@@ -4821,8 +4823,10 @@
 					<!--<field id="udl:esquema_identificador_persona" set="persona" read-only="true" /> -->
 					<field id="udl:nom_natural_persona" set="persona" />
 					<field id="udl:transferible" set="iarxiu" />
-					<field id="udl:id_ref_PIA" set="iarxiu" />
-					<field id="udl:id_peticio" set="iarxiu" />
+					<field id="udl:id_ref_PIA" set="iarxiu" read-only="true"/>
+					<field id="udl:id_peticio" set="iarxiu" read-only="true"/>
+					<field id="udl:estat" set="iarxiu" read-only="true"/>
+					<field id="udl:data_transferencia" set="iarxiu" read-only="true"/>
 					<!--<field id="udl:esquema_nom_persona" set="persona" /> -->
 					<!--<field id="udl:data_inici_persona" set="persona" /> -->
 					<!--<field id="udl:data_fi_persona" set="persona" /> -->
@@ -4962,6 +4966,8 @@
 					<show id="udl:transferible" />
 					<show id="udl:id_ref_PIA" />
 					<show id="udl:id_peticio" />
+					<show id="udl:estat" />
+					<show id="udl:data_transferencia" />
 					<!--<show id="udl:esquema_nom_persona" /> -->
 					<!--<show id="udl:data_inici_persona" /> -->
 					<!--<show id="udl:data_fi_persona" /> -->
@@ -5119,8 +5125,10 @@
 					<!--<field id="udl:esquema_identificador_persona" set="persona" read-only="true" /> -->
 					<field id="udl:nom_natural_persona" set="persona" />
 					<field id="udl:transferible" set="iarxiu" />
-					<field id="udl:id_ref_PIA" set="iarxiu" />
-					<field id="udl:id_peticio" set="iarxiu" />
+					<field id="udl:id_ref_PIA" set="iarxiu" read-only="true"/>
+					<field id="udl:id_peticio" set="iarxiu" read-only="true"/>
+					<field id="udl:estat" set="iarxiu" read-only="true"/>
+					<field id="udl:data_transferencia" set="iarxiu" read-only="true"/>
 					<!--<field id="udl:esquema_nom_persona" set="persona" /> -->
 					<!--<field id="udl:data_inici_persona" set="persona" /> -->
 					<!--<field id="udl:data_fi_persona" set="persona" /> -->
@@ -5263,6 +5271,8 @@
 					<show id="udl:nom_natural_persona" />
 					<show id="udl:id_ref_PIA" />
 					<show id="udl:id_peticio" />
+					<show id="udl:estat" />
+					<show id="udl:data_transferencia" />
 					<!--<show id="udl:esquema_nom_persona" /> -->
 					<!--<show id="udl:data_inici_persona" /> -->
 					<!--<show id="udl:data_fi_persona" /> -->
@@ -5419,8 +5429,10 @@
 					<!--<field id="udl:secuencial_identificador_persona" set="persona" read-only="true" /> -->
 					<!--<field id="udl:esquema_identificador_persona" set="persona" read-only="true" /> -->
 					<field id="udl:nom_natural_persona" set="persona" />
-					<field id="udl:id_ref_PIA" set="iarxiu" />
-					<field id="udl:id_peticio" set="iarxiu" />
+					<field id="udl:id_ref_PIA" set="iarxiu" read-only="true"/>
+					<field id="udl:id_peticio" set="iarxiu" read-only="true"/>
+					<field id="udl:estat" set="iarxiu" read-only="true"/>
+					<field id="udl:data_transferencia" set="iarxiu" read-only="true"/>
 					<!--<field id="udl:esquema_nom_persona" set="persona" /> -->
 					<!--<field id="udl:data_inici_persona" set="persona" /> -->
 					<!--<field id="udl:data_fi_persona" set="persona" /> -->
