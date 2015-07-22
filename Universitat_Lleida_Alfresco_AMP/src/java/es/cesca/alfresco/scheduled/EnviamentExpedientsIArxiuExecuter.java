@@ -22,9 +22,12 @@ import org.alfresco.service.cmr.repository.ContentReader;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.namespace.QName;
+import org.alfresco.web.bean.repository.Repository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.FileAppender;
+
+import com.smile.webscripts.helper.ConstantsUdL;
 
 import es.cesca.alfresco.util.CescaUtil;
 import es.cesca.alfresco.util.UDLHelper;
@@ -620,6 +623,13 @@ public final class EnviamentExpedientsIArxiuExecuter extends ExecuterAbstractBas
 			//Aquest camp no el tindrem fins que s'obri la peticio a iArxiu
 			setTracerMessage("Node en tramitacio correctament: "+ node.getId() +" Per expedient amb id_exp: "+id_exp);
 			nodeService.setProperty(node, CescaUtil.PETICIO_PROP_ID_EXP, id_exp);
+			
+			// Se marca el expediente como en tramitación de envio a iArxiu
+			// Se obtiene el campo id_peticion que coincide con el nodeRef del expediente
+			String idPeticion = (String)nodeService.getProperty(node, CescaUtil.PETICIO_PROP_ID);
+			NodeRef expNodeRef = new NodeRef(Repository.getStoreRef(), idPeticion);
+			nodeService.setProperty(expNodeRef, ConstantsUdL.UDL_PETICIO_PROP_ESTAT, CescaUtil.STATUS_ENTRAMITACIO);
+			
 		} else{
 			setTracerMessage("Node en tramitacio correctament: "+ node.getId() +" per al document independent");
 			nodeService.setProperty(node, CescaUtil.PETICIO_PROP_NUM_DOC, id_doc_middleware);

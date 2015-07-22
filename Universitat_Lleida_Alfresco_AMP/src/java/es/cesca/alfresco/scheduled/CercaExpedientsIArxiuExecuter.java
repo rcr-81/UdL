@@ -16,12 +16,17 @@ import org.alfresco.service.cmr.model.FileExistsException;
 import org.alfresco.service.cmr.model.FileInfo;
 import org.alfresco.service.cmr.repository.ContentReader;
 import org.alfresco.service.cmr.repository.NodeRef;
+import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.cmr.search.ResultSet;
 import org.alfresco.service.cmr.search.SearchParameters;
 import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.namespace.QName;
+import org.alfresco.web.bean.repository.Repository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.smile.webscripts.helper.ConstantsUdL;
+import com.smile.webscripts.helper.UdlProperties;
 
 import es.cesca.alfresco.util.CescaUtil;
 import es.cesca.alfresco.util.XMLHelper;
@@ -347,6 +352,15 @@ public class CercaExpedientsIArxiuExecuter extends ExecuterAbstractBase {
 			getServiceRegistry().getNodeService().setProperties(node, props);
 			
 			System.out.println("finalizada peticion IArxiu con id "+noderef.getId());
+			
+			// Se marca el expediente como pendiente de envio a iArxiu
+			// Se obtiene el campo id_peticion que coincide con el nodeRef del expediente
+			NodeService nodeService = getServiceRegistry().getNodeService();
+			Map<QName, Serializable> propsIarxiu = new HashMap<QName, Serializable>();
+			propsIarxiu.put(ConstantsUdL.PETICIO_PROP_ID, noderef.getId());
+			propsIarxiu.put(ConstantsUdL.UDL_PETICIO_PROP_ESTAT, CescaUtil.STATUS_PENDENT);
+			nodeService.addAspect(noderef, ConstantsUdL.ASPECT_IARXIU, propsIarxiu);
+
 			return true;
 			//No hi ha contingut per guardar dins la peticio.
 		} catch(FileExistsException e) {

@@ -149,8 +149,13 @@ public interface ConstantsUdL {
 	public final static String UDL_URI = "http://www.smile.com/model/udl/1.0";
 	public final static String UDLRM_URI = "http://www.smile.com/model/udlrm/1.0";
 	
+	public static QName ASPECT_IARXIU = QName.createQName(UdlProperties.UDL_URI, "iarxiu");
 	public static QName ASPECT_TRANSFERIBLE_IARXIU = QName.createQName(UDL_URI, "transferibleIarxiu");
 	public static QName PROP_TRANSFERIBLE = QName.createQName(UDL_URI, "transferible");
+	public static final QName UDL_PETICIO_PROP_ESTAT = QName.createQName(ConstantsUdL.UDL_URI, "estat");
+	public static final QName PETICIO_PROP_ID = QName.createQName(UDL_URI, "id_peticio");
+	public static final QName DATA_TRANSFERENCIA = QName.createQName(UDL_URI, "data_transferencia");
+	public static final QName PIA = QName.createQName(UdlProperties.UDL_URI, "id_ref_PIA");
 	
 	public static QName ASPECT_RECORD_COMPONENT_ID = QName.createQName(RM_URI, "recordComponentIdentifier");
 	public static QName PROP_IDENTIFIER = QName.createQName(RM_URI, "identifier");

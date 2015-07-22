@@ -22,6 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.FileAppender;
 
+import com.smile.webscripts.helper.ConstantsUdL;
 import com.smile.webscripts.helper.UdlProperties;
 
 import es.cesca.alfresco.util.CescaUtil;
@@ -177,24 +178,14 @@ public class ActualitzacioPeticionsIArxiuExecuter extends ExecuterAbstractBase {
 		setTracerMessage("Node transferit correctament amb pia > "+pia +" (actualitzat al repositori)");
 		
 		// Se marca el expediente como enviado a iArxiu
-		addIArxiuAspect(node, pia);
+		// Se obtiene el campo id_peticion que coincide con el nodeRef
+		String idPeticion = (String)nodeService.getProperty(node, CescaUtil.PETICIO_PROP_ID);
+		NodeRef nodeRef = new NodeRef(Repository.getStoreRef(), idPeticion);
+		nodeService.setProperty(nodeRef, ConstantsUdL.PIA, pia);
+		nodeService.setProperty(nodeRef, ConstantsUdL.UDL_PETICIO_PROP_ESTAT, CescaUtil.STATUS_TRANSFERIT);
+		nodeService.setProperty(nodeRef, ConstantsUdL.DATA_TRANSFERENCIA, new Date());
 	}
 
-	private void addIArxiuAspect(NodeRef node, String pia) {
-		// Se obtiene el campo id_peticion que coincide con el nodeRef
-		NodeService nodeService = getServiceRegistry().getNodeService();
-		String idPeticion = (String)nodeService.getProperty(node, CescaUtil.PETICIO_PROP_ID);
-		
-		// Se añade el aspecto iArxiu al expediente
-		Map<QName, Serializable> props = new HashMap<QName, Serializable>();
-		props.put(QName.createQName(UdlProperties.UDL_URI, "id_ref_PIA"), pia);
-		props.put(QName.createQName(UdlProperties.UDL_URI, "id_peticio"), idPeticion);
-		nodeService.addAspect(new NodeRef(Repository.getStoreRef(), idPeticion), QName.createQName(UdlProperties.UDL_URI, "iarxiu"), props);
-		
-		// Se añade el aspecto rma:transferred al expediente para que Alfresco muestre la flecha verde de transferido
-		//nodeService.addAspect(new NodeRef(Repository.getStoreRef(), idPeticion), QName.createQName(UdlProperties.RM_URI, "transferred"), null);
-	}
-	
 	protected void createRebutIArxiu(String peticio, NodeRef peticioRef, String idExpMid, String pia) {
 		if(logger.isDebugEnabled())
 			logger.debug("Crea rebut Peticio: "+ peticio);

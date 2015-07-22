@@ -28,6 +28,7 @@ import org.alfresco.service.cmr.search.SearchParameters;
 import org.alfresco.service.cmr.search.SearchService;
 import org.alfresco.service.cmr.security.AuthorityType;
 import org.alfresco.service.namespace.QName;
+import org.alfresco.web.bean.repository.Repository;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,6 +39,8 @@ import org.apache.log4j.SimpleLayout;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+
+import com.smile.webscripts.helper.ConstantsUdL;
 
 import es.cesca.alfresco.util.CescaUtil;
 
@@ -52,6 +55,10 @@ public abstract class ExecuterAbstractBase extends ActionExecuterAbstractBase {
 	protected void marcaErrorAPeticio(NodeRef node, String descripcio) {//Sept mod - descripcio
 		getServiceRegistry().getNodeService().setProperty(node, CescaUtil.PETICIO_PROP_ESTAT, CescaUtil.STATUS_ERROR);
 		getServiceRegistry().getNodeService().setProperty(node, CescaUtil.PETICIO_PROP_DESC_ERROR, descripcio);
+		
+		String idPeticion = (String) getServiceRegistry().getNodeService().getProperty(node, CescaUtil.PETICIO_PROP_ID);
+		NodeRef expNodeRef = new NodeRef(Repository.getStoreRef(), idPeticion);
+		getServiceRegistry().getNodeService().setProperty(expNodeRef, ConstantsUdL.UDL_PETICIO_PROP_ESTAT, descripcio);
 	}
 
 	protected boolean isPeticioOK(String result) {
