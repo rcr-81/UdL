@@ -3230,12 +3230,22 @@
 				<property name="udl:id_ref_PIA">
 					<title>Identificador de paquet (PIA)</title>
 					<type>d:text</type>
-					<mandatory>true</mandatory>
+					<mandatory>false</mandatory>
 				</property>
 				<property name="udl:id_peticio">
 					<title>Identificador petició trasllat a iArxiu</title>
 					<type>d:text</type>
 					<mandatory>true</mandatory>
+				</property>
+				<property name="udl:estat">
+					<title>Estat de la petició</title>
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="udl:data_transferencia">
+					<title>Data de transferència</title>
+					<type>d:date</type>
+					<mandatory>false</mandatory>
 				</property>
 			</properties>
 		</aspect>
