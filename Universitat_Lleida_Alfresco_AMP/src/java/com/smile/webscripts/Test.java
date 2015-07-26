@@ -1,11 +1,12 @@
 package com.smile.webscripts;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -56,6 +57,8 @@ import com.smile.webscripts.expedient.InfoTransferencia;
 import com.smile.webscripts.helper.ConstantsUdL;
 import com.smile.webscripts.helper.UdlProperties;
 
+import es.cesca.alfresco.util.CescaUtil;
+
 public class Test extends DeclarativeWebScript implements ConstantsUdL {
 	private ServiceRegistry serviceRegistry;
 
@@ -86,15 +89,15 @@ public class Test extends DeclarativeWebScript implements ConstantsUdL {
 		SearchService searchService = serviceRegistry.getSearchService();
 		
 		try{
-			InputStream entrada = new FileInputStream("/opt/alfresco-3.4.13/tomcat/test.properties");
+//			InputStream entrada = new FileInputStream("/opt/alfresco-3.4.13/tomcat/test.properties");
 //			InputStream entrada = new FileInputStream("/home/racor/Documentos/test.properties");
-			propiedades.load(entrada);
-			String nodeRef = (String) propiedades.get("nodeRef");
+//			propiedades.load(entrada);
+//			String nodeRef = (String) propiedades.get("nodeRef");
 			
 			//String query = "ISNULL:\"udlrm:suport_origen_expedient\" AND TYPE:\"rma:recordFolder\" AND ASPECT:\"udlrm:expedient\"";
 			//String query = "PARENT:\"workspace://SpacesStore/fd6aa21f-0217-450f-9433-38cc4cbd8229\" AND ISNULL:\"udlrm:suport_origen_expedient\" AND TYPE:\"rma:recordFolder\" AND ASPECT:\"udlrm:expedient\"";
-			String query = "PARENT:\"" + nodeRef + "\"" + " AND TYPE:\"rma:recordFolder\" AND ASPECT:\"udlrm:expedient\" AND @udlrm\\:suport_origen_expedient:\"Físic\"";
-
+			//String query = "PARENT:\"" + nodeRef + "\"" + " AND TYPE:\"rma:recordFolder\" AND ASPECT:\"udlrm:expedient\" AND @udlrm\\:suport_origen_expedient:\"Físic\"";
+			String query = "ASPECT:\"udl:iarxiu\"";
 			
 //			String query = propiedades.getProperty("query");
 			System.out.println("query: " + query);
@@ -110,11 +113,12 @@ public class Test extends DeclarativeWebScript implements ConstantsUdL {
 				expNodeRef = (NodeRef) it.next();
 				
 				try {
-					createIndex(nodeService, expNodeRef, i, req);
+					//createIndex(nodeService, expNodeRef, i, req);
+					updateIArxiuMetadata(nodeService, i, expNodeRef);
 					i++;
 
 				}catch(Exception e) {
-					System.out.println("ERROR: Seguramente ya existe un index.xml");
+//					System.out.println("ERROR: Seguramente ya existe un index.xml");
 					e.printStackTrace();
 				}
 
@@ -129,6 +133,38 @@ public class Test extends DeclarativeWebScript implements ConstantsUdL {
 		return model;
 	}
 
+	private void updateIArxiuMetadata(NodeService nodeService, int i, NodeRef expNodeRef) throws Exception {
+		System.out.println("EXPEDIENT: " + i);
+		
+		if(nodeService.getProperty(expNodeRef, ConstantsUdL.UDL_PETICIO_PROP_ESTAT) == null 
+				|| "".equals(nodeService.getProperty(expNodeRef, ConstantsUdL.UDL_PETICIO_PROP_ESTAT))) {
+			
+//			System.out.println("ESTAT: " + nodeService.getProperty(expNodeRef, ConstantsUdL.UDL_PETICIO_PROP_ESTAT));
+			nodeService.setProperty(expNodeRef, ConstantsUdL.UDL_PETICIO_PROP_ESTAT, CescaUtil.STATUS_TRANSFERIT);	
+		}
+		
+		//if(nodeService.getProperty(expNodeRef, ConstantsUdL.DATA_TRANSFERENCIA) == null
+		//		|| "".equals(nodeService.getProperty(expNodeRef, ConstantsUdL.DATA_TRANSFERENCIA))) {
+
+		Date fecha = (Date)nodeService.getProperty(expNodeRef, ConstantsUdL.DATA_TRANSFERENCIA);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String fechaString = sdf.format(fecha);
+		
+		System.out.println("fechaString: " + fechaString);
+		
+		if("01/08/2015".equalsIgnoreCase(fechaString)) {
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.YEAR, 2015);
+			cal.set(Calendar.MONTH, 6);
+			cal.set(Calendar.DAY_OF_MONTH, 1);
+			
+			System.out.println("New DATE: " + sdf.format(cal.getTime()));
+					
+//			System.out.println("DATA TRANSFERENCIA: " + nodeService.getProperty(expNodeRef, ConstantsUdL.DATA_TRANSFERENCIA));
+			nodeService.setProperty(expNodeRef, ConstantsUdL.DATA_TRANSFERENCIA, cal.getTime());
+		}
+	}
+	
 	private void setExpedientFisic(NodeService nodeService, int i, NodeRef expNodeRef) throws Exception {
 		nodeService.setProperty(expNodeRef, suportOrigenExp, "Físic");
 		System.out.println(i++ + ": Metadada suport orígen actualitzada (Expedient: " + expNodeRef.getId().toString() + ")");
